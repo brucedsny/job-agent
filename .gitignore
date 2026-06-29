@@ -25,5 +25,8 @@ build/
 *.log
 logs/
 
+# site_copier output
+site-copy/
+
 # Claude Code local overrides (machine-specific, not shared)
 .claude/settings.local.json

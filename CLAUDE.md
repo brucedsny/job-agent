@@ -4,12 +4,10 @@ Guia de contexto para o Claude Code neste repositório.
 
 ## Sobre o projeto
 
-`job-agent` — repositório em estágio inicial. O código do projeto ainda não foi
-criado; por enquanto o repositório contém apenas a infraestrutura de automação do
-Claude Code (skills, hooks, permissões e workflows do GitHub Actions).
-
-Quando o projeto for definido, atualize esta seção com: linguagem/stack, como
-rodar, como testar e como fazer lint.
+`job-agent` — além da infraestrutura de automação do Claude Code (skills, hooks,
+permissões e workflows do GitHub Actions), o repositório contém o **`site_copier`**:
+um agente em Python (apenas stdlib) que copia todo o conteúdo de um site para
+navegação offline. Documentação em `site_copier/README.md`.
 
 ## Convenções
 
@@ -32,11 +30,9 @@ Invoque com `/<nome>`:
 
 ## Comandos do projeto
 
-> Preencher quando o projeto tiver código.
-
 ```
-# Instalar deps:  <TODO>
-# Rodar:          <TODO>
-# Testar:         <TODO>
+# Instalar deps:  (nenhuma — usa só a stdlib do Python 3.8+)
+# Rodar:          python -m site_copier <url> -o <dir>
+# Testar:         python -m unittest discover -s tests
 # Lint:           <TODO>
 ```
