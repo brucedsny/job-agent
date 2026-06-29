@@ -22,10 +22,26 @@ python -m site_copier https://exemplo.com --respect-robots --delay 0.5 --workers
 
 Depois abra `./site-copy/<host>/index.html` no navegador.
 
+### Vários sites de uma vez
+
+Passe várias URLs, ou um arquivo com uma URL por linha:
+
+```bash
+python -m site_copier https://a.com https://b.com -o ./copias
+
+# arquivo: uma URL por linha, '#' são comentários
+python -m site_copier --urls-file sites.txt -o ./copias
+```
+
+Cada site vai para `./copias/<host>/` e um `./copias/index.html` lista todos.
+Um site que falhar não interrompe os demais.
+
 ## Opções principais
 
 | Flag | Padrão | Descrição |
 |------|--------|-----------|
+| `url ...` | — | Uma ou mais URLs iniciais. |
+| `-i, --urls-file` | — | Arquivo com uma URL por linha (`#` = comentário). |
 | `-o, --out` | `site-copy` | Diretório de saída. |
 | `--max-pages` | `500` | Máximo de páginas HTML a baixar. |
 | `--max-depth` | `10` | Profundidade máxima de links a partir da URL inicial. |

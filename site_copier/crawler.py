@@ -59,6 +59,7 @@ class SiteCopier:
         user_agent=DEFAULT_UA,
         respect_robots=False,
         verbose=True,
+        manifest_name="manifest.json",
     ):
         seed = normalize_url(seed) or normalize_url("http://" + seed)
         if not seed:
@@ -76,6 +77,7 @@ class SiteCopier:
         self.user_agent = user_agent
         self.respect_robots = respect_robots
         self.verbose = verbose
+        self.manifest_name = manifest_name
 
         self._q = queue.Queue()
         self._lock = threading.Lock()
@@ -296,7 +298,7 @@ class SiteCopier:
             "resources": sorted(entries, key=lambda e: e["path"]),
             "errors": self.stats.errors,
         }
-        with open(os.path.join(self.outdir, "manifest.json"), "w", encoding="utf-8") as fh:
+        with open(os.path.join(self.outdir, self.manifest_name), "w", encoding="utf-8") as fh:
             json.dump(manifest, fh, indent=2, ensure_ascii=False)
 
     def _log(self, msg):
