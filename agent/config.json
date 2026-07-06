@@ -1,0 +1,25 @@
+{
+  "mychart_base_url": "https://mychart.uihealthcare.org/MyChart",
+  "timezone": "America/Chicago",
+  "calendar_name": "Saúde",
+  "accounts": [
+    {
+      "id": "eu",
+      "label": "[Eu]",
+      "color_id": "9",
+      "user_env": "MYCHART_EU_USER",
+      "pass_env": "MYCHART_EU_PASS",
+      "persona": null
+    },
+    {
+      "id": "mae",
+      "label": "[Mãe]",
+      "color_id": "11",
+      "user_env": "MYCHART_MAE_USER",
+      "pass_env": "MYCHART_MAE_PASS",
+      "persona": null
+    }
+  ],
+  "reminder_color_id": "5",
+  "event_reminders_minutes": [1440, 120]
+}

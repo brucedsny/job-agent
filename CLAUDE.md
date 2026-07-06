@@ -4,12 +4,16 @@ Guia de contexto para o Claude Code neste repositório.
 
 ## Sobre o projeto
 
-`job-agent` — repositório em estágio inicial. O código do projeto ainda não foi
-criado; por enquanto o repositório contém apenas a infraestrutura de automação do
-Claude Code (skills, hooks, permissões e workflows do GitHub Actions).
+`job-agent` — agentes pessoais de automação rodando sobre o Claude Code.
 
-Quando o projeto for definido, atualize esta seção com: linguagem/stack, como
-rodar, como testar e como fazer lint.
+**Agente atual: consultas médicas (MyChart UIHC → Google Calendar).**
+Stack: Python 3.11 + Playwright (Chromium pré-instalado em
+`PLAYWRIGHT_BROWSERS_PATH`; não rode `playwright install`). Documentação e
+setup em `agent/README.md`; orquestração em `.claude/skills/check-medico/`.
+Sincroniza as consultas de duas contas do MyChart no calendário "Saúde" do
+Google Calendar (via MCP) e cria lembretes de especialidades sem consulta
+futura. Credenciais só por variáveis de ambiente (`MYCHART_*`) — nunca
+commitar segredos nem imprimir seus valores.
 
 ## Convenções
 
@@ -25,6 +29,8 @@ rodar, como testar e como fazer lint.
 
 Invoque com `/<nome>`:
 
+- `/check-medico` — sincroniza consultas do MyChart (UIHC) no calendário
+  "Saúde" do Google Calendar e cria lembretes de especialidades pendentes.
 - `/pr-review` — revisão do diff atual (bugs + melhorias).
 - `/security-review` — revisão de segurança das mudanças do branch.
 - `/commit-pr` — commit limpo + abertura de PR.
@@ -32,11 +38,9 @@ Invoque com `/<nome>`:
 
 ## Comandos do projeto
 
-> Preencher quando o projeto tiver código.
-
 ```
-# Instalar deps:  <TODO>
-# Rodar:          <TODO>
-# Testar:         <TODO>
-# Lint:           <TODO>
+# Instalar deps:  pip install -r agent/requirements.txt
+# Rodar scraper:  python3 agent/mychart.py --account eu --out <dir>
+# Rotina toda:    /check-medico
+# Checar sintaxe: python3 -m py_compile agent/mychart.py
 ```
