@@ -1,5 +1,6 @@
 {
-  "mychart_base_url": "https://mychart.uihealthcare.org/MyChart",
+  "mychart_base_url": "https://mychart.uihealthcare.org/mychart",
+  "login_path": "/Authentication/Login",
   "timezone": "America/Chicago",
   "calendar_name": "Saúde",
   "accounts": [

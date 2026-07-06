@@ -180,9 +180,9 @@ def handle_mfa(page, out_dir: Path) -> bool:
     return True
 
 
-def login(page, base_url: str, username: str, password: str, out_dir: Path) -> bool:
+def login(page, login_url: str, username: str, password: str, out_dir: Path) -> bool:
     write_status(out_dir, "logging_in")
-    page.goto(base_url, timeout=NAV_TIMEOUT_MS, wait_until="networkidle")
+    page.goto(login_url, timeout=NAV_TIMEOUT_MS, wait_until="networkidle")
 
     user_input = first_visible(
         page, ["#Login", 'input[name="Login"]', 'input[name*="user" i]', 'input[type="text"]']
@@ -257,14 +257,17 @@ def main() -> int:
         write_status(out_dir, "error", f"missing env vars {account['user_env']}/{account['pass_env']}")
         return 2
 
-    base_url = config["mychart_base_url"].rstrip("/")
+    # MYCHART_BASE_URL overrides config — used by the run-agent driver to point
+    # the scraper at a local mock MyChart instead of the live portal.
+    base_url = os.environ.get("MYCHART_BASE_URL", config["mychart_base_url"]).rstrip("/")
+    login_url = base_url + config.get("login_path", "/Authentication/Login")
 
     with sync_playwright() as p:
         browser = launch_browser(p)
         page = browser.new_page()
         page.set_default_timeout(NAV_TIMEOUT_MS)
         try:
-            if not login(page, base_url, username, password, out_dir):
+            if not login(page, login_url, username, password, out_dir):
                 status = json.loads((out_dir / "status.json").read_text())
                 if status.get("state") == "waiting_mfa":
                     write_status(out_dir, "error", "MFA timeout")
