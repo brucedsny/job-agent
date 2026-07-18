@@ -1,0 +1,36 @@
+{{date}}
+
+{{hiring_manager_or_team}}
+{{company}}
+{{company_city_state}}
+
+Re: {{job_title}} ({{job_req_id_if_any}})
+
+{{opening_paragraph}}
+[1-2 frases. Por que ESTA empresa: citar {{company_real_fact}} — um fato
+concreto e verificável (projeto recente, notícia, valor declarado). Nada de
+"I am thrilled".]
+
+{{match_paragraph_1}}
+[Conectar o requisito principal da JD ({{jd_requirement_1}}) a uma experiência
+real do resume, com número concreto: {{real_metric_1}}.]
+
+{{match_paragraph_2}}
+[Segundo requisito ({{jd_requirement_2}}) → segunda experiência real
+({{real_metric_2}}). Variar o comprimento das frases em relação ao parágrafo
+anterior.]
+
+{{closing_paragraph}}
+[1-2 frases diretas: disponibilidade, próxima ação. Sem "at your earliest
+convenience".]
+
+{{signature_name}}
+{{signature_city_state}}
+{{signature_phone}} | {{signature_email}}
+
+---
+NOTA PARA OS AGENTES: este é o esqueleto usado pelo Agent 05. Substitua TODOS
+os campos {{...}}; as instruções entre colchetes são guia de escrita e nunca
+devem aparecer no texto final. O usuário pode substituir este arquivo pelo
+conteúdo do cover_letter_template.docx real dele — se o fizer, respeite o novo
+esqueleto.

@@ -1,0 +1,11 @@
+PLACEHOLDER — ARQUIVO DE VERDADE AUSENTE
+
+Este arquivo deve conter o resume real de IT Support do Bruce Dornelles
+(conteúdo de resume_master_it_support.docx da pasta job-agent-system no
+computador do usuário).
+
+REGRA PARA OS AGENTES: enquanto este placeholder existir, os agentes 2 e 4-7
+(JD Analyzer/Match, Resume Tailor, Cover Letter, Humanity Score, Checkpoint)
+NÃO podem rodar para cargos de IT Support — peça ao usuário para substituir
+este arquivo pelo resume real. NUNCA invente experiência para preencher a
+lacuna (Regra Inegociável #2).
