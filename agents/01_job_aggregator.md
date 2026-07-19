@@ -21,13 +21,21 @@ lista bruta estruturada, pronta para o JD Analyzer.
 
 ## Filtros obrigatórios (aplicar ANTES de gravar a vaga)
 
-- **Área:** TI / IT Support / Desktop Support / Field Support / Data Center /
-  AI-adjacent (nível de entrada a intermediário).
+- **Área (leque amplo, por decisão do usuário em 2026-07-19):** qualquer vaga de
+  tecnologia — IT Support / Consultant / Specialist / Analyst, Desktop/Field
+  Support, Help/Service Desk, Data Center, **AI/GenAI** (incl. suporte, ops,
+  treinamento de modelos, prompt/AI operations), **cloud** (Azure/AWS/GCP,
+  M365), **cybersecurity**, sysadmin, agtech/tecnologia agrícola (Bruce tem
+  bacharelado em Agricultural Engineering — John Deere, Corteva, etc.).
+  Keywords extras: "IT Support Consultant" (cargo anterior dele), bilingual
+  Portuguese + technology. Excluir apenas nível claramente executivo/principal
+  ou vagas 100% de software engineering pesado; na dúvida, INCLUIR e anotar o
+  fit — melhor vaga a mais que a menos.
 - **Recência:** postada há no máximo **14 dias** (Regra Inegociável #3). Vaga sem
   data de postagem identificável → marcar `date_posted = unknown` e sinalizar para
   revisão manual, não descartar silenciosamente.
-- **Local/modalidade:** onsite/hybrid em Cedar Rapids, IA e região, ou remote nos
-  EUA.
+- **Local/modalidade:** remote nos EUA (prioridade máxima), ou onsite/hybrid em
+  Cedar Rapids, IA e região (incl. Iowa City, Des Moines).
 - **Deduplicação:** antes de adicionar, verificar por link e por par
   (empresa + cargo) contra `data/job_scoring_tracker.csv`.
 

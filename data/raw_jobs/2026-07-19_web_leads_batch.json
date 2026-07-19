@@ -1,0 +1,50 @@
+{
+ "batch_date": "2026-07-19",
+ "source_note": "Web-search leads: bilingual Portuguese, cybersecurity entry, agtech (John Deere). Dates unknown \u2014 verify links. AI-trainer platforms noted separately: opentrain.ai, micro1.ai (marketplaces, sem vaga \u00fanica).",
+ "jobs": [
+  {
+   "company": "Keeper Security",
+   "title": "Customer Support Representative (Bilingual Portuguese)",
+   "location": "United States (remote; hybrid opcional Chicago)",
+   "work_mode": "remote",
+   "date_posted": "unknown",
+   "source": "web-search",
+   "link": "https://www.keepersecurity.com/careers.html",
+   "description": "PARTIAL: B2B support team, 100% remote from select locations; requires 1+ yr technical support; Portuguese bilingual \u2014 match direto com o perfil do Bruce.",
+   "fit": "alto"
+  },
+  {
+   "company": "Keeper Security",
+   "title": "Systems Support Engineer (Bilingual Portuguese)",
+   "location": "United States (remote; hybrid opcional Chicago)",
+   "work_mode": "remote",
+   "date_posted": "unknown",
+   "source": "web-search",
+   "link": "https://www.keepersecurity.com/careers.html",
+   "description": "PARTIAL: B2B support team, 100% remote from select locations; Portuguese bilingual; systems support \u2014 fit alto.",
+   "fit": "alto"
+  },
+  {
+   "company": "CyberSheath Services International",
+   "title": "Cyber Security Analyst I (SOC)",
+   "location": "United States (remote)",
+   "work_mode": "remote",
+   "date_posted": "unknown",
+   "source": "web-search",
+   "link": "https://cybersheath.com/careers/",
+   "description": "PARTIAL: SOC team, monitoring via SIEM multi-tenant, entry level \u2014 porta de entrada cyber.",
+   "fit": "medio"
+  },
+  {
+   "company": "John Deere",
+   "title": "IT / Technology openings (Moline IL + Ames/Des Moines/Johnston/Urbandale IA)",
+   "location": "Moline, IL / Iowa",
+   "work_mode": "onsite/hybrid/remote (varia)",
+   "date_posted": "unknown",
+   "source": "career-page",
+   "link": "https://jobs.deere.com/go/Technology-Jobs-in-Moline/2462900/",
+   "description": "PARTIAL: portal de tech jobs da Deere; IT Early Development Program com vagas em Iowa; sinergia com bacharelado em Agricultural Engineering do Bruce.",
+   "fit": "alto"
+  }
+ ]
+}
