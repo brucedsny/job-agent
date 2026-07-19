@@ -1,11 +1,52 @@
-PLACEHOLDER — ARQUIVO DE VERDADE AUSENTE
+# GROUND TRUTH — Data Center Technician resume (Bruce Dornelles)
+# Source: user-provided .docx, converted 2026-07-19. Do NOT add anything not present here.
 
-Este arquivo deve conter o resume real de Data Center do Bruce Dornelles
-(conteúdo de resume_master_data_center.docx da pasta job-agent-system no
-computador do usuário).
-
-REGRA PARA OS AGENTES: enquanto este placeholder existir, os agentes 2 e 4-7
-(JD Analyzer/Match, Resume Tailor, Cover Letter, Humanity Score, Checkpoint)
-NÃO podem rodar para cargos de Data Center — peça ao usuário para substituir
-este arquivo pelo resume real. NUNCA invente experiência para preencher a
-lacuna (Regra Inegociável #2).
+BRUCE DORNELLES
+Data Center Technician  —  Hardware Troubleshooting  ·  Component-Level Repair & Part Replacement  ·  Server, OS & Networking Support
+Cedar Rapids  (319) 383-9808  brucedsny@gmail.com
+PROFESSIONAL SUMMARY
+Hands-on technician with 6+ years diagnosing and troubleshooting computer and server hardware, operating systems, and networking protocols across enterprise, healthcare, and 24/7 industrial manufacturing environments. Performs component-level repairs, part replacement, and preventative maintenance on technical equipment with limited guidance; installs, configures, tests, and maintains hardware and peripherals; documents all work through ITSM ticketing. Completed the online Google IT Support Professional Certificate program. Accustomed to physically demanding work under PPE / EH&S safety protocols and to non-standard hours — weekends, night shifts, holidays, and shift-based schedules. Bachelor's degree  ·  U.S. Citizen  ·  Bilingual (English/Portuguese).
+CORE COMPETENCIES
+Hardware Troubleshooting & Component-Level Repairs  ·  Computer / Server Hardware  ·  Operating Systems  ·  Networking Protocols  ·  Equipment Installation & Deployment  ·  Preventative Maintenance  ·  End-of-Life Disassembly & Secure Disposal  ·  Data Security & Asset Tracking  ·  ITSM Ticketing & Documentation  ·  Non-Standard Hours: Nights / Weekends / Holidays  ·  Team Collaboration in Dynamic Environments
+TECHNICAL SKILLS
+Identity & Cloud: Active Directory, Microsoft 365 Administration, Azure, Group Policy (GPO)
+Endpoint & Imaging: SCCM, MDM / Device Management, Imaging & Deployment, Patch Management, Endpoint Security
+Hardware: Computer / Server Hardware, Component-Level Repair & Part Replacement, PCs, Laptops, Printers, Peripherals, Installation & Configuration, Asset / Lifecycle Tracking
+ITSM & Support: ServiceNow, ITSM Ticketing, Knowledge Base & Technical Documentation, Remote Desktop / Remote Support
+Networking & Comms: Networking Protocols — TCP/IP, DNS, DHCP, VPN; Firewalls, Routers & Switches, Wired & Wireless Networking
+OS & Scripting: Windows 10/11, Windows Server, Linux (Bash), macOS, iOS, PowerShell
+PROFESSIONAL EXPERIENCE
+Process Technician — Procter & Gamble Co.02/2024 – Present
+Iowa City, IA  ·  Large-scale industrial manufacturing plant
+Work non-standard hours across a 24/7 manufacturing operation — weekends, night shifts, and holidays on shift-based schedules — with zero missed rotations.
+Diagnose equipment failures and perform component-level repairs and part replacement on overnight shifts, restoring full operation before the start of the next shift.
+Lift and move 50+ lb (23 kg) equipment in confined spaces — frequent bending, kneeling, and pushing/pulling over extended periods — in strict compliance with PPE and EH&S safety protocols.
+Disassemble end-of-life equipment via part replacement in a team setting, recovering reusable components and ensuring secure, compliant disposal of remaining assets.
+Repair and perform preventative maintenance on equipment and machines per standard procedures, with limited guidance.
+IT Support Consultant — University of Iowa Hospitals & Clinics01/2022 – 12/2023
+Iowa City, IA
+Delivered hands-on and remote Tier 2 support to a large clinical user base via phone, email, and in-person, diagnosing and troubleshooting computer hardware, operating system, and software issues.
+Administered user accounts, groups, and access across Active Directory and Microsoft 365 environments.
+Managed imaging, configuration, and patch management across 300+ endpoints with SCCM, reaching full security compliance within deadline.
+Created technical documentation and knowledge base articles; trained 10 new hires, cutting ramp time ~20% and improving user adoption.
+Desktop Support Technician — Procter & Gamble05/2020 – 12/2021
+Iowa City, IA
+Installed, configured, tested, and maintained desktops, laptops, and peripherals in a fast-paced manufacturing facility, minimizing operational disruption.
+Resolved 60+ weekly hardware and operating-system incidents across Windows, macOS, and iOS, sustaining a 98% user-satisfaction rating.
+Maintained a 99% resolution rate on high-priority ServiceNow tickets, consistently meeting SLA.
+Audited a $200K hardware inventory with strict lifecycle tracking, eliminating equipment loss.
+IT Support Engineer — Oncoclínicas Group03/2019 – 02/2020
+Porto Alegre, Brazil
+Restored remote network access for staff in under 15 minutes by diagnosing complex VPN and Citrix faults.
+Deployed and configured collaboration and virtual-meeting technology (unified communications), ensuring reliable connectivity.
+Trained physicians and staff on new EHR software, driving adoption during a digital-transformation rollout.
+EDUCATION
+B.S., Agricultural Engineering — Federal University of Rio Grande do Sul (UFRGS), Brazil
+Digital Systems Engineering (Information Systems / IT coursework) — State University of Rio Grande do Sul (UERGS), Brazil
+CERTIFICATIONS
+Google IT Support Professional Certificate — Google (online program)
+Microsoft AI & Machine Learning Engineering — Professional Certificate
+Microsoft IT Support Specialist — Professional Certificate
+ADDITIONAL
+Work Authorization: U.S. Citizen — no visa sponsorship required, now or in the future
+·  Availability: Non-standard hours — weekends, night shifts, holidays, shift-based schedules  ·  Physical: Able to lift/move 50 lb (23 kg) with frequent bending, kneeling, climbing, pushing/pulling  ·  Safety: PPE / EH&S-trained

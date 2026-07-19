@@ -1,11 +1,50 @@
-PLACEHOLDER — ARQUIVO DE VERDADE AUSENTE
+# GROUND TRUTH — IT Field Support Specialist resume (Bruce Dornelles)
+# Source: user-provided .docx, converted 2026-07-19. Do NOT add anything not present here.
 
-Este arquivo deve conter o resume real de IT Support do Bruce Dornelles
-(conteúdo de resume_master_it_support.docx da pasta job-agent-system no
-computador do usuário).
-
-REGRA PARA OS AGENTES: enquanto este placeholder existir, os agentes 2 e 4-7
-(JD Analyzer/Match, Resume Tailor, Cover Letter, Humanity Score, Checkpoint)
-NÃO podem rodar para cargos de IT Support — peça ao usuário para substituir
-este arquivo pelo resume real. NUNCA invente experiência para preencher a
-lacuna (Regra Inegociável #2).
+BRUCE DORNELLES
+IT Field Support Specialist  —  Onsite & Remote End-User Support  ·  Field & Industrial Environments
+Cedar Rapids  (319) 383-9808  brucedsny@gmail.com
+PROFESSIONAL SUMMARY
+IT Field Support Specialist with 6+ years delivering hands-on and remote support across enterprise, healthcare, and industrial manufacturing environments. Diagnoses and resolves hardware, software, and system issues for a dispersed, diverse user base via phone, email, in-person, and site visits. Installs, configures, and maintains PCs, laptops, mobile devices, printers, and peripherals; administers Active Directory and Microsoft 365 user accounts, groups, and access; and manages tickets through ITSM with disciplined documentation. Comfortable on plant floors and job sites under full PPE and EH&S safety protocols — pairing strong technical aptitude with clear, customer-focused communication. Microsoft- and Google-certified; bilingual (English/Portuguese).
+CORE COMPETENCIES
+Onsite & Remote Support  ·  Hardware / Software / System Troubleshooting  ·  Active Directory & Microsoft 365 Administration  ·  ITSM Ticketing & Documentation  ·  Imaging & Device Deployment  ·  Mobile Devices, Printers & Peripherals  ·  New Site Setups & IT Projects  ·  VoIP & Enterprise Applications  ·  End-User Training  ·  PPE / EH&S Safety Compliance  ·  Up to 25% Field Travel
+TECHNICAL SKILLS
+Identity & Cloud: Active Directory, Microsoft 365 Administration (Accounts / Groups / Access), Azure, Group Policy (GPO), SharePoint, Microsoft Teams
+Endpoint & Imaging: SCCM, MDM / Device Management, Imaging & Deployment, Patch Management, Endpoint Security
+Hardware: PCs, Laptops, Mobile Devices, Printers, Peripherals, Installation & Configuration, Asset / Lifecycle Tracking
+ITSM & Support: ServiceNow, ITSM Ticketing, Knowledge Base & Technical Documentation, Remote Desktop / Remote Support
+Networking & Comms: TCP/IP, DNS, DHCP, VPN, Firewall, VoIP / Unified Communications, Wired & Wireless Networking
+OS & Scripting: Windows 10/11, Windows Server, macOS, iOS, PowerShell
+PROFESSIONAL EXPERIENCE
+Process Technician — Procter & Gamble Co.02/2024 – Present
+Iowa City, IA  ·  Large-scale industrial manufacturing plant
+Provide hands-on technical and IT/OT support on a live manufacturing floor under strict PPE and EH&S safety protocols — directly transferable to field and job-site IT support.
+Troubleshoot hardware, endpoint, and wired/wireless connectivity issues, sustaining ~98% system uptime during peak shifts.
+Centralize team communication on Microsoft Teams and SharePoint, maintaining full issue-tracking continuity across a 24/7 operation.
+IT Support Consultant — University of Iowa Hospitals & Clinics01/2022 – 12/2023
+Iowa City, IA
+Delivered hands-on and remote Tier 2 support to a large clinical user base via phone, email, and in-person, diagnosing and resolving hardware, software, and system issues.
+Administered user accounts, groups, and access across Active Directory and Microsoft 365 environments.
+Managed imaging, configuration, and patch management across 300+ endpoints with SCCM, reaching full security compliance within deadline.
+Created technical documentation and knowledge base articles; trained 10 new hires, cutting ramp time ~20% and improving user adoption.
+Desktop Support Technician — Procter & Gamble05/2020 – 12/2021
+Iowa City, IA
+Installed, configured, and maintained desktops, laptops, and peripherals in a fast-paced manufacturing facility, minimizing operational disruption.
+Resolved 60+ weekly incidents across Windows, macOS, and iOS, sustaining a 98% user-satisfaction rating.
+Maintained a 99% resolution rate on high-priority ServiceNow tickets, consistently meeting SLA.
+Audited a $200K hardware inventory with strict lifecycle tracking, eliminating equipment loss.
+IT Support Engineer — Oncoclínicas Group03/2019 – 02/2020
+Porto Alegre, Brazil
+Restored remote network access for staff in under 15 minutes by diagnosing complex VPN and Citrix faults.
+Deployed and configured collaboration and virtual-meeting technology (unified communications), ensuring reliable connectivity.
+Trained physicians and staff on new EHR software, driving adoption during a digital-transformation rollout.
+EDUCATION
+B.S., Agricultural Engineering — Federal University of Rio Grande do Sul (UFRGS), Brazil
+Digital Systems Engineering (Information Systems / IT coursework) — State University of Rio Grande do Sul (UERGS), Brazil
+CERTIFICATIONS
+Microsoft IT Support Specialist — Professional Certificate
+Microsoft AI & Machine Learning Engineering — Professional Certificate
+Google IT Support — Professional Certificate
+ADDITIONAL
+Work Authorization: U.S. Citizen — no visa sponsorship required, now or in the future
+·  Safety: PPE-trained
