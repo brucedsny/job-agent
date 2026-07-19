@@ -1,0 +1,64 @@
+{
+  "batch_date": "2026-07-19",
+  "session_note": "Remote session: outbound HTTPS blocked by environment network policy (proxy 403 for all non-allowlisted hosts). WebSearch worked; direct fetch of job pages (WebFetch/curl) did not. All leads below are PARTIAL: collected from search-result data only, full job descriptions unavailable. Dates flagged unknown require manual verification before JD analysis.",
+  "jobs": [
+    {
+      "company": "Loenbro",
+      "title": "IT Field Support Specialist",
+      "location": "Cedar Rapids, IA",
+      "work_mode": "onsite",
+      "date_posted": "unknown",
+      "source": "career-page",
+      "link": "https://job-boards.greenhouse.io/loenbro/jobs/4304408009",
+      "description": "PARTIAL (from search results): Supports end users across a dispersed organization; reports to Field Service Manager (posting also references Technology Manager); hands-on and remote support for reliable, secure, efficient computing systems; key point of contact for technical issues, troubleshooting, system support, user guidance; up to 25% travel to field locations for onsite support and infrastructure setup. Full-time, onsite, FLSA exempt. Full JD not retrievable this session."
+    },
+    {
+      "company": "Microsoft",
+      "title": "Data Center Technician",
+      "location": "Des Moines / West Des Moines, IA",
+      "work_mode": "onsite",
+      "date_posted": "unknown",
+      "source": "career-page",
+      "link": "https://careers.microsoft.com/us/en/job/797299/Data-Center-Technician",
+      "description": "PARTIAL (from search results): Entry-track DCT role — preparing, installing, diagnosing, troubleshooting, replacing and decommissioning equipment under guidance of experienced colleagues. 12-hour shifts incl. nights/weekends/holidays; climbing, prolonged standing, lifting 50 lbs; no visa sponsorship. Pay bands cited: ATR-B $23.17-$36.49/hr, ATR-C $26.92-$47.60/hr. Full JD not retrievable this session."
+    },
+    {
+      "company": "UnityPoint Health",
+      "title": "IT Technical Support Specialist",
+      "location": "Cedar Rapids, IA",
+      "work_mode": "onsite",
+      "date_posted": "unknown",
+      "source": "career-page",
+      "link": "https://careers.unitypoint.org/results",
+      "description": "PARTIAL (from search results): Full-time IT Technical Support Specialist, Client Device Support (CDS) team context; salary range cited $47,403-$71,115. Direct posting URL not identified this session (careers portal requires JS); verify on careers.unitypoint.org. Full JD not retrievable this session."
+    }
+  ],
+  "discarded": [
+    {
+      "company": "ENGIE North America",
+      "title": "IT Systems Engineer (4211) — University of Iowa operations",
+      "reason": "posted 2026-01-08, older than 14 days (rule #3)",
+      "link": "https://jobs.engie.com/job/IT-Systems-Engineer/59002-en_US"
+    },
+    {
+      "company": "US Dept. of Labor (USAJOBS)",
+      "title": "IT Specialist (CUSTSPT)",
+      "reason": "announcement closed 2026-07-14",
+      "link": "https://www.usajobs.gov/job/875510900"
+    },
+    {
+      "company": "University of Iowa",
+      "title": "IT Support Analyst / IT Support Consultant (multiple)",
+      "reason": "postings reported closed",
+      "link": "https://uiowa.referrals.selectminds.com/"
+    }
+  ],
+  "sources_inaccessible": [
+    "linkedin.com (blocked by network policy)",
+    "indeed.com (blocked by network policy)",
+    "usajobs.gov direct pages (blocked by network policy)",
+    "ziprecruiter.com (blocked by network policy)",
+    "careers.microsoft.com, job-boards.greenhouse.io, jobs.engie.com, uiowa.referrals.selectminds.com (blocked by network policy)",
+    "iowa.gov state jobs (not reached — same policy)"
+  ]
+}
