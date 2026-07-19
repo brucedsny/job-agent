@@ -1,0 +1,470 @@
+{
+ "batch_date": "2026-07-19",
+ "source_note": "Source: LinkedIn job-alert emails in Gmail (last 14 days). date_posted = date the alert email arrived (proxy for posting date, alerts cover new postings). Full JDs still unavailable (network policy blocks linkedin.com); links must be opened by the user or in a local session. Location 'United States' presumed remote \u2014 confirm on the posting.",
+ "jobs": [
+  {
+   "company": "RemoteHunter",
+   "title": "Entry-Level IT Support Associate (Remote)",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-18",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4441715646/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Swooped",
+   "title": "IT Support Specialist II",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-18",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4442126132/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Jobright.ai",
+   "title": "IT Help Desk Technician",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-18",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4441364507/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Illumia",
+   "title": "Technical Support Engineer- Quickcharge",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-18",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4432699581/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "HRCap, Inc.",
+   "title": "IT Help Desk Support Technician",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-17",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4438734630/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "NexusTek",
+   "title": "Service Desk Engineer",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-17",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4441906422/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "LiveKit",
+   "title": "IT Support Engineer",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-17",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4419637426/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Humana",
+   "title": "Helpdesk Support Technician 2",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-14",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4437648381/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Swooped",
+   "title": "IT Support Specialist II",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-14",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4440059152/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Careerscape",
+   "title": "Information Technology Support Specialist",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4437212718/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Netrolynx AI",
+   "title": "IT Support Associate",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4440015953/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Franklin Fitch",
+   "title": "Support Analyst",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4439799812/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "RemoteHunter",
+   "title": "Remote Technical Support Specialist",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4439159274/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "Symbotic",
+   "title": "Technical Support Administrator",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4439752924/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "AgileGrid Solutions",
+   "title": "IT Support Analyst",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-13",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4439723940/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  },
+  {
+   "company": "James Search Group",
+   "title": "Desktop Support Specialist",
+   "location": "United States",
+   "work_mode": "remote (a confirmar)",
+   "date_posted": "2026-07-12",
+   "source": "linkedin (email alert)",
+   "link": "https://www.linkedin.com/jobs/view/4439571171/",
+   "salary_hint": null,
+   "description": "PARTIAL: from alert email only. Open link for full JD."
+  }
+ ],
+ "rejected_count": 57,
+ "rejected_summary": [
+  {
+   "company": "Microsoft",
+   "title": "Data Center Technician",
+   "reason": "onsite fora de Iowa (Richmond, VA)"
+  },
+  {
+   "company": "Microsoft",
+   "title": "Data Center Project Manager",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Microsoft",
+   "title": "Software Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Microsoft",
+   "title": "Cloud & AI Digital Solution Area Specialist Acquisition",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Microsoft",
+   "title": "Silicon Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Microsoft",
+   "title": "Technical Program Manager I - Finance Data & Experiences",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "SpaceX",
+   "title": "IT Support Technician",
+   "reason": "onsite fora de Iowa (Washington, DC)"
+  },
+  {
+   "company": "RemoteHunter",
+   "title": "IT Technician I (Remote)",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "SpaceXAI",
+   "title": "IT Services Technician",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Metropolitan Transportation Authority",
+   "title": "Technical Support Analyst Levels 1 - 5",
+   "reason": "onsite fora de Iowa (New York, NY)"
+  },
+  {
+   "company": "Fluidstack",
+   "title": "IT Engineer, Data Center",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Heidi",
+   "title": "IT Administrator",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "David Yurman",
+   "title": "Data Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Marc Jacobs",
+   "title": "Desktop Support Specialist",
+   "reason": "onsite fora de Iowa (New York, NY)"
+  },
+  {
+   "company": "Galaxy",
+   "title": "AI & IT Operations Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Maybern",
+   "title": "Corporate IT Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "DeepL",
+   "title": "IT Support Engineer",
+   "reason": "onsite fora de Iowa (Austin, TX)"
+  },
+  {
+   "company": "Henderson Harbor Group",
+   "title": "Entry Level IT Support - $75k",
+   "reason": "onsite fora de Iowa (New York, NY)"
+  },
+  {
+   "company": "RemoteHunter",
+   "title": "IT Technician I (Remote)",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Oscar Health",
+   "title": "IT Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Voice AI Space",
+   "title": "IT Support Specialist",
+   "reason": "onsite fora de Iowa (New York, NY)"
+  },
+  {
+   "company": "BrainStation",
+   "title": "IT Help Desk Technician",
+   "reason": "onsite fora de Iowa (New York, United States)"
+  },
+  {
+   "company": "Headway",
+   "title": "IT Engineer, Endpoints",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Optiver",
+   "title": "Enterprise Technology Support Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Insight Global",
+   "title": "Artificial Intelligence Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Stripe",
+   "title": "Technical Support Engineer",
+   "reason": "onsite fora de Iowa (New York, United States)"
+  },
+  {
+   "company": "Amazon",
+   "title": "IT Support Engineer I, Ops Tech Solutions (OTS)",
+   "reason": "onsite fora de Iowa (Richmond, VA)"
+  },
+  {
+   "company": "RemoteHunter",
+   "title": "IT Technician I (Remote)",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Habitat Health",
+   "title": "IT Support Analyst",
+   "reason": "onsite fora de Iowa (West Covina, CA)"
+  },
+  {
+   "company": "Stripe",
+   "title": "Technical Support Engineer",
+   "reason": "onsite fora de Iowa (San Francisco, CA)"
+  },
+  {
+   "company": "Bloomberg",
+   "title": "IT Service Desk Analyst",
+   "reason": "onsite fora de Iowa (New York, NY)"
+  },
+  {
+   "company": "SpaceXAI",
+   "title": "IT Services Technician",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "SpaceXAI",
+   "title": "IT Services Technician",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Proxima",
+   "title": "IT Support Analyst",
+   "reason": "onsite fora de Iowa (Chicago, IL)"
+  },
+  {
+   "company": "Botify",
+   "title": "Technical Support Engineer",
+   "reason": "onsite fora de Iowa (New York, United States)"
+  },
+  {
+   "company": "Haystack",
+   "title": "Technical Support Associate",
+   "reason": "onsite fora de Iowa (Salinas, CA)"
+  },
+  {
+   "company": "Las Vegas Sands Corp.",
+   "title": "Technology Support Engineer",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Boeing",
+   "title": "IT Support Technician L2 - Contract - Onsite",
+   "reason": "onsite fora de Iowa (Bingen, WA)"
+  },
+  {
+   "company": "Amazon",
+   "title": "ITS Support Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Amazon",
+   "title": "IT Support Associate II, OTS",
+   "reason": "onsite fora de Iowa (Richardson, TX)"
+  },
+  {
+   "company": "Trilyon, Inc.",
+   "title": "MacOS Help Desk Technician/IT Support-$26/hr",
+   "reason": "onsite fora de Iowa (New York, United States)"
+  },
+  {
+   "company": "Haystack",
+   "title": "IT Support Specialist",
+   "reason": "onsite fora de Iowa (Washington DC-Baltimore Area)"
+  },
+  {
+   "company": "Vanderbilt University Medical Center",
+   "title": "Technical Support Specialist (Local / Onsite)",
+   "reason": "onsite fora de Iowa (Nashville Metropolitan Area)"
+  },
+  {
+   "company": "Amazon",
+   "title": "ITS Support Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Amazon",
+   "title": "ITS Support Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Harvey",
+   "title": "IT Operations Analyst",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Amazon",
+   "title": "IT Support Engineer I, Ops Tech Solutions (OTS)",
+   "reason": "onsite fora de Iowa (Niagara Falls, NY)"
+  },
+  {
+   "company": "DailyPay",
+   "title": "IT Analyst",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "SPS",
+   "title": "Information Technology (IT) Specialist",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Google",
+   "title": "System Development Engineer, Fleet Infrastructure Engineering",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Harvey",
+   "title": "IT Operations Analyst",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Paramount",
+   "title": "Software Engineer, Content Engineering",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "OpenAI",
+   "title": "IT Support Specialist",
+   "reason": "onsite fora de Iowa (Mountain View, CA)"
+  },
+  {
+   "company": "Amazon",
+   "title": "ITS Support Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Amazon",
+   "title": "ITS Support Engineer I",
+   "reason": "titulo fora do perfil"
+  },
+  {
+   "company": "Axinn",
+   "title": "Tech Support Specialist",
+   "reason": "onsite fora de Iowa (Washington DC-Baltimore Area)"
+  },
+  {
+   "company": "Action1",
+   "title": "Technical Support Engineer Tier I",
+   "reason": "onsite fora de Iowa (North Carolina, United States)"
+  }
+ ]
+}
