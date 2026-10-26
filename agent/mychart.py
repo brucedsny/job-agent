@@ -12,7 +12,7 @@ Usage:
 
 Protocol with the orchestrator:
     - status.json in the out dir is updated as the run progresses:
-        {"state": "starting" | "logging_in" | "waiting_mfa" | "scraping"
+        {"state": "starting" | "logging_in" | "waiting_mfa" | "mfa_submitted" | "scraping"
                  | "done" | "error", "detail": "..."}
     - When state is "waiting_mfa", the orchestrator must write the 6-digit
       verification code (sent by MyChart to the patient's email) into
@@ -107,13 +107,25 @@ def dump_page(page, out_dir: Path, name: str) -> dict:
 
 
 def looks_logged_in(page) -> bool:
+    # The public login page also mentions "appointments", so require being past
+    # /Authentication/ and a signed-in marker.
+    if "/authentication/" in page.url.lower():
+        return False
     try:
         body = page.locator("body").inner_text(timeout=10_000)
     except Exception:
         return False
-    return bool(re.search(r"log\s*out|sign\s*out|visits|appointments", body, re.I)) and not re.search(
-        r"forgot (username|password)", body, re.I
-    )
+    return bool(re.search(r"welcome,|log\s*out|sign\s*out", body, re.I))
+
+
+def wait_until_logged_in(page, seconds: int = 30) -> bool:
+    """After Verify, MyChart shows a "Loading .../inside.asp" interstitial on
+    the SecondaryValidation URL before redirecting to Home."""
+    for _ in range(seconds):
+        if looks_logged_in(page):
+            return True
+        page.wait_for_timeout(1000)
+    return False
 
 
 def mfa_page_kind(page) -> str | None:
@@ -189,6 +201,7 @@ def handle_mfa(page, out_dir: Path) -> bool:
     )
     if submit:
         submit.click()
+        write_status(out_dir, "mfa_submitted")
         page.wait_for_load_state("networkidle", timeout=NAV_TIMEOUT_MS)
     return True
 
@@ -233,7 +246,7 @@ def login(page, login_url: str, username: str, password: str, out_dir: Path) -> 
 
     if not handle_mfa(page, out_dir):
         return False
-    return looks_logged_in(page)
+    return wait_until_logged_in(page)
 
 
 def switch_persona(page, persona: str, out_dir: Path) -> None:
@@ -307,12 +320,13 @@ def main() -> int:
         page.set_default_timeout(NAV_TIMEOUT_MS)
         try:
             if not login(page, login_url, username, password, out_dir):
-                status = json.loads((out_dir / "status.json").read_text())
-                if status.get("state") == "waiting_mfa":
+                state = json.loads((out_dir / "status.json").read_text()).get("state")
+                if state == "waiting_mfa":
                     write_status(out_dir, "error", "MFA timeout")
                     return 3
                 dump_page(page, out_dir, "login_failed")
-                write_status(out_dir, "error", "login failed")
+                detail = "not signed in after MFA code" if state == "mfa_submitted" else "login failed"
+                write_status(out_dir, "error", detail)
                 return 2
 
             if account.get("persona"):

@@ -16,7 +16,8 @@ Routes (all under /mychart):
     POST /mychart/Authentication/Login  step=password  -> 302 SecondaryValidation
     GET  /mychart/Authentication/SecondaryValidation   choose text/email
     POST /mychart/Authentication/SecondaryValidation   method=email -> code page
-                                                       code=...     -> 302 Home
+                                                       code=...     -> "Loading" page,
+                                                       refreshes to Home after 2 s
     GET  /mychart/Home                                 "Welcome, <name>!"
     GET  /mychart/Visits                               upcoming visits (+ Past tab)
     GET  /mychart/Visits?tab=past                      past visits
@@ -176,7 +177,11 @@ class Handler(BaseHTTPRequestHandler):
             if form.get("method") == "email":
                 self._send("MyChart - Extra Security Required", CODE_BODY)
             elif form.get("twofactorcode"):
-                self._send("Redirect", "", status=302, location="/mychart/Home")
+                # Live portal: an interstitial stays on this URL before Home.
+                self._send(
+                    "Loading https://mychart.uihealthcare.org/MyChart/inside.asp",
+                    '<meta http-equiv="refresh" content="2;url=/mychart/Home"><p>Loading...</p>',
+                )
             else:
                 self._send("MyChart - Extra Security Required", CHOOSE_BODY)
         else:
