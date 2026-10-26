@@ -12,6 +12,14 @@ consulta passada mas nenhuma futura marcada.
 | `agent/mychart.py` | Script Playwright que loga no MyChart, resolve o desafio de MFA (código lido do Gmail pelo agente) e salva o texto/screenshots das páginas de consultas. |
 | `.claude/skills/check-medico/` | Skill que orquestra: roda o scraper para as duas contas, extrai as consultas dos dumps, sincroniza o calendário via Google Calendar (MCP) e gera o relatório. |
 | Trigger semanal | Dispara a skill automaticamente toda semana na sessão do Claude Code. |
+| `agent/mychart_explorer.py` | Navegador interativo controlado por HTTP local, para explorar o portal passo a passo e baixar registros (exportações de visitas, cópias formais, documentos digitalizados, notas). As instruções e as particularidades do portal estão no cabeçalho do arquivo. |
+| `agent/ccda_extract.py` | Converte as exportações "Visit Records" do MyChart (XML C-CDA) em um arquivo de texto por atendimento, mais um índice JSON. |
+
+O login real da UIHC é em duas etapas (usuário → *Continue* → senha), seguido de
+"Verify your identity". O scraper escolhe *Send to my email*, e o código chega
+no Gmail do Bruce em segundos, inclusive o da conta da Clea. O `result.json`
+traz `patient_name` (o "Welcome, X!" da tela inicial), e a skill etiqueta os
+eventos por esse nome, não pela variável de ambiente usada.
 
 Cores no calendário: `[Eu]` azul (Blueberry), `[Mãe]` vermelho (Tomato),
 lembretes de "marcar consulta" amarelo (Banana).
@@ -20,7 +28,9 @@ lembretes de "marcar consulta" amarelo (Banana).
 
 1. **Crie o calendário "Saúde"** no Google Calendar:
    Outros calendários → `+` → Criar novo calendário → nome `Saúde`.
-   (O conector do Calendar cria eventos, mas não calendários.)
+   (O conector do Calendar cria eventos, mas não calendários.) Enquanto ele
+   não existir, a skill usa o calendário principal, com etiqueta, cor e
+   visibilidade privada.
 
 2. **Credenciais do MyChart** — nas configurações do *environment* do Claude
    Code (claude.ai/code → seu ambiente → variáveis de ambiente), defina:
@@ -48,6 +58,20 @@ lembretes de "marcar consulta" amarelo (Banana).
 - Manual: digite `/check-medico` numa sessão do Claude Code neste repo.
 - Automático: o trigger semanal roda a mesma skill e só avisa se houver
   novidade ou problema.
+
+## Exportar o prontuário completo
+
+O MyChart exporta no máximo 50 visitas por pedido. Para tudo: Document Center →
+*View, Download, or Send Visit Records* → *Date Range*, em faixas de até 50
+visitas → *Download all* → *Request download*. Os arquivos ficam prontos em
+minutos em *Requested Records* e expiram em 7 dias. A "cópia formal do
+prontuário" (pedido ao setor de prontuários) é um PDF único e completo, com as
+notas médicas. As notas de uma internação em andamento não entram nas
+exportações; só dá para lê-las na página de notas da visita (`/note_text` no
+explorador).
+
+**Dados de saúde nunca entram no repositório.** Use o scratchpad da sessão
+para downloads e textos extraídos, e entregue ao usuário por anexo.
 
 ## Limitações conhecidas
 

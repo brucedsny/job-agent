@@ -67,13 +67,19 @@ def find_chromium_executable() -> str | None:
 
 
 def launch_browser(p):
+    options = {"headless": True}
+    # Chromium does not pick up HTTPS_PROXY by itself; the cloud environment's
+    # egress only works through it. Local addresses (the mock) bypass it.
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    if proxy:
+        options["proxy"] = {"server": proxy, "bypass": "localhost,127.0.0.1"}
     try:
-        return p.chromium.launch(headless=True)
+        return p.chromium.launch(**options)
     except Exception:
         executable = find_chromium_executable()
         if not executable:
             raise
-        return p.chromium.launch(headless=True, executable_path=executable)
+        return p.chromium.launch(executable_path=executable, **options)
 
 
 def first_visible(page, selectors: list[str]):
@@ -172,12 +178,22 @@ def handle_mfa(page, out_dir: Path) -> bool:
             pass
 
     submit = first_visible(
-        page, ['button[type="submit"]', 'button:has-text("verify")', 'button:has-text("continue")', 'input[type="submit"]']
+        page,
+        [
+            "#submitSecondaryValidation",
+            'button[type="submit"]',
+            'button:has-text("verify")',
+            'button:has-text("continue")',
+            'input[type="submit"]',
+        ],
     )
     if submit:
         submit.click()
         page.wait_for_load_state("networkidle", timeout=NAV_TIMEOUT_MS)
     return True
+
+
+LOGIN_SUBMIT = ["#submit", 'button[type="submit"]', 'input[type="submit"]', 'button:has-text("sign in")']
 
 
 def login(page, login_url: str, username: str, password: str, out_dir: Path) -> bool:
@@ -187,16 +203,29 @@ def login(page, login_url: str, username: str, password: str, out_dir: Path) -> 
     user_input = first_visible(
         page, ["#Login", 'input[name="Login"]', 'input[name*="user" i]', 'input[type="text"]']
     )
-    pass_input = first_visible(page, ['input[type="password"]'])
-    if not user_input or not pass_input:
+    if not user_input:
         dump_page(page, out_dir, "login_page_unrecognized")
         return False
-
     user_input.fill(username)
+
+    # UIHC shows only the username field first; the password field appears
+    # after "Continue" on the same URL.
+    pass_input = first_visible(page, ['input[type="password"]'])
+    if not pass_input:
+        cont = first_visible(page, LOGIN_SUBMIT)
+        if not cont:
+            dump_page(page, out_dir, "login_page_unrecognized")
+            return False
+        cont.click()
+        try:
+            page.locator('input[type="password"]').first.wait_for(state="visible", timeout=20_000)
+        except PWTimeout:
+            dump_page(page, out_dir, "login_password_step_missing")
+            return False
+        pass_input = first_visible(page, ['input[type="password"]'])
+
     pass_input.fill(password)
-    submit = first_visible(
-        page, ["#submit", 'button[type="submit"]', 'input[type="submit"]', 'button:has-text("sign in")']
-    )
+    submit = first_visible(page, LOGIN_SUBMIT)
     if not submit:
         return False
     submit.click()
@@ -215,6 +244,16 @@ def switch_persona(page, persona: str, out_dir: Path) -> None:
     except Exception as e:
         write_status(out_dir, "scraping", f"persona switch failed: {e}")
     dump_page(page, out_dir, "after_persona_switch")
+
+
+def detect_patient_name(page) -> str:
+    """First name shown on the MyChart home page ("Welcome, Clea!")."""
+    try:
+        body = page.locator("body").inner_text(timeout=10_000)
+    except Exception:
+        return ""
+    match = re.search(r"Welcome,\s*([^!\n]+)!", body)
+    return match.group(1).strip() if match else ""
 
 
 def scrape_visits(page, base_url: str, out_dir: Path) -> list[dict]:
@@ -279,12 +318,14 @@ def main() -> int:
             if account.get("persona"):
                 switch_persona(page, account["persona"], out_dir)
 
+            patient_name = detect_patient_name(page)
             artifacts = scrape_visits(page, base_url, out_dir)
             (out_dir / "result.json").write_text(
                 json.dumps(
                     {
                         "account": account["id"],
                         "label": account["label"],
+                        "patient_name": patient_name,
                         "scraped_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
                         "artifacts": artifacts,
                     },

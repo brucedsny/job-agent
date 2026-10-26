@@ -40,7 +40,7 @@ Expected tail on success (exit 0):
 
 ```
 [4/5] scraper exited rc=0; verifying artifacts
-[5/5] OK — login, MFA handshake, and Visits scraping all worked
+[5/5] OK — two-step login, MFA handshake, patient detection and Visits scraping all worked
 ```
 
 Artifacts land in `.claude/skills/run-agent/_smoke_out/` (gitignored). With
@@ -78,7 +78,12 @@ echo 246810 > /tmp/run-out/mfa_code.txt
 Only works where the environment can reach `mychart.uihealthcare.org` and the
 `MYCHART_*` credentials are set (see `agent/README.md`). Same command without
 `MYCHART_BASE_URL`. The full weekly rotation (both accounts → Google Calendar)
-is the `/check-medico` skill, not this one.
+is the `/check-medico` skill, not this one. Verified live on 2026-10-26: the
+egress proxy is reached through `HTTPS_PROXY` (the scraper passes it to
+Chromium explicitly), and the MFA code arrives by email within seconds.
+
+To explore the live portal by hand (new pages, record downloads), use
+`agent/mychart_explorer.py`; its header lists the commands and portal quirks.
 
 ## Failure-mode exit codes (verified)
 
@@ -102,10 +107,15 @@ is the `/check-medico` skill, not this one.
 - **Chromium version skew.** `mychart.py` falls back to the browser binary in
   `PLAYWRIGHT_BROWSERS_PATH` if the pip `playwright` package's bundled version
   doesn't match. If launch fails anyway, check that dir exists.
-- **Selectors are best-effort.** The mock mirrors the selectors the scraper
-  targets (`#Login`, password field, `#submit`, numeric code input, a "Past"
-  tab). The real Epic portal may differ; a green driver proves the scraper
-  *logic*, not that UIHC hasn't changed its DOM.
+- **The mock mirrors the live flow seen on 2026-10-26.** Username → *Continue*
+  → password on the same URL (`#Login`, `#Password`, `#submit`), then "Verify
+  your identity" with `#textCode`/`#emailCode`, then `#twofactorcode`,
+  `#rememberMe` (checked; its label intercepts clicks) and
+  `#submitSecondaryValidation`, then Home with "Welcome, <name>!". If UIHC
+  changes its DOM, a green driver proves the scraper *logic* only. Re-check
+  the live page with the explorer and update the mock to match.
+- **Proxy.** In the cloud container Chromium needs the `HTTPS_PROXY` passed as a
+  launch option; local addresses bypass it, so the mock still works.
 
 ## Troubleshooting
 

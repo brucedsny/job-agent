@@ -137,8 +137,11 @@ def main() -> int:
         return fail("upcoming dump missing expected 'Cardiology'", mock)
     if "Ophthalmology" not in past:
         return fail("past dump missing expected 'Ophthalmology'", mock)
+    patient = json.loads((out_dir / "result.json").read_text()).get("patient_name")
+    if patient != "Clea":
+        return fail(f"patient_name in result.json is {patient!r}, expected 'Clea'", mock)
 
-    print("[5/5] OK — login, MFA handshake, and Visits scraping all worked")
+    print("[5/5] OK — two-step login, MFA handshake, patient detection and Visits scraping all worked")
     print(f"      artifacts in: {out_dir}")
     print(f"      upcoming visits dump ({len(upcoming)} chars), "
           f"past visits dump ({len(past)} chars)")

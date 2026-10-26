@@ -10,7 +10,8 @@
       "color_id": "9",
       "user_env": "MYCHART_EU_USER",
       "pass_env": "MYCHART_EU_PASS",
-      "persona": null
+      "persona": null,
+      "patient_first_name": "Bruce"
     },
     {
       "id": "mae",
@@ -18,9 +19,13 @@
       "color_id": "11",
       "user_env": "MYCHART_MAE_USER",
       "pass_env": "MYCHART_MAE_PASS",
-      "persona": null
+      "persona": null,
+      "patient_first_name": "Clea"
     }
   ],
   "reminder_color_id": "5",
-  "event_reminders_minutes": [1440, 120]
+  "event_reminders_minutes": [
+    1440,
+    120
+  ]
 }
