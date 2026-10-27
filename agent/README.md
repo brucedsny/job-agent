@@ -73,6 +73,14 @@ explorador).
 **Dados de saúde nunca entram no repositório.** Use o scratchpad da sessão
 para downloads e textos extraídos, e entregue ao usuário por anexo.
 
+## Transcrever áudios
+
+`python3 agent/transcribe.py <audio> <saida.txt> [--model small] [--lang pt]`
+transcreve localmente com faster-whisper (instale sob demanda:
+`pip install faster-whisper`), com minuto:segundo em cada trecho. A skill
+`/health-sync` usa isso para os áudios que o usuário joga na pasta de entrada
+do Drive.
+
 ## Limitações conhecidas
 
 - Scraping de portal Epic pode quebrar se a UIHC mudar o layout; o script
