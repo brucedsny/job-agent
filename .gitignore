@@ -27,3 +27,6 @@ logs/
 
 # Claude Code local overrides (machine-specific, not shared)
 .claude/settings.local.json
+
+# run-agent smoke artifacts
+.claude/skills/run-agent/_smoke_out/
