@@ -56,3 +56,19 @@ ou rascunhos contra o prontuário e devolve só o veredito com fonte.
 # Checar sintaxe: python3 -m py_compile agent/mychart.py
 # Transcrever:    python3 agent/transcribe.py <audio> <saida.txt>  (pip install faster-whisper)
 ```
+
+## MyChart da Clea a partir da nuvem (funciona — não peça senha ao usuário)
+
+O MyChart da UIHC abre pela nuvem. O login vem das variáveis de ambiente
+`MYCHART_EU_USER`/`MYCHART_EU_PASS` (hoje com o login da Clea; use
+`MYCHART_MAE_*` se existirem). Nunca peça usuário/senha nem imprima valores.
+
+1. `setsid -f nohup python3 agent/mychart_explorer.py --out <scratchpad>/mychart_live --port 8765 >/dev/null 2>&1`
+2. Siga a sequência de login do cabeçalho de `agent/mychart_explorer.py`
+   (`fill_secret` para usuário e senha; `#emailCode` para o código).
+3. Código MFA: o e-mail "Verification Code" mais recente no Gmail
+   (`newer_than:1h`). Se não chegar em 3 min, peça ao usuário só o código.
+4. Leia com `/text`, `/links`, `/note_text`; feche com `/quit`.
+
+Memória do caso: Google Drive, pasta Clea_Prontuario_IA — leia primeiro
+`00_PAINEL` e `00_FATOS_VERIFICADOS`. O portal do Wellmark não abre da nuvem.
