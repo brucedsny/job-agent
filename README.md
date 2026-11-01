@@ -53,3 +53,47 @@ Guia de contexto carregado automaticamente pelo Claude em toda sessão.
 - Em uma issue: comente `@claude implemente X` → o workflow abre um PR.
 - Em um PR: comente `@claude corrija o teste que falhou`.
 - No Claude Code local/web: digite `/pr-review`, `/security-review`, etc.
+
+---
+
+## Job Search Agent (o código)
+
+Sistema modular de 8 agentes para busca de emprego, com **humano no comando**:
+o currículo é adaptado **só com fatos reais** do perfil-mestre, e **toda
+candidatura exige aprovação humana (Gate B) — nunca há auto-apply**.
+Arquitetura e políticas: [`README-PLANNING.md`](README-PLANNING.md).
+
+### Instalação
+
+```bash
+pip install -e ".[dev]"            # + ".[pdf]" (WeasyPrint) e ".[browser]" (Playwright) se quiser
+cp .env.example .env               # ANTHROPIC_API_KEY e fontes de vagas
+job-agent init-profile             # edite data/profile/master.yaml com dados REAIS
+```
+
+### Uso
+
+```bash
+job-agent discover --greenhouse stripe --query python   # ou --url / --lever / --ashby / --all
+job-agent run <job_id>              # extrai → rankeia → adapta CV → PDF → pacote; PARA no Gate B
+job-agent autopilot --max 10        # prepara as de alto fit pela política (não envia)
+job-agent review <job_id>           # preview do que será enviado
+job-agent approve <job_id>          # aprovação humana (ou approve-all --yes)
+job-agent submit <job_id>           # API ATS / e-mail; browser só com --consent (Gate C)
+job-agent feedback <job_id> callback && job-agent rates   # aprendizado do funil
+job-agent report                    # funil, custo por etapa, pendências
+job-agent stop / resume             # kill-switch
+```
+
+| # | Agente | Modelo |
+|---|--------|--------|
+| 1 | Discovery (URL, Greenhouse, Lever, Ashby) | — |
+| 2 | Extraction | Haiku → Sonnet |
+| 3 | Fit Ranking (probabilidade real de entrevista) | Sonnet |
+| 4 | Resume Tailor + guard anti-mentira | Opus |
+| 5 | Document (PDF ATS-safe: WeasyPrint → Typst) | — |
+| 6 | Assembly (pacote, cover letter, bloqueios) | Sonnet / Opus |
+| 7 | Submission (API › e-mail › browser c/ Gate C) | — |
+| 8 | CRM (SQLite: funil, custo, auditoria, outcomes) | — |
+
+Testes: `pytest -q` (offline — sem rede nem API key).

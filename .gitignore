@@ -27,3 +27,14 @@ logs/
 
 # Claude Code local overrides (machine-specific, not shared)
 .claude/settings.local.json
+
+# job-agent runtime data / PII (master.example.yaml IS versioned)
+data/profile/master.yaml
+data/crm.sqlite
+data/output/
+data/outbox/
+data/STOP
+*.pdf
+*.eml
+*.typ
+.pytest_cache/

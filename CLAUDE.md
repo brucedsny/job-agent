@@ -4,12 +4,15 @@ Guia de contexto para o Claude Code neste repositório.
 
 ## Sobre o projeto
 
-`job-agent` — repositório em estágio inicial. O código do projeto ainda não foi
-criado; por enquanto o repositório contém apenas a infraestrutura de automação do
-Claude Code (skills, hooks, permissões e workflows do GitHub Actions).
+`job-agent` — Job Search Agent em Python 3.11 (8 agentes: discovery, extraction,
+ranking, tailor, document, assembly, submission, CRM). Pacote em `src/`, CLI Typer
+(`src/cli.py`), CRM em SQLite (`data/crm.sqlite`), LLM via Anthropic SDK
+(`src/llm.py`). Arquitetura: `README-PLANNING.md`.
 
-Quando o projeto for definido, atualize esta seção com: linguagem/stack, como
-rodar, como testar e como fazer lint.
+Regras invioláveis: o CV adaptado só usa fatos de `data/profile/master.yaml`
+(guard anti-mentira em `src/agents/tailor.py`); **nunca** submeter sem aprovação
+humana (Gate B, `GATE_B_ALWAYS_REQUIRED`); browser só com consentimento (Gate C).
+Dados pessoais (`master.yaml`, `crm.sqlite`, PDFs) nunca vão para o git.
 
 ## Convenções
 
@@ -32,11 +35,9 @@ Invoque com `/<nome>`:
 
 ## Comandos do projeto
 
-> Preencher quando o projeto tiver código.
-
 ```
-# Instalar deps:  <TODO>
-# Rodar:          <TODO>
-# Testar:         <TODO>
-# Lint:           <TODO>
+# Instalar deps:  pip install -e ".[dev]"   (extras: pdf, browser)
+# Rodar:          job-agent --help   (ou python -m src.cli)
+# Testar:         pytest -q
+# Lint:           (não configurado)
 ```

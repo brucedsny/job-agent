@@ -1,0 +1,38 @@
+# Master profile (EXAMPLE). Copy to master.yaml and fill with REAL data.
+# This is the ONLY source of facts the system may use in a tailored resume.
+contact:
+  name: "Maria Silva"
+  email: "maria.silva@example.com"
+  phone: "+55 11 90000-0000"
+  location: "São Paulo, BR (remoto)"
+  links: ["https://github.com/mariasilva"]
+summary: >
+  Engenheira de software backend com 6 anos de experiência em Python e sistemas distribuídos.
+experiences:
+  - company: "Acme Pagamentos"
+    title: "Engenheira de Software Sênior"
+    start: "2021-03"
+    end: null
+    bullets:
+      - "Liderou a migração do monólito para microserviços em Python/FastAPI."
+      - "Reduziu a latência p95 da API de checkout de 800ms para 180ms."
+      - "Implementou pipeline de eventos com Kafka processando 5M de eventos/dia."
+    skills: ["Python", "FastAPI", "PostgreSQL", "Kafka", "AWS"]
+  - company: "Beta Tech"
+    title: "Engenheira de Software"
+    start: "2018-01"
+    end: "2021-02"
+    bullets:
+      - "Criou suíte de testes que elevou a cobertura de 40% para 85%."
+    skills: ["Python", "Django", "Docker"]
+education:
+  - institution: "Universidade de São Paulo"
+    degree: "Bacharelado"
+    field: "Ciência da Computação"
+    end: "2017"
+skills:
+  - {name: "Python", years: 6}
+  - {name: "FastAPI", years: 3}
+  - {name: "Kafka", years: 3}
+certifications: ["AWS Certified Solutions Architect – Associate"]
+languages: ["Português (nativo)", "Inglês (avançado)"]
