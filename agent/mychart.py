@@ -59,10 +59,18 @@ def find_chromium_executable() -> str | None:
     """Fallback for version mismatch between playwright pip package and
     the pre-installed browsers in PLAYWRIGHT_BROWSERS_PATH."""
     root = os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
-    for pattern in ("chromium-*/chrome-linux/chrome", "chromium/chrome-linux/chrome"):
+    for pattern in (
+        "chromium-*/chrome-linux64/chrome",
+        "chromium-*/chrome-linux/chrome",
+        "chromium/chrome-linux/chrome",
+    ):
         matches = sorted(glob.glob(str(Path(root) / pattern)))
         if matches:
             return matches[-1]
+    # Some images ship a single launcher file at <root>/chromium.
+    launcher = Path(root) / "chromium"
+    if launcher.is_file() and os.access(launcher, os.X_OK):
+        return str(launcher)
     return None
 
 
