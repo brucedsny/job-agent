@@ -39,6 +39,8 @@ Invoque com `/<nome>`:
   atualiza a ficha de fatos e escreve a atualização no Drive.
 - `/health-advocate` — respostas de advocacia em saúde com fonte (Vitórias /
   Brechas / A real / O que dizer / Checklist).
+- `/junta` — análise do caso inteiro por uma junta médica (padrão) ou
+  jurídica/social (`/junta juridica`), carregando prompts e ficha do Drive.
 - `/pr-review` — revisão do diff atual (bugs + melhorias).
 - `/security-review` — revisão de segurança das mudanças do branch.
 - `/commit-pr` — commit limpo + abertura de PR.
