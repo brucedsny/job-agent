@@ -20,6 +20,10 @@ paciente fica neste repositório: os fatos vivem no Drive do usuário.
 Várias fontes longas, ou checar a resposta de outra IA → delegue ao subagente
 `fact-checker`; ele devolve só o veredito com citação.
 
+Recomendação concreta (comida, remédio, suplemento, exame, documento,
+contrato) → antes, leia o "PORTÃO DE SEGURANÇA" do prompt da junta no Drive
+(alergias, intolerâncias, remédios, riscos) e teste a recomendação contra ele.
+
 ## 2. Checar antes de afirmar
 
 - Número, data, diagnóstico, remédio, exame, citação de pessoa, regra do

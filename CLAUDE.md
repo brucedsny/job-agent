@@ -39,15 +39,25 @@ Invoque com `/<nome>`:
   atualiza a ficha de fatos e escreve a atualização no Drive.
 - `/health-advocate` — respostas de advocacia em saúde com fonte (Vitórias /
   Brechas / A real / O que dizer / Checklist).
-- `/junta` — análise do caso inteiro por uma junta médica (padrão) ou
-  jurídica/social (`/junta juridica`), carregando prompts e ficha do Drive.
+- `/junta` — análise do caso inteiro por uma junta médica (padrão),
+  jurídica/social (`/junta juridica`) ou as duas (`/junta ambas`), com a
+  "junta do diabo" atacando o rascunho; `/junta diabo <texto>` só critica.
+  Carrega prompts e ficha do Drive.
 - `/pr-review` — revisão do diff atual (bugs + melhorias).
 - `/security-review` — revisão de segurança das mudanças do branch.
 - `/commit-pr` — commit limpo + abertura de PR.
 - `/triage-issue` — investigação e triagem de uma issue.
 
-Subagente `fact-checker` (`.claude/agents/`): checa afirmações de outras IAs
-ou rascunhos contra o prontuário e devolve só o veredito com fonte.
+Subagentes (`.claude/agents/`):
+- `fact-checker` — checa afirmações de outras IAs ou rascunhos contra o
+  prontuário e devolve só o veredito com fonte.
+- `junta-diabo` — equipe vermelha que ataca rascunhos da junta (fatos,
+  evidência, lei, segurança, vieses) e devolve MANTER / AJUSTAR / RETIRAR.
+
+**Regra de segurança:** qualquer recomendação concreta sobre a mãe (comida,
+remédio, suplemento, exame, atividade, documento ou contrato) passa antes pelo
+"portão de segurança" do prompt da junta no Drive (alergias, intolerâncias,
+remédios e riscos), mesmo em perguntas rápidas. Use `/junta` no modo rápido.
 
 ## Comandos do projeto
 
