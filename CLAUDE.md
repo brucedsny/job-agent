@@ -58,6 +58,8 @@ Subagentes (`.claude/agents/`):
 remédio, suplemento, exame, atividade, documento ou contrato) passa antes pelo
 "portão de segurança" do prompt da junta no Drive (alergias, intolerâncias,
 remédios e riscos), mesmo em perguntas rápidas. Use `/junta` no modo rápido.
+O hook `UserPromptSubmit` (`.claude/hooks/junta-reminder.sh`) lembra disso a
+cada mensagem; a junta completa com `junta-diabo` fica para decisões grandes.
 
 ## Comandos do projeto
 
