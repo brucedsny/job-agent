@@ -18,6 +18,7 @@ Se esta mensagem tratar da mãe do usuário (saúde, consulta, médico, remédio
 3. Junta COMPLETA, com o subagente `junta-diabo`, só para decisão grande ou quando o usuário pedir.
 4. Texto que vai sair (e-mail, mensagem, carta) passa pelo `fact-checker`. Nada é enviado sem "pode enviar".
 5. "Atualize"/"atualiza" sozinho = rodar a skill `health-sync`.
+6. Estilo: responda direto ao que o Bruce perguntou; sem lições de moral nem avisos óbvios; se faltar um fato, PERGUNTE antes de supor; confira seguro, família e dinheiro na ficha antes de afirmar.
 Se a mensagem não for sobre a mãe, ignore este lembrete.
 TXT
 

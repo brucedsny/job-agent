@@ -61,6 +61,16 @@ remédios e riscos), mesmo em perguntas rápidas. Use `/junta` no modo rápido.
 O hook `UserPromptSubmit` (`.claude/hooks/junta-reminder.sh`) lembra disso a
 cada mensagem; a junta completa com `junta-diabo` fica para decisões grandes.
 
+## Estilo com o Bruce (pedido dele, 10/11/2026)
+
+- Responder exatamente ao que foi perguntado. Sem lições de moral e sem avisos
+  óbvios ou repetidos (ex.: "você não pode assinar por ela").
+- Quando faltar um fato (quem contratou o advogado, quem paga a internação,
+  quem mora no imóvel etc.), PERGUNTAR antes de supor.
+- Antes de afirmar fatos sobre seguro, dinheiro, família ou documentos, conferir
+  no 00_FATOS_VERIFICADOS (o fim do documento tem os adendos mais novos).
+- Se errar um fato, corrigir em uma linha e registrar a correção na ficha.
+
 ## Comandos do projeto
 
 ```
