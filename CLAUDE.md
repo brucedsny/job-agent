@@ -43,6 +43,8 @@ Invoque com `/<nome>`:
   jurídica/social (`/junta juridica`) ou as duas (`/junta ambas`), com a
   "junta do diabo" atacando o rascunho; `/junta diabo <texto>` só critica.
   Carrega prompts e ficha do Drive.
+- `/privacidade` — auditoria de privacidade (GitHub, Drive, conectores) e
+  configurações recomendadas.
 - `/pr-review` — revisão do diff atual (bugs + melhorias).
 - `/security-review` — revisão de segurança das mudanças do branch.
 - `/commit-pr` — commit limpo + abertura de PR.
@@ -61,15 +63,24 @@ remédios e riscos), mesmo em perguntas rápidas. Use `/junta` no modo rápido.
 O hook `UserPromptSubmit` (`.claude/hooks/junta-reminder.sh`) lembra disso a
 cada mensagem; a junta completa com `junta-diabo` fica para decisões grandes.
 
-## Estilo com o Bruce (pedido dele, 10/11/2026)
+## Estilo com o usuário (pedido dele, 10/11/2026)
 
 - Responder exatamente ao que foi perguntado. Sem lições de moral e sem avisos
-  óbvios ou repetidos (ex.: "você não pode assinar por ela").
-- Quando faltar um fato (quem contratou o advogado, quem paga a internação,
-  quem mora no imóvel etc.), PERGUNTAR antes de supor.
+  óbvios ou repetidos.
+- Quando faltar um fato, PERGUNTAR antes de supor.
 - Antes de afirmar fatos sobre seguro, dinheiro, família ou documentos, conferir
   no 00_FATOS_VERIFICADOS (o fim do documento tem os adendos mais novos).
 - Se errar um fato, corrigir em uma linha e registrar a correção na ficha.
+
+## Privacidade (prioridade máxima)
+
+- O hook `SessionStart` (`.claude/hooks/privacy-check.sh`) avisa se o
+  repositório está público ou se há dado pessoal nos arquivos. Havendo aviso,
+  dizer ao usuário na PRIMEIRA linha da resposta.
+- `/privacidade` faz a auditoria completa (GitHub, histórico do git, Drive,
+  conectores) e dá o passo a passo das configurações.
+- Nada de dado pessoal da família em arquivo versionado; nunca imprimir senhas,
+  códigos de verificação ou números de documentos.
 
 ## Comandos do projeto
 
