@@ -4,7 +4,7 @@
 Logs into a MyChart account with Playwright, navigates to the Visits pages
 and dumps page text + screenshots to an output directory. Parsing of the
 dumps into structured appointments is done by the orchestrating agent
-(see .claude/skills/check-medico), which is far more robust to Epic UI
+(see .claude/skills/atualiza), which is far more robust to Epic UI
 changes than hardcoded selectors.
 
 Usage:

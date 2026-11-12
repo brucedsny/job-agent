@@ -7,7 +7,7 @@ description: Build, launch, and smoke-test the medical-appointment agent (MyChar
 
 The runnable unit is `agent/mychart.py`: a Playwright/Chromium scraper that
 logs into MyChart (UIHC), solves an email-code MFA challenge, and dumps the
-Visits pages for the orchestrating `/check-medico` skill to parse. The live
+Visits pages for the orchestrating `/atualiza` skill to parse. The live
 portal needs real credentials and network egress that this environment blocks,
 so the primary way to run it here is the **offline driver**, which boots a mock
 MyChart and runs the real scraper against it.
@@ -77,8 +77,8 @@ echo 246810 > /tmp/run-out/mfa_code.txt
 
 Only works where the environment can reach `mychart.uihealthcare.org` and the
 `MYCHART_*` credentials are set (see `agent/README.md`). Same command without
-`MYCHART_BASE_URL`. The full weekly rotation (both accounts → Google Calendar)
-is the `/check-medico` skill, not this one. Verified live on 2026-10-26: the
+`MYCHART_BASE_URL`. The calendar sync (both accounts → Google Calendar) is
+part of the `/atualiza` skill, not this one. Verified live on 2026-10-26: the
 egress proxy is reached through `HTTPS_PROXY` (the scraper passes it to
 Chromium explicitly), and the MFA code arrives by email within seconds.
 
@@ -88,7 +88,7 @@ To explore the live portal by hand (new pages, record downloads), use
 ## Failure-mode exit codes (verified)
 
 `agent/mychart.py` exits with a distinct code per failure, so the driver and
-`/check-medico` can react. These were reproduced in this environment:
+`/atualiza` can react. These were reproduced in this environment:
 
 - Missing `MYCHART_*` env vars → exit **2** (`missing env vars ...`).
 - Network policy blocks the portal → exit **4** (`network blocked by
