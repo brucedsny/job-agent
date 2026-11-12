@@ -20,6 +20,7 @@ textos extraídos e PDFs gerados ficam no scratchpad da sessão e vão para o Dr
 |---|---|
 | `mychart.py` | Scraper Playwright das consultas: login em duas etapas, MFA por e-mail (o agente grava o código em `mfa_code.txt`), texto e screenshots da página Visits. |
 | `mychart_explorer.py` | Navegador controlado por HTTP local para ler notas, resultados e mensagens e baixar registros; comandos e particularidades do portal no cabeçalho. |
+| `wellmark.py` | Baixa do myWellmark (seguro) os EOBs, as cartas de autorização (aprovações, negativas, SNF) e a lista de claims, com `index.json` (data, tipo, título, status, arquivo). MFA por e-mail via `mfa_code.txt`; para sem a pessoa quando o código vai por SMS (exit 6) e em CAPTCHA ou bot check (exit 7). Detalhes do portal no cabeçalho. |
 | `ccda_extract.py` | Converte as exportações "Visit Records" (XML C-CDA) em um texto por atendimento + índice JSON. |
 | `transcribe.py` | Transcreve áudio localmente (faster-whisper, instalado sob demanda) com minuto:segundo. |
 | `export_chat.py` | Exporta conversas do Claude Code e do claude.ai (`conversations.json`, projetos) para Markdown + SQLite. |
@@ -40,6 +41,9 @@ textos extraídos e PDFs gerados ficam no scratchpad da sessão e vão para o Dr
 4. **Agenda:** crie o calendário "Saúde" no Google Calendar (o conector não
    cria calendários); sem ele, a skill usa o principal, com etiqueta, cor e
    evento privado.
+5. **Wellmark:** `WELLMARK_USER`/`WELLMARK_PASS` nas variáveis de ambiente;
+   rede para `mywellmark.wellmark.com`, `authentication.wellmark.com`,
+   `apigw.wellmark.com` e os links temporários dos documentos (S3 e CloudFront).
 
 ## Uso
 
@@ -48,6 +52,9 @@ textos extraídos e PDFs gerados ficam no scratchpad da sessão e vão para o Dr
 - Teste offline do scraper, sem credenciais nem rede:
   `python3 .claude/skills/run-agent/driver.py`.
 - Folhas: `node agent/tools/html2pdf.js IN.html OUT.pdf 0.95`.
+- Seguro: `python3 agent/wellmark.py --out <scratchpad>/wellmark_dl [--since AAAA-MM-DD]`
+  (PDFs em `eobs/` e `auth_letters/`, `index.json`, `status.json`); a skill
+  `/atualiza` sobe só os arquivos novos para `30_Seguro_Wellmark_e_contas`.
 
 ## Prontuário completo
 
@@ -63,4 +70,7 @@ nas exportações: leia-as com `/note_text` no explorador.
 - Mudanças de layout do portal Epic podem quebrar o scraper; os dumps e
   screenshots existem para o agente se adaptar.
 - CAPTCHA ou bloqueio de automação exigem intervenção manual.
-- O portal do Wellmark não abre da nuvem.
+- O myWellmark recusa o Chromium headless (fica em "Loading"; os scripts
+  voltam como HTML): o `wellmark.py` para com exit 7 e não contorna. Em
+  2026-10 a conta só tinha MFA por SMS. `--headed` abre uma janela para quem
+  roda num computador com tela e passa o código (não testado no portal).
