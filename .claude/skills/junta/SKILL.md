@@ -1,6 +1,6 @@
 ---
 name: junta
-description: Junta médica e jurídica do caso da mãe, com a "junta do diabo" atacando o rascunho. Use para análise completa, segunda opinião ou estratégia (alta, moradia, seguro, imigração, direitos, "o que eu digo") — e, no modo rápido, antes de QUALQUER recomendação concreta sobre a mãe (comida, remédio, suplemento, exame, atividade, visita, documento, contrato).
+description: Junta médica/jurídica do caso da mãe com a "junta do diabo". Use para análise, segunda opinião ou estratégia (alta, seguro, direitos, "o que eu digo") e, no modo rápido, antes de QUALQUER recomendação concreta sobre a mãe (comida, remédio, exame, atividade, visita, documento).
 ---
 
 # junta — análise do caso, sempre a partir do Drive

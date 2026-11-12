@@ -1,6 +1,6 @@
 ---
 name: mae
-description: Perguntas e conversa do dia a dia sobre a mãe (saúde, hospital, seguro, família, documentos) — lê 00_ESTADO_ATUAL e só o tema necessário do 01_FATOS; com "salva" grava os fatos novos nos documentos centrais do Drive.
+description: Perguntas do dia a dia sobre a mãe (saúde, hospital, seguro, família) — lê 00_ESTADO_ATUAL e só o tema necessário do 01_FATOS; "salva" grava os fatos novos no Drive.
 ---
 
 # mae — perguntas e memória do caso

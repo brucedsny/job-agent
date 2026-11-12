@@ -1,6 +1,6 @@
 ---
 name: privacidade
-description: Auditoria de privacidade do usuário e da família — repositório no GitHub, dados pessoais nos arquivos e no histórico do git, compartilhamento do Drive, conectores e configurações recomendadas. Use para "privacidade", "segurança" ou "quem pode ver", antes de publicar algo e quando o hook de início de sessão avisar de risco.
+description: Auditoria de privacidade (GitHub, arquivos e histórico do git, Drive, conectores) e configurações recomendadas. Use para "privacidade"/"quem pode ver", antes de publicar algo e quando o hook avisar de risco.
 ---
 
 # privacidade — auditoria e alerta

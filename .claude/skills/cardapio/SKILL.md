@@ -1,6 +1,6 @@
 ---
 name: cardapio
-description: Pedido das refeições do hospital para imprimir — PDF bilíngue com os pratos em inglês exatamente como no cardápio do hospital (negrito) + português, checado contra alergias, intolerâncias e dieta prescrita. Use para cardápio, pedido de comida ou "o que ela pode comer".
+description: Pedido das refeições do hospital para imprimir (PDF bilíngue, pratos em inglês como no cardápio + português), checado contra alergias e dieta. Use para cardápio ou pedido de comida da mãe.
 ---
 
 # cardapio — pedido de comida para o hospital

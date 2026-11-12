@@ -1,6 +1,6 @@
 ---
 name: atualiza
-description: Atualização do caso da mãe — só o que é novo desde o last_sync no MyChart, no Gmail (hospital, Wellmark, CLINIX, tribunal, HIM) e na 90_Entrada do Drive; sincroniza as consultas na agenda, atualiza os documentos centrais e resume em 80_Atualizacoes. Use quando o usuário disser "atualiza"/"atualize" ou o agendamento disparar.
+description: Atualização do caso da mãe — só o novo desde o last_sync no MyChart, Gmail e 90_Entrada; agenda de consultas, documentos centrais e resumo em 80_Atualizacoes. Use para "atualiza"/"atualize" ou no agendamento.
 ---
 
 # atualiza — só o que é novo

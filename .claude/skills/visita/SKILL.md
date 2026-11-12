@@ -1,6 +1,6 @@
 ---
 name: visita
-description: Folha de visita ao hospital para imprimir — PDF bilíngue (inglês em negrito para ler em voz alta + português embaixo) com o que perguntar e pedir a cada pessoa da equipe. Use quando o usuário for visitar a mãe ou pedir a folha da visita.
+description: Folha de visita ao hospital para imprimir (PDF bilíngue, inglês em negrito para ler em voz alta + português) com perguntas e pedidos à equipe. Use antes de visitar a mãe.
 ---
 
 # visita — folha para levar ao hospital

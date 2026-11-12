@@ -1,6 +1,6 @@
 ---
 name: escrever
-description: Escreve e-mail, carta ou mensagem do MyChart sobre o caso da mãe — rascunho → fact-checker → mostra ao usuário → envia só depois de "pode enviar" → registra no 01_FATOS. Use para escrever, responder ou mandar qualquer texto para fora.
+description: E-mail, carta ou mensagem do MyChart sobre o caso da mãe — rascunho → fact-checker → envio só após "pode enviar" → registro no 01_FATOS. Use para escrever, responder ou mandar texto para fora.
 ---
 
 # escrever — rascunho, checagem, "pode enviar", registro
