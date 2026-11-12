@@ -9,7 +9,7 @@ then Home ("Welcome, <name>!") and the Visits page. No live portal,
 credentials or network egress are involved.
 
 Usage:
-    python mock_mychart.py --port 8799 [--patient Clea]
+    python mock_mychart.py --port 8799 [--patient Pat]
 Routes (all under /mychart):
     GET  /mychart/Authentication/Login                 username step
     POST /mychart/Authentication/Login  step=user      -> password step
@@ -27,7 +27,7 @@ import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs
 
-PATIENT = "Clea"
+PATIENT = "Pat"
 
 PAGE = """<!doctype html><html><head><meta charset="utf-8"><title>{title}</title>
 </head><body>{body}</body></html>"""
@@ -65,7 +65,7 @@ CHOOSE_BODY = """
 
 CODE_BODY = """
 <h1>Verify your identity</h1>
-<p>We've sent a security code to br****y@gmail.com.</p>
+<p>We've sent a security code to u****r@example.com.</p>
 <p>Enter your code below to continue.</p>
 <form method="POST" action="/mychart/Authentication/SecondaryValidation">
   <label for="twofactorcode">Enter Code</label>
@@ -121,7 +121,7 @@ VISITS_PAST_BODY = """
   <li>
     <strong>Primary Care</strong> — Dr. Nina Alvarez<br>
     Wednesday March 12, 2025 &nbsp; 8:15 AM CDT &nbsp; Completed<br>
-    To schedule a follow-up call (319) 384-8442.
+    To schedule a follow-up call (319) 555-0100.
   </li>
   <li>
     <strong>Ophthalmology</strong> — Dr. Omar Reyes<br>
@@ -192,7 +192,7 @@ def main():
     global PATIENT
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=8799)
-    parser.add_argument("--patient", default="Clea")
+    parser.add_argument("--patient", default="Pat")
     args = parser.parse_args()
     PATIENT = args.patient
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
