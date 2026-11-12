@@ -25,7 +25,16 @@
       "mcp__Gmail__search_threads",
       "mcp__Google_Calendar",
       "mcp__Google_Docs",
-      "mcp__Google_Drive"
+      "mcp__Google_Drive",
+      "mcp__7ac12b5d-3ff0-4d87-a4e9-4bf8f95c04c2",
+      "mcp__da2d0fbe-9f5a-4810-ad02-084fbb3abc1d",
+      "mcp__6f696a39-1eef-4676-a72e-523ebf50a897",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__search_threads",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__get_thread",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__get_message",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__list_labels",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__list_drafts",
+      "mcp__42d74fcc-602b-413c-8e79-96c23f7d4030__download_gmail_attachment"
     ],
     "deny": [
       "Read(./.env)",
