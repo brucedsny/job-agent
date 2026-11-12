@@ -22,8 +22,9 @@ Drive. Esta skill não envia nada a ninguém.
 
 ## 1. Gmail (sempre)
 - `search_threads` com `after:<since em epoch>`:
-  `from:(uihealthcare.org OR uiowa.edu OR wellmark.com OR clinixhealthcare.com OR iowacourts.gov OR iid.iowa.gov OR careinitiatives.org) -subject:"Verification Code"`,
-  e outra busca pelo primeiro nome da mãe (`03_CONTATOS`).
+  `from:(uihealthcare.org OR uiowa.edu OR wellmark.com OR clinixhealthcare.com OR iowacourts.gov OR iid.iowa.gov) -subject:"Verification Code"`,
+  e outra pelo primeiro nome da mãe e pelos domínios extras do `03_CONTATOS`
+  (casa de cuidado, advogado etc.).
 - Leia só threads novos. Classifique: hospital/portal · HIM (prontuário) ·
   seguro · CLINIX (revisão externa) · tribunal · casa de cuidado · contas.
 - Aviso do portal → passo 2. Prazo (recurso, audiência, pagamento) → passo 3.
