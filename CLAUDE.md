@@ -1,109 +1,79 @@
-# CLAUDE.md
+# CLAUDE.md — job-agent v2
 
-Guia de contexto para o Claude Code neste repositório.
+Agente pessoal para acompanhar o caso de saúde da mãe do usuário: MyChart (UIHC),
+Gmail, Google Calendar e Drive. Código em `agent/` (Python 3.11 + Playwright; o
+Chromium já está em `PLAYWRIGHT_BROWSERS_PATH`, sem `playwright install`).
 
-## Sobre o projeto
-
-`job-agent` — agentes pessoais de automação rodando sobre o Claude Code.
-
-**Agente atual: consultas médicas (MyChart UIHC → Google Calendar).**
-Stack: Python 3.11 + Playwright (Chromium pré-instalado em
-`PLAYWRIGHT_BROWSERS_PATH`; não rode `playwright install`). Documentação e
-setup em `agent/README.md`; orquestração em `.claude/skills/check-medico/`.
-Sincroniza as consultas de duas contas do MyChart no calendário "Saúde" do
-Google Calendar (via MCP) e cria lembretes de especialidades sem consulta
-futura. Credenciais só por variáveis de ambiente (`MYCHART_*`) — nunca
-commitar segredos nem imprimir seus valores.
-
-Também acompanha a saúde da mãe 2x/dia (skills `health-*`): ficha de fatos
-verificados, atualizações e transcrições ficam no Google Drive do usuário.
-Dados de paciente nunca entram no repositório.
-
-## Convenções
-
-- **Idioma:** as respostas ao usuário podem ser em português; código, nomes e
-  mensagens de commit em inglês, salvo indicação contrária.
-- **Branches:** desenvolva em branches de feature; nunca faça push direto para a
-  branch padrão sem permissão explícita.
-- **Commits:** mensagens curtas e descritivas no imperativo (ex: "add login
-  handler"). Não inclua identificadores de modelo nas mensagens.
-- **PRs:** só abra um PR quando solicitado. Mantenha-os pequenos e focados.
-
-## Skills disponíveis
-
-Invoque com `/<nome>`:
-
-- `/check-medico` — sincroniza consultas do MyChart (UIHC) no calendário
-  "Saúde" do Google Calendar e cria lembretes de especialidades pendentes.
-- `/health-sync` — rotina 2x/dia (MyChart + Gmail + Inbox do Drive) que
-  atualiza a ficha de fatos e escreve a atualização no Drive.
-- `/health-advocate` — respostas de advocacia em saúde com fonte (Vitórias /
-  Brechas / A real / O que dizer / Checklist).
-- `/junta` — análise do caso inteiro por uma junta médica (padrão),
-  jurídica/social (`/junta juridica`) ou as duas (`/junta ambas`), com a
-  "junta do diabo" atacando o rascunho; `/junta diabo <texto>` só critica.
-  Carrega prompts e ficha do Drive.
-- `/privacidade` — auditoria de privacidade (GitHub, Drive, conectores) e
-  configurações recomendadas.
-- `/pr-review` — revisão do diff atual (bugs + melhorias).
-- `/security-review` — revisão de segurança das mudanças do branch.
-- `/commit-pr` — commit limpo + abertura de PR.
-- `/triage-issue` — investigação e triagem de uma issue.
-
-Subagentes (`.claude/agents/`):
-- `fact-checker` — checa afirmações de outras IAs ou rascunhos contra o
-  prontuário e devolve só o veredito com fonte.
-- `junta-diabo` — equipe vermelha que ataca rascunhos da junta (fatos,
-  evidência, lei, segurança, vieses) e devolve MANTER / AJUSTAR / RETIRAR.
-
-**Regra de segurança:** qualquer recomendação concreta sobre a mãe (comida,
-remédio, suplemento, exame, atividade, documento ou contrato) passa antes pelo
-"portão de segurança" do prompt da junta no Drive (alergias, intolerâncias,
-remédios e riscos), mesmo em perguntas rápidas. Use `/junta` no modo rápido.
-O hook `UserPromptSubmit` (`.claude/hooks/junta-reminder.sh`) lembra disso a
-cada mensagem; a junta completa com `junta-diabo` fica para decisões grandes.
-
-## Estilo com o usuário (pedido dele, 10/11/2026)
-
-- Responder exatamente ao que foi perguntado. Sem lições de moral e sem avisos
-  óbvios ou repetidos.
-- Quando faltar um fato, PERGUNTAR antes de supor.
-- Antes de afirmar fatos sobre seguro, dinheiro, família ou documentos, conferir
-  no 00_FATOS_VERIFICADOS (o fim do documento tem os adendos mais novos).
-- Se errar um fato, corrigir em uma linha e registrar a correção na ficha.
-
-## Privacidade (prioridade máxima)
-
-- O hook `SessionStart` (`.claude/hooks/privacy-check.sh`) avisa se o
-  repositório está público ou se há dado pessoal nos arquivos. Havendo aviso,
-  dizer ao usuário na PRIMEIRA linha da resposta.
-- `/privacidade` faz a auditoria completa (GitHub, histórico do git, Drive,
-  conectores) e dá o passo a passo das configurações.
-- Nada de dado pessoal da família em arquivo versionado; nunca imprimir senhas,
+## Privacidade (prioridade máxima — o repositório é PÚBLICO)
+- Nenhum dado da paciente ou da família em arquivo versionado: nomes, datas de
+  nascimento, MRN, endereços, telefones, e-mails, processos, IDs do seguro,
+  diagnósticos, remédios. Tudo isso vive no Drive.
+- Segredos só pelas variáveis de ambiente `MYCHART_*`. Nunca imprimir senhas,
   códigos de verificação ou números de documentos.
+- O hook `privacy-check.sh` (início da sessão) avisa de risco; havendo aviso,
+  diga ao usuário na PRIMEIRA linha da resposta. Auditoria: `/privacidade`.
 
-## Comandos do projeto
+## Memória do caso (Google Drive)
+Toda conversa começa lendo `00_ESTADO_ATUAL`. Pasta raiz `MAE_…` (id
+`1mdFbtMTtVKPi23NJGmJxoopHRZjpoBdl`; tem de ficar "Restricted"). Busque com
+`search_files`: `parentId = '<id>' and title contains '<nome>'` (títulos podem
+ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
+- `00_ESTADO_ATUAL` — o que vale agora (até 2 páginas; reescrito a cada atualização)
+- `01_FATOS` — fatos por tema, com etiqueta de fonte
+- `02_LINHA_DO_TEMPO` · `03_CONTATOS` · `04_MAPA_DA_PASTA` (onde fica cada coisa)
+- Pastas: `10_Prontuario_MyChart` · `20_Hospital_queixas_e_HIM` ·
+  `30_Seguro_Wellmark_e_contas` · `40_Juridico_EUA` · `50_Brasil` ·
+  `60_Cuidados_diarios` · `70_Analises_juntas_e_outras_IAs` (prompts
+  `00_PROMPT_JUNTA_MEDICA` v4 e `00_PROMPT_JUNTA_JURIDICA` v2) ·
+  `80_Atualizacoes` (a descrição guarda `last_sync=`) · `90_Entrada` · `99_Arquivo`
 
-```
-# Instalar deps:  pip install -r agent/requirements.txt
-# Rodar scraper:  python3 agent/mychart.py --account eu --out <dir>
-# Rotina toda:    /check-medico
-# Checar sintaxe: python3 -m py_compile agent/mychart.py
-# Transcrever:    python3 agent/transcribe.py <audio> <saida.txt>  (pip install faster-whisper)
-```
+## Skills (`/<nome>`)
+- `/mae` — perguntas do dia a dia; "salva" grava os fatos novos nos documentos centrais.
+- `/atualiza` — novidades do MyChart, Gmail e `90_Entrada`; agenda; resumo em
+  `80_Atualizacoes`. "Atualiza" ou "atualize" sozinho = `/atualiza`.
+- `/junta` — junta médica/jurídica com a "junta do diabo"; modo rápido = portão de segurança.
+- `/escrever` — e-mail, carta ou mensagem do MyChart; envio só com "pode enviar".
+- `/visita` · `/cardapio` — folhas bilíngues para imprimir (PDF).
+- `/privacidade` — auditoria de privacidade e configurações.
+- Dev: `/commit-pr`, `/pr-review`, `/security-review`, `/triage-issue`, `/run-agent`.
+- Subagentes: `fact-checker` (checa afirmações) e `junta-diabo` (ataca rascunhos da junta).
 
-## MyChart da Clea a partir da nuvem (funciona — não peça senha ao usuário)
+## Regras do caso
+- **Portão de segurança:** toda recomendação concreta sobre a mãe (comida,
+  remédio, suplemento, exame, atividade, visita, documento, contrato) passa
+  antes pela `/junta` no modo rápido, mesmo em pergunta simples.
+- **Nada é enviado sem "pode enviar":** e-mail, carta, mensagem ou formulário
+  passa pelo `fact-checker` e só sai depois que o usuário escrever "pode enviar".
+- **Não gravar dentro do hospital** (conversas com a equipe incluídas).
 
-O MyChart da UIHC abre pela nuvem. O login vem das variáveis de ambiente
-`MYCHART_EU_USER`/`MYCHART_EU_PASS` (hoje com o login da Clea; use
-`MYCHART_MAE_*` se existirem). Nunca peça usuário/senha nem imprima valores.
+## Estilo com o usuário
+- Responder exatamente ao que foi perguntado; sem lições de moral nem avisos
+  óbvios ou repetidos.
+- Faltou um fato: PERGUNTAR antes de supor.
+- Seguro, dinheiro, família e documentos: conferir no `01_FATOS` antes de afirmar.
+- Errou um fato: corrigir em uma linha e registrar a correção no `01_FATOS`.
+- Tópicos coloridos em português; o que for dito à equipe vai em frases curtas
+  e simples em inglês.
 
+## MyChart da mãe pela nuvem (funciona — não peça senha)
+Login pelas variáveis `MYCHART_EU_USER`/`MYCHART_EU_PASS` (hoje com o login da
+mãe; use `MYCHART_MAE_*` se existirem). Nunca peça nem imprima os valores.
 1. `setsid -f nohup python3 agent/mychart_explorer.py --out <scratchpad>/mychart_live --port 8765 >/dev/null 2>&1`
 2. Siga a sequência de login do cabeçalho de `agent/mychart_explorer.py`
    (`fill_secret` para usuário e senha; `#emailCode` para o código).
 3. Código MFA: o e-mail "Verification Code" mais recente no Gmail
    (`newer_than:1h`). Se não chegar em 3 min, peça ao usuário só o código.
 4. Leia com `/text`, `/links`, `/note_text`; feche com `/quit`.
+O portal do Wellmark não abre da nuvem.
 
-Memória do caso: Google Drive, pasta Clea_Prontuario_IA — leia primeiro
-`00_PAINEL` e `00_FATOS_VERIFICADOS`. O portal do Wellmark não abre da nuvem.
+## Convenções e comandos
+Código, nomes e commits em inglês (imperativo, sem nome de modelo). Branch de
+feature; nada de push na branch padrão sem permissão; PR só quando pedido.
+```
+python3 -m pip install -r agent/requirements.txt      # dependências
+python3 -m py_compile agent/*.py                      # sintaxe
+python3 .claude/skills/run-agent/driver.py            # teste offline do scraper
+python3 agent/transcribe.py <audio> <saida.txt>       # pip install faster-whisper
+node agent/tools/html2pdf.js <in.html> <out.pdf> 0.95 # folha em PDF
+python3 agent/export_chat.py --out <dir> [fontes]     # exportar conversas
+```
