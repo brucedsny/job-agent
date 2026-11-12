@@ -30,3 +30,6 @@ logs/
 
 # run-agent smoke artifacts
 .claude/skills/run-agent/_smoke_out/
+
+# Portal downloads hold patient data: keep them in the scratchpad
+wellmark_dl/
