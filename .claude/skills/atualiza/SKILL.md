@@ -13,7 +13,7 @@ Drive. Esta skill não envia nada a ninguém.
 - `since` = `last_sync=<RFC3339>` na descrição da pasta `80_Atualizacoes`
   (`get_file_metadata`); sem marcador, últimas 24 h. Anote `now` (UTC).
 - Leia `00_ESTADO_ATUAL` (onde ela está, o que está pendente).
-- Preflight sem imprimir valores: credenciais `MYCHART_*` (`[ -n "${VAR:-}" ]`);
+- Preflight sem imprimir valores: credenciais `MYCHART_*` e `WELLMARK_*` (`[ -n "${VAR:-}" ]`);
   rede: `curl -sS -o /dev/null -w "%{http_code}" --max-time 15 https://mychart.uihealthcare.org/mychart/Authentication/Login`
   (erro de túnel ou 403 do proxy → peça para liberar `mychart.uihealthcare.org`
   no ambiente e siga sem MyChart); `python3 -c "import playwright"`, senão
@@ -47,6 +47,24 @@ em transição (até 7 dias após alta ou transferência), ou às segundas.
   em background; em `status.json` = `waiting_mfa`, grave o código em
   `<out>/mfa_code.txt`; `error` → leia `detail` e os `login_*`; use
   `visits_upcoming.txt` e `visits_past.txt` (os `.png` se o texto for ambíguo).
+
+## 2b. Wellmark (portal do seguro)
+Rode se o usuário pediu, se chegou e-mail do Wellmark desde `since` ou às
+segundas (cada login dispara um código de verificação).
+- `python3 agent/wellmark.py --out <scratchpad>/wellmark_dl --since <since>`
+  em background. `status.json` = `waiting_mfa` com `mfa_channel: email` →
+  código do e-mail mais recente do Wellmark (`from:wellmark.com newer_than:1h`)
+  em `<out>/mfa_code.txt`.
+- Exit 6 (MFA por SMS) ou 7 (CAPTCHA, bot check ou "Loading" sem fim; veja
+  `blocked.txt`): uma linha no resumo e siga com e-mails e cartas. Nunca
+  contorne. SMS só com o usuário presente (`--allow-sms`; ele passa o código).
+- `index.json`: suba para `30_Seguro_Wellmark_e_contas` só os `file` cujo nome
+  ainda não existe lá nem em `PLANO DE SAUDE` (pule os `same_text_as`):
+  `create_file` com `base64Content` = `sha256:<sha256>:<caminho absoluto>`,
+  `application/pdf` e `disableConversionToGoogleType`. Atualize o Doc
+  `30_INDICE_WELLMARK` (data, tipo, título, status, arquivo).
+- Autorização ou carta nova, ou claim `Denied` novo → `00_ESTADO_ATUAL` e
+  `01_FATOS` (seção Seguro); prazo de recurso da carta → passo 3.
 
 ## 3. Agenda
 - Calendário "Saúde" (`list_calendars`; sem ele, o principal — diga uma vez
@@ -97,4 +115,3 @@ decisão do seguro, consulta, prazo) → grave como na skill `mae`, seção 3.
   decisão do seguro, carta com prazo, mensagem nova da equipe.
 - Resposta: 3–6 linhas + link do Doc; falhas (login, MFA, rede, credencial)
   em uma linha. Nada novo → "Sem novidades (Gmail, MyChart, Entrada)."
-- O portal do Wellmark não abre da nuvem: use os e-mails e as cartas.
