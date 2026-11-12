@@ -1,6 +1,6 @@
 ---
 name: privacidade
-description: Auditoria de privacidade do usuário e da família — visibilidade do repositório no GitHub, dados pessoais em arquivos e no histórico do git, compartilhamento das pastas do Google Drive, conectores e configurações recomendadas (Claude, ChatGPT, Google). Use quando o usuário pedir "privacidade", "segurança", "quem pode ver", ao criar ou publicar qualquer coisa, e sempre que o hook de início de sessão avisar de um risco.
+description: Auditoria de privacidade do usuário e da família — repositório no GitHub, dados pessoais nos arquivos e no histórico do git, compartilhamento do Drive, conectores e configurações recomendadas. Use para "privacidade", "segurança" ou "quem pode ver", antes de publicar algo e quando o hook de início de sessão avisar de risco.
 ---
 
 # privacidade — auditoria e alerta
@@ -17,13 +17,18 @@ ONDE está o problema.
    (privado responde 404/sem campo). Se `public`: risco ALTO.
 2. **Arquivos versionados** — padrões sensíveis (SSN, CPF, data de nascimento,
    telefones, e-mails pessoais, nomes de familiares, números de processo,
-   prontuário): `git ls-files | xargs grep -nIE '<padrões>'`. Reporte arquivo e
-   linha, não o valor.
+   prontuário): `git ls-files | xargs grep -nIE '<padrões>'`. Para os nomes e
+   números do caso, monte a lista a partir do `03_CONTATOS` e do `01_FATOS`
+   num arquivo do scratchpad (nunca no repositório) e use
+   `git ls-files -z | xargs -0 grep -nIF -f <lista> | cut -d: -f1,2`. Reporte
+   arquivo e linha, não o valor.
 3. **Histórico do git** — os mesmos padrões em `git log --all -p` (contagem por
    padrão). Dado já publicado continua no histórico até reescrita.
-4. **Google Drive** — `get_file_permissions` nas pastas e documentos do caso
-   (comece pela pasta da ficha de fatos). Risco se houver "anyone with the
-   link", domínio ou pessoas fora da família autorizada.
+4. **Google Drive** — `get_file_permissions` na pasta raiz do caso (id no
+   CLAUDE.md), nos documentos centrais (`00_ESTADO_ATUAL` a `04_MAPA_DA_PASTA`)
+   e nas pastas 10–90. Risco se houver "anyone with the link", domínio ou
+   pessoas fora da família autorizada. O id da raiz está neste repositório
+   público: a raiz tem de ficar "Restricted" (risco ALTO se não estiver).
 5. **Conectores** — liste quais estão ligados (Gmail, Drive, Calendar etc.) e o
    que cada um permite. Não desligue nada sem o usuário pedir.
 
