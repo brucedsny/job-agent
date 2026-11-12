@@ -48,10 +48,11 @@ from urllib.parse import parse_qs, urljoin, urlparse
 from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, str(Path(__file__).parent))
-from mychart import find_chromium_executable  # noqa: E402
+from mychart import find_chromium_executable, scrub_secrets  # noqa: E402
 
 BASE = os.environ.get("MYCHART_HOST", "https://mychart.uihealthcare.org")
 NAV_MS = 45_000
+
 NOTE_JS = """(() => {
   const host = document.querySelector('.InternalReportViewerWrapper');
   if (!host || !host.shadowRoot) return null;
@@ -232,7 +233,7 @@ def run(out: Path, port: int):
                 else:
                     res = {"error": f"unknown command {cmd}"}
             except Exception as e:
-                res = {"error": str(e)[:800], "url": page.url}
+                res = {"error": scrub_secrets(e)[:800], "url": page.url}
             box["result"] = res
             done.set()
 

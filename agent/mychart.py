@@ -34,6 +34,16 @@ from pathlib import Path
 from playwright.sync_api import TimeoutError as PWTimeout
 from playwright.sync_api import sync_playwright
 
+
+def scrub_secrets(text):
+    """Hide every MYCHART_*/WELLMARK_* secret value that an error message echoes back."""
+    text = str(text)
+    for key, value in os.environ.items():
+        if key.startswith(("MYCHART_", "WELLMARK_")) and value and len(value) >= 4:
+            text = text.replace(value, "[REDACTED]")
+    return text
+
+
 CONFIG_PATH = Path(__file__).parent / "config.json"
 MFA_POLL_SECONDS = 5
 MFA_TIMEOUT_SECONDS = 300
@@ -106,7 +116,7 @@ def dump_page(page, out_dir: Path, name: str) -> dict:
     try:
         text_path.write_text(page.locator("body").inner_text(timeout=10_000))
     except Exception as e:
-        text_path.write_text(f"<dump failed: {e}>")
+        text_path.write_text(f"<dump failed: {scrub_secrets(e)}>")
     try:
         page.screenshot(path=str(png_path), full_page=True)
     except Exception:
@@ -263,7 +273,7 @@ def switch_persona(page, persona: str, out_dir: Path) -> None:
         page.get_by_text(persona, exact=False).first.click(timeout=10_000)
         page.wait_for_load_state("networkidle", timeout=NAV_TIMEOUT_MS)
     except Exception as e:
-        write_status(out_dir, "scraping", f"persona switch failed: {e}")
+        write_status(out_dir, "scraping", f"persona switch failed: {scrub_secrets(e)}")
     dump_page(page, out_dir, "after_persona_switch")
 
 
@@ -357,7 +367,7 @@ def main() -> int:
             write_status(out_dir, "done")
             return 0
         except Exception as e:
-            message = str(e)
+            message = scrub_secrets(e)
             dump_page(page, out_dir, "error_page")
             if "ERR_TUNNEL_CONNECTION_FAILED" in message or "ERR_PROXY" in message:
                 write_status(out_dir, "error", "network blocked by environment policy")
