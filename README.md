@@ -2,9 +2,8 @@
 
 Repositório configurado para uso intensivo com **Claude Code** (CLI, web e GitHub Actions).
 
-> O código do projeto ainda não foi criado. Este repositório já vem com a
-> infraestrutura de automação do Claude (skills, hooks, permissões e workflows)
-> pronta para quando o desenvolvimento começar.
+> O agente atual (v2) acompanha um caso de saúde da família: veja
+> `agent/README.md` e `CLAUDE.md`. Nenhum dado pessoal fica neste repositório.
 
 ## O que já está instalado
 
