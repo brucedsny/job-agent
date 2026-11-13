@@ -49,7 +49,9 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 ## Estilo com o usuário
 - Responder exatamente ao que foi perguntado; sem lições de moral nem avisos
   óbvios ou repetidos.
-- Faltou um fato: PERGUNTAR antes de supor.
+- Faltou um fato: procurar antes no Gmail (inclusive Wave Notes), no Drive e
+  em `80_Atualizacoes`; só então PERGUNTAR. Nunca perguntar o que já foi dito.
+- À equipe do hospital, nada que só se lê no MyChart dela: perguntar primeiro.
 - Seguro, dinheiro, família e documentos: conferir no `01_FATOS` antes de afirmar.
 - Errou um fato: corrigir em uma linha e registrar a correção no `01_FATOS`.
 - Tópicos coloridos em português; o que for dito à equipe vai em frases curtas
