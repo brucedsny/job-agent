@@ -18,11 +18,17 @@ busca no CLAUDE.md). Nenhum dado dela entra neste repositório.
 4. Fonte primária (nota, carta, transcrição) só para o que a ficha não
    resolve, em trechos. Várias fontes ou checar outra IA → subagente
    `fact-checker`.
+5. Faltou um fato → antes de perguntar ao usuário, procure no Gmail (inclusive
+   Wave Notes: `from:support@wave.co "Wave Notes"`), nos documentos centrais e
+   nas últimas `80_Atualizacoes`. Nunca pergunte o que já está registrado. Das
+   Wave Notes, só o que é da mãe; notas de saúde do próprio usuário não entram
+   no caso.
 
 ## 2. Responder
 
 - Exatamente o que foi perguntado, em tópicos coloridos; frases para a equipe
-  em inglês curto e simples, com tradução.
+  em inglês curto e simples, com tradução, sem nada que só se lê no MyChart
+  dela (pergunte e deixe a equipe contar).
 - Número, data, remédio, diagnóstico, seguro, dinheiro e família só com fonte
   do `01_FATOS`. Sem fonte → "não confirmado", ou pergunte.
 - Divergência → "⚠️ Inconsistência: X diz A; o registro diz B (fonte)".

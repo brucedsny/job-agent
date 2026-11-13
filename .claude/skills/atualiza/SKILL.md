@@ -7,7 +7,9 @@ description: Atualização do caso da mãe — só o novo desde o last_sync no M
 
 Nada novo → grave o marcador e responda em uma linha, sem documento nem
 notificação. O scratchpad some quando o contêiner reinicia: a memória é o
-Drive. Esta skill não envia nada a ninguém.
+Drive. Esta skill não envia nada a ninguém. Antes de perguntar algo ao
+usuário, procure no Gmail (inclusive Wave Notes), nos documentos centrais e
+nas últimas `80_Atualizacoes`; nunca pergunte o que já está registrado.
 
 ## 0. Preparar
 - `since` = `last_sync=<RFC3339>` na descrição da pasta `80_Atualizacoes`
@@ -25,6 +27,9 @@ Drive. Esta skill não envia nada a ninguém.
   `from:(uihealthcare.org OR uiowa.edu OR wellmark.com OR clinixhealthcare.com OR iowacourts.gov OR iid.iowa.gov) -subject:"Verification Code"`,
   e outra pelo primeiro nome da mãe e pelos domínios extras do `03_CONTATOS`
   (casa de cuidado, advogado etc.).
+- Wave Notes: `from:support@wave.co "Wave Notes" after:<since em epoch>`. Das
+  que falam da mãe, grave só os fatos dela (passo 5); notas de saúde do
+  próprio usuário nunca entram no caso.
 - Leia só threads novos. Classifique: hospital/portal · HIM (prontuário) ·
   seguro · CLINIX (revisão externa) · tribunal · casa de cuidado · contas.
 - Aviso do portal → passo 2. Prazo (recurso, audiência, pagamento) → passo 3.
@@ -90,6 +95,9 @@ segundas (cada login dispara um código de verificação).
 
 ## 4. Drive `90_Entrada` (e arquivos novos soltos na raiz)
 - `search_files`: `parentId = '<id da 90_Entrada>' and createdTime > '<since>'`.
+- Lote grande (dezenas de arquivos): primeiro um Doc "Inventário 90_Entrada —
+  AAAA-MM-DD" em `80_Atualizacoes` (arquivo · tipo · data · de quem · o que
+  traz · destino) e os achados decisivos no resumo e na resposta; só então mova.
 - Áudio → `download_file_content` para uma pasta nova no scratchpad →
   `python3 -m pip install -q faster-whisper` (se faltar) →
   `python3 agent/transcribe.py <audio> <saida.txt>` → Doc "Transcrição —

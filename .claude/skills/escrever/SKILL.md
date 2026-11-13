@@ -8,6 +8,9 @@ description: E-mail, carta ou mensagem do MyChart sobre o caso da mãe — rascu
 ## 1. Contexto
 - `00_ESTADO_ATUAL`, o tema do `01_FATOS` e o `03_CONTATOS` (nomes e
   endereços confirmados, assinatura e papel do usuário).
+- Antes de qualquer carta, confirme no registro a situação ATUAL do próprio
+  usuário (trabalho ou licença, endereço, telefone); não suponha — faltou ou
+  mudou → procure no Gmail e, se não achar, pergunte.
 - Resposta a e-mail: leia o thread inteiro (`get_thread`) — quem escreveu, o
   que pediu, prazo.
 
@@ -15,14 +18,17 @@ description: E-mail, carta ou mensagem do MyChart sobre o caso da mãe — rascu
 - Para equipe, seguro ou tribunal: inglês simples, frases curtas, uma ideia
   por frase; educado e factual; fatos com data; pedido claro, com resposta por
   escrito e prazo. Nada de ameaça; nunca pedir que alguém altere documentação.
+- Para o hospital: nada que só se lê no MyChart da paciente — peça que a
+  equipe informe. Para a equipe médica: tom de pedido, nunca de cobrança; lei
+  só se o usuário pedir.
 - Embaixo, só para o usuário: tradução curta em português.
 - Recomendação concreta sobre a mãe no texto → `/junta` no modo rápido antes.
 - Só o dado de saúde necessário. Nunca números de documento, senhas ou códigos.
 
 ## 3. Checar
-Subagente `fact-checker` com o rascunho e os IDs dos documentos centrais;
-corrija o que vier ❌ ou 🔶. Sem tempo → escreva no topo "não checado pelo
-fact-checker".
+Subagente `fact-checker` com o rascunho, o destinatário e os IDs dos
+documentos centrais; corrija o que vier ❌ ou 🔶 e tire o que vier 🔒 (só no
+MyChart). Sem tempo → escreva no topo "não checado pelo fact-checker".
 
 ## 4. Mostrar e esperar
 Mostre: canal, Para/Cc, assunto, texto final e o veredito em uma linha. Envie

@@ -26,7 +26,8 @@ diga o que falta.
   bebida) · almoço e jantar por dia · "Please avoid" · perguntas à equipe
   (limite de líquidos, lista de alergias, revisão pela nutricionista).
 - `.en`: nome do prato em inglês, como no cardápio. `.pt`: o que é e por quê,
-  curto. Perguntas em inglês simples, com tradução.
+  curto. Perguntas em inglês simples, com tradução, sem nada que só se lê no
+  MyChart dela.
 - No máximo 2 páginas.
 
 ## 4. Checar, gerar, entregar

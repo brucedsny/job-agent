@@ -21,9 +21,13 @@ pela `/junta` no modo rápido. Portão não abriu → fica fora da folha.
 - Troque todo `{{…}}`; repita ou apague itens e seções. Até 7 itens por pessoa.
 - `.en`: frase em inglês simples (nível A2–B1), educada ("Could…?"), uma
   ideia por frase. `.pt`: tradução curta.
-- Número, data e remédio só do `01_FATOS`, com fonte. Nada de ameaça nem de
-  pedir que alterem documentação.
-- No máximo 2 páginas.
+- `.en` nunca cita o que só se lê no MyChart dela: vira pergunta aberta, e a
+  equipe conta.
+- Número, data e remédio só do `01_FATOS`, com fonte. Tom de pedido: nada de
+  cobrança, ameaça ou lei (salvo pedido do usuário), nem de pedir que alterem
+  documentação.
+- No máximo 2 páginas. Papel para ENTREGAR à equipe: folha à parte, 1 página,
+  só inglês simples, sem números do prontuário; a bilíngue fica com o usuário.
 
 ## 4. Checar, gerar, entregar
 1. Subagente `fact-checker` sobre o texto da folha; corrija.

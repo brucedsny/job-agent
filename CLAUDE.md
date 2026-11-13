@@ -31,12 +31,12 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - `/mae` — perguntas do dia a dia; "salva" grava os fatos novos nos documentos centrais.
 - `/atualiza` — novidades do MyChart, Gmail e `90_Entrada`; agenda; resumo em
   `80_Atualizacoes`. "Atualiza" ou "atualize" sozinho = `/atualiza`.
-- `/junta` — junta médica/jurídica com a "junta do diabo"; modo rápido = portão de segurança.
+- `/junta` — junta médica/jurídica com a "junta da sabedoria"; modo rápido = portão de segurança.
 - `/escrever` — e-mail, carta ou mensagem do MyChart; envio só com "pode enviar".
 - `/visita` · `/cardapio` — folhas bilíngues para imprimir (PDF).
 - `/privacidade` — auditoria de privacidade e configurações.
 - Dev: `/commit-pr`, `/pr-review`, `/security-review`, `/triage-issue`, `/run-agent`.
-- Subagentes: `fact-checker` (checa afirmações) e `junta-diabo` (ataca rascunhos da junta).
+- Subagentes: `fact-checker` (checa afirmações) e `junta-sabedoria` (ataca e confere rascunhos da junta).
 
 ## Regras do caso
 - **Portão de segurança:** toda recomendação concreta sobre a mãe (comida,
