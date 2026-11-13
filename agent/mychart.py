@@ -4,7 +4,7 @@
 Logs into a MyChart account with Playwright, navigates to the Visits pages
 and dumps page text + screenshots to an output directory. Parsing of the
 dumps into structured appointments is done by the orchestrating agent
-(see .claude/skills/check-medico), which is far more robust to Epic UI
+(see .claude/skills/atualiza), which is far more robust to Epic UI
 changes than hardcoded selectors.
 
 Usage:
@@ -34,6 +34,16 @@ from pathlib import Path
 from playwright.sync_api import TimeoutError as PWTimeout
 from playwright.sync_api import sync_playwright
 
+
+def scrub_secrets(text):
+    """Hide every MYCHART_*/WELLMARK_* secret value that an error message echoes back."""
+    text = str(text)
+    for key, value in os.environ.items():
+        if key.startswith(("MYCHART_", "WELLMARK_")) and value and len(value) >= 4:
+            text = text.replace(value, "[REDACTED]")
+    return text
+
+
 CONFIG_PATH = Path(__file__).parent / "config.json"
 MFA_POLL_SECONDS = 5
 MFA_TIMEOUT_SECONDS = 300
@@ -59,10 +69,18 @@ def find_chromium_executable() -> str | None:
     """Fallback for version mismatch between playwright pip package and
     the pre-installed browsers in PLAYWRIGHT_BROWSERS_PATH."""
     root = os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
-    for pattern in ("chromium-*/chrome-linux/chrome", "chromium/chrome-linux/chrome"):
+    for pattern in (
+        "chromium-*/chrome-linux64/chrome",
+        "chromium-*/chrome-linux/chrome",
+        "chromium/chrome-linux/chrome",
+    ):
         matches = sorted(glob.glob(str(Path(root) / pattern)))
         if matches:
             return matches[-1]
+    # Some images ship a single launcher file at <root>/chromium.
+    launcher = Path(root) / "chromium"
+    if launcher.is_file() and os.access(launcher, os.X_OK):
+        return str(launcher)
     return None
 
 
@@ -98,7 +116,7 @@ def dump_page(page, out_dir: Path, name: str) -> dict:
     try:
         text_path.write_text(page.locator("body").inner_text(timeout=10_000))
     except Exception as e:
-        text_path.write_text(f"<dump failed: {e}>")
+        text_path.write_text(f"<dump failed: {scrub_secrets(e)}>")
     try:
         page.screenshot(path=str(png_path), full_page=True)
     except Exception:
@@ -255,12 +273,12 @@ def switch_persona(page, persona: str, out_dir: Path) -> None:
         page.get_by_text(persona, exact=False).first.click(timeout=10_000)
         page.wait_for_load_state("networkidle", timeout=NAV_TIMEOUT_MS)
     except Exception as e:
-        write_status(out_dir, "scraping", f"persona switch failed: {e}")
+        write_status(out_dir, "scraping", f"persona switch failed: {scrub_secrets(e)}")
     dump_page(page, out_dir, "after_persona_switch")
 
 
 def detect_patient_name(page) -> str:
-    """First name shown on the MyChart home page ("Welcome, Clea!")."""
+    """First name shown on the MyChart home page ("Welcome, <name>!")."""
     try:
         body = page.locator("body").inner_text(timeout=10_000)
     except Exception:
@@ -349,7 +367,7 @@ def main() -> int:
             write_status(out_dir, "done")
             return 0
         except Exception as e:
-            message = str(e)
+            message = scrub_secrets(e)
             dump_page(page, out_dir, "error_page")
             if "ERR_TUNNEL_CONNECTION_FAILED" in message or "ERR_PROXY" in message:
                 write_status(out_dir, "error", "network blocked by environment policy")

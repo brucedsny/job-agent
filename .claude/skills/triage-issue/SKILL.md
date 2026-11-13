@@ -1,6 +1,6 @@
 ---
 name: triage-issue
-description: Investiga uma issue do GitHub, classifica-a e propõe um plano de ação. Use quando o usuário pedir para triar/analisar uma issue (ex: "/triage-issue 17").
+description: Investiga uma issue do GitHub, classifica-a e propõe um plano de ação. Use quando o usuário pedir para triar/analisar uma issue (por exemplo, "/triage-issue 17").
 ---
 
 # Triage Issue

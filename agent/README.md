@@ -1,90 +1,76 @@
-# Agente de consultas médicas (MyChart UIHC → Google Calendar)
+# Agente do caso da mãe — v2
 
-Rotina que checa as consultas no MyChart da UIHC de **duas pessoas** (você e
-sua mãe), adiciona tudo num calendário dedicado **"Saúde"** do Google Calendar
-(mesmo calendário, cores diferentes) e cria lembretes para especialidades com
-consulta passada mas nenhuma futura marcada.
+Código usado pelas skills do Claude Code (`.claude/skills/`) para acompanhar o
+caso de saúde da mãe do usuário. A memória do caso fica no Google Drive (ver
+`CLAUDE.md`); **nenhum dado de paciente entra neste repositório**. Downloads,
+textos extraídos e PDFs gerados ficam no scratchpad da sessão e vão para o Drive.
 
-## Como funciona
+## O que mudou na v2
 
-| Peça | Papel |
-|------|-------|
-| `agent/mychart.py` | Script Playwright que loga no MyChart, resolve o desafio de MFA (código lido do Gmail pelo agente) e salva o texto/screenshots das páginas de consultas. |
-| `.claude/skills/check-medico/` | Skill que orquestra: roda o scraper para as duas contas, extrai as consultas dos dumps, sincroniza o calendário via Google Calendar (MCP) e gera o relatório. |
-| Trigger semanal | Dispara a skill automaticamente toda semana na sessão do Claude Code. |
-| `agent/mychart_explorer.py` | Navegador interativo controlado por HTTP local, para explorar o portal passo a passo e baixar registros (exportações de visitas, cópias formais, documentos digitalizados, notas). As instruções e as particularidades do portal estão no cabeçalho do arquivo. |
-| `agent/ccda_extract.py` | Converte as exportações "Visit Records" do MyChart (XML C-CDA) em um arquivo de texto por atendimento, mais um índice JSON. |
+- Menos skills, mais afiadas: `/mae` (dia a dia e "salva"), `/atualiza`
+  (substitui `health-sync` + `check-medico`), `/junta` (absorveu
+  `health-advocate`), `/escrever`, `/visita`, `/cardapio`, `/privacidade`.
+- Memória em documentos centrais no Drive: `00_ESTADO_ATUAL` (reescrito a cada
+  atualização), `01_FATOS`, `02_LINHA_DO_TEMPO`, `03_CONTATOS`, `04_MAPA_DA_PASTA`.
+- Nomes, contatos e números do caso saíram dos arquivos versionados.
 
-O login real da UIHC é em duas etapas (usuário → *Continue* → senha), seguido de
-"Verify your identity". O scraper escolhe *Send to my email*, e o código chega
-no Gmail do Bruce em segundos, inclusive o da conta da Clea. O `result.json`
-traz `patient_name` (o "Welcome, X!" da tela inicial), e a skill etiqueta os
-eventos por esse nome, não pela variável de ambiente usada.
+## Peças
 
-Cores no calendário: `[Eu]` azul (Blueberry), `[Mãe]` vermelho (Tomato),
-lembretes de "marcar consulta" amarelo (Banana).
+| Arquivo | Papel |
+|---|---|
+| `mychart.py` | Scraper Playwright das consultas: login em duas etapas, MFA por e-mail (o agente grava o código em `mfa_code.txt`), texto e screenshots da página Visits. |
+| `mychart_explorer.py` | Navegador controlado por HTTP local para ler notas, resultados e mensagens e baixar registros; comandos e particularidades do portal no cabeçalho. |
+| `wellmark.py` | Baixa do myWellmark (seguro) os EOBs, as cartas de autorização (aprovações, negativas, SNF) e a lista de claims, com `index.json` (data, tipo, título, status, arquivo). MFA por e-mail via `mfa_code.txt`; para sem a pessoa quando o código vai por SMS (exit 6) e em CAPTCHA ou bot check (exit 7). Detalhes do portal no cabeçalho. |
+| `ccda_extract.py` | Converte as exportações "Visit Records" (XML C-CDA) em um texto por atendimento + índice JSON. |
+| `transcribe.py` | Transcreve áudio localmente (faster-whisper, instalado sob demanda) com minuto:segundo. |
+| `export_chat.py` | Exporta conversas do Claude Code e do claude.ai (`conversations.json`, projetos) para Markdown + SQLite. |
+| `tools/html2pdf.js` | HTML → PDF Letter (folhas de `/visita` e `/cardapio`, cartas). |
+| `tools/readnote.sh` | Abre uma nota pelo texto "Signed …" no explorador e salva o texto. |
+| `config.json` | Contas (`eu`, `mae`), etiquetas e cores da agenda, fuso. |
 
 ## Setup (uma vez)
 
-1. **Crie o calendário "Saúde"** no Google Calendar:
-   Outros calendários → `+` → Criar novo calendário → nome `Saúde`.
-   (O conector do Calendar cria eventos, mas não calendários.) Enquanto ele
-   não existir, a skill usa o calendário principal, com etiqueta, cor e
-   visibilidade privada.
-
-2. **Credenciais do MyChart** — nas configurações do *environment* do Claude
-   Code (claude.ai/code → seu ambiente → variáveis de ambiente), defina:
-   ```
-   MYCHART_EU_USER / MYCHART_EU_PASS    (sua conta)
-   MYCHART_MAE_USER / MYCHART_MAE_PASS  (conta da sua mãe)
-   ```
-   Nunca commite esses valores (`.env` está no `.gitignore`).
-
-   *Alternativa:* se você tem **acesso proxy** ao prontuário da sua mãe pela
-   sua própria conta, edite `agent/config.json`: na conta `mae`, aponte
-   `user_env`/`pass_env` para as suas credenciais e preencha `persona` com o
-   nome dela como aparece no seletor de pessoa do MyChart.
-
-3. **Política de rede** — o ambiente precisa alcançar
-   `mychart.uihealthcare.org`. Nas configurações do ambiente, adicione esse
-   domínio à lista de permissões de rede (ou use "todos os domínios").
-
-4. **MFA por e-mail** — deixe a verificação em duas etapas do MyChart
-   configurada para enviar o código ao Gmail conectado ao Claude
-   (brucedsny@gmail.com), para o agente conseguir ler o código sozinho.
+1. **Credenciais do MyChart** nas variáveis de ambiente do ambiente do Claude
+   Code: `MYCHART_EU_USER`/`MYCHART_EU_PASS` e, se houver,
+   `MYCHART_MAE_USER`/`MYCHART_MAE_PASS`. Nunca commite valores (`.env` está
+   no `.gitignore`). Com acesso proxy ao prontuário da mãe, aponte a conta
+   `mae` do `config.json` para as suas variáveis e preencha `persona`.
+2. **Rede:** o ambiente precisa alcançar `mychart.uihealthcare.org`.
+3. **MFA por e-mail:** o código do MyChart deve chegar ao Gmail conectado ao
+   Claude, para o agente ler sozinho.
+4. **Agenda:** crie o calendário "Saúde" no Google Calendar (o conector não
+   cria calendários); sem ele, a skill usa o principal, com etiqueta, cor e
+   evento privado.
+5. **Wellmark:** `WELLMARK_USER`/`WELLMARK_PASS` nas variáveis de ambiente;
+   rede para `mywellmark.wellmark.com`, `authentication.wellmark.com`,
+   `apigw.wellmark.com` e os links temporários dos documentos (S3 e CloudFront).
 
 ## Uso
 
-- Manual: digite `/check-medico` numa sessão do Claude Code neste repo.
-- Automático: o trigger semanal roda a mesma skill e só avisa se houver
-  novidade ou problema.
+- `/atualiza` (ou só "atualiza"): novidades do MyChart, Gmail e `90_Entrada`,
+  agenda e resumo no Drive. Um agendamento pode disparar a mesma skill.
+- Teste offline do scraper, sem credenciais nem rede:
+  `python3 .claude/skills/run-agent/driver.py`.
+- Folhas: `node agent/tools/html2pdf.js IN.html OUT.pdf 0.95`.
+- Seguro: `python3 agent/wellmark.py --out <scratchpad>/wellmark_dl [--since AAAA-MM-DD]`
+  (PDFs em `eobs/` e `auth_letters/`, `index.json`, `status.json`); a skill
+  `/atualiza` sobe só os arquivos novos para `30_Seguro_Wellmark_e_contas`.
 
-## Exportar o prontuário completo
+## Prontuário completo
 
-O MyChart exporta no máximo 50 visitas por pedido. Para tudo: Document Center →
-*View, Download, or Send Visit Records* → *Date Range*, em faixas de até 50
-visitas → *Download all* → *Request download*. Os arquivos ficam prontos em
-minutos em *Requested Records* e expiram em 7 dias. A "cópia formal do
-prontuário" (pedido ao setor de prontuários) é um PDF único e completo, com as
-notas médicas. As notas de uma internação em andamento não entram nas
-exportações; só dá para lê-las na página de notas da visita (`/note_text` no
-explorador).
+O MyChart exporta no máximo 50 visitas por pedido: Document Center → *View,
+Download, or Send Visit Records* → *Date Range*, em faixas de até 50 visitas →
+*Download all* → *Request download*; os arquivos aparecem em *Requested
+Records* e expiram em 7 dias. A cópia formal do prontuário (pedido ao HIM) é
+um PDF único com as notas. Notas de uma internação em andamento não entram
+nas exportações: leia-as com `/note_text` no explorador.
 
-**Dados de saúde nunca entram no repositório.** Use o scratchpad da sessão
-para downloads e textos extraídos, e entregue ao usuário por anexo.
+## Limitações
 
-## Transcrever áudios
-
-`python3 agent/transcribe.py <audio> <saida.txt> [--model small] [--lang pt]`
-transcreve localmente com faster-whisper (instale sob demanda:
-`pip install faster-whisper`), com minuto:segundo em cada trecho. A skill
-`/health-sync` usa isso para os áudios que o usuário joga na pasta de entrada
-do Drive.
-
-## Limitações conhecidas
-
-- Scraping de portal Epic pode quebrar se a UIHC mudar o layout; o script
-  salva screenshots/dumps justamente para o agente se adaptar, mas ajustes em
-  `mychart.py` podem ser necessários.
-- Se o MyChart exigir CAPTCHA ou bloquear automação, será preciso intervenção
-  manual (a skill reporta isso).
+- Mudanças de layout do portal Epic podem quebrar o scraper; os dumps e
+  screenshots existem para o agente se adaptar.
+- CAPTCHA ou bloqueio de automação exigem intervenção manual.
+- O myWellmark recusa o Chromium headless (fica em "Loading"; os scripts
+  voltam como HTML): o `wellmark.py` para com exit 7 e não contorna. Em
+  2026-10 a conta só tinha MFA por SMS. `--headed` abre uma janela para quem
+  roda num computador com tela e passa o código (não testado no portal).

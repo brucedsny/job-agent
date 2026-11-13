@@ -138,8 +138,8 @@ def main() -> int:
     if "Ophthalmology" not in past:
         return fail("past dump missing expected 'Ophthalmology'", mock)
     patient = json.loads((out_dir / "result.json").read_text()).get("patient_name")
-    if patient != "Clea":
-        return fail(f"patient_name in result.json is {patient!r}, expected 'Clea'", mock)
+    if patient != "Pat":
+        return fail(f"patient_name in result.json is {patient!r}, expected 'Pat'", mock)
 
     print("[5/5] OK — two-step login, MFA handshake, patient detection and Visits scraping all worked")
     print(f"      artifacts in: {out_dir}")
