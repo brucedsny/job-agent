@@ -67,7 +67,7 @@ In another (the scraper pauses at MFA until you write the code file):
 
 ```bash
 MYCHART_BASE_URL=http://127.0.0.1:8799/mychart \
-MYCHART_EU_USER=x MYCHART_EU_PASS=x \
+MYCHART_BRUCE_USER=x MYCHART_BRUCE_PASS=x \
 python3 agent/mychart.py --account eu --out /tmp/run-out &
 # when status.json shows "waiting_mfa":
 echo 246810 > /tmp/run-out/mfa_code.txt

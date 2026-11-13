@@ -19,6 +19,11 @@ Também acompanha a saúde da mãe 2x/dia (skills `health-*`): ficha de fatos
 verificados, atualizações e transcrições ficam no Google Drive do usuário.
 Dados de paciente nunca entram no repositório.
 
+**Agente do Bruce (separado do da mãe):** `/cerebro` cuida das 11 áreas da
+vida a partir da pasta `00_CEREBRO_BRUCE` do Drive; a saúde dele tem
+`/saude-bruce` (MyChart dele → `06_SAUDE 🩺 (privado)`), `/junta-bruce` e
+`/consulta`. Nada do Bruce vai para a pasta da Clea, e vice-versa.
+
 ## Convenções
 
 - **Idioma:** as respostas ao usuário podem ser em português; código, nomes e
@@ -41,6 +46,14 @@ Invoque com `/<nome>`:
   Brechas / A real / O que dizer / Checklist).
 - `/junta` — análise do caso inteiro por uma junta médica (padrão) ou
   jurídica/social (`/junta juridica`), carregando prompts e ficha do Drive.
+- `/cerebro` — check-in das 11 áreas da vida do Bruce (diário, `semana`,
+  `<área>`), no máximo 3 ações.
+- `/saude-bruce` — baixa o MyChart do Bruce (`tudo` = completo) para o Drive
+  e atualiza a ficha `00_FICHA_SAUDE_BRUCE`.
+- `/junta-bruce` — junta de todas as especialidades: exames e encaminhamentos
+  por prioridade, com o porquê e a frase em inglês.
+- `/consulta` — roteiro PT+EN antes de uma consulta do Bruce; `/consulta
+  depois` fecha com o resumo e atualiza ficha e agenda.
 - `/pr-review` — revisão do diff atual (bugs + melhorias).
 - `/security-review` — revisão de segurança das mudanças do branch.
 - `/commit-pr` — commit limpo + abertura de PR.
@@ -63,7 +76,9 @@ ou rascunhos contra o prontuário e devolve só o veredito com fonte.
 
 O MyChart da UIHC abre pela nuvem. O login vem das variáveis de ambiente
 `MYCHART_EU_USER`/`MYCHART_EU_PASS` (hoje com o login da Clea; use
-`MYCHART_MAE_*` se existirem). Nunca peça usuário/senha nem imprima valores.
+`MYCHART_MAE_*` se existirem). O login do Bruce é
+`MYCHART_BRUCE_USER`/`MYCHART_BRUCE_PASS` (variáveis novas só aparecem numa
+sessão nova). Nunca peça usuário/senha nem imprima valores.
 
 1. `setsid -f nohup python3 agent/mychart_explorer.py --out <scratchpad>/mychart_live --port 8765 >/dev/null 2>&1`
 2. Siga a sequência de login do cabeçalho de `agent/mychart_explorer.py`

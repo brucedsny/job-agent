@@ -29,8 +29,9 @@ Responda ao usuário em português.
 
 ## Passo 0 — Preflight
 
-1. Credenciais: para cada conta do config, veja se `user_env` e `pass_env`
-   estão definidas (`[ -n "${!v}" ]`, **sem imprimir valores**). Rode só as
+1. Credenciais: para cada conta do config, veja se algum dos nomes listados
+   em `user_env` e em `pass_env` está definido (`[ -n "${!v}" ]`, **sem
+   imprimir valores**; o scraper usa o primeiro definido). Rode só as
    contas completas; liste as que faltam no relatório. Só aborte se nenhuma
    conta tiver credenciais.
 2. Rede: `curl -sS -o /dev/null -w "%{http_code}" --max-time 15 https://mychart.uihealthcare.org/mychart/Authentication/Login`.

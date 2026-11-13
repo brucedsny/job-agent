@@ -40,6 +40,16 @@ MFA_TIMEOUT_SECONDS = 300
 NAV_TIMEOUT_MS = 45_000
 
 
+def first_env(names: str | list[str]) -> tuple[str, str]:
+    """Return (name, value) of the first set variable; config may list
+    fallbacks, e.g. ["MYCHART_MAE_USER", "MYCHART_EU_USER"]."""
+    candidates = [names] if isinstance(names, str) else names
+    for name in candidates:
+        if os.environ.get(name):
+            return name, os.environ[name]
+    return "/".join(candidates), ""
+
+
 def load_account(account_id: str) -> tuple[dict, dict]:
     config = json.loads(CONFIG_PATH.read_text())
     for account in config["accounts"]:
@@ -59,7 +69,8 @@ def find_chromium_executable() -> str | None:
     """Fallback for version mismatch between playwright pip package and
     the pre-installed browsers in PLAYWRIGHT_BROWSERS_PATH."""
     root = os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
-    for pattern in ("chromium-*/chrome-linux/chrome", "chromium/chrome-linux/chrome"):
+    for pattern in ("chromium-*/chrome-linux64/chrome", "chromium-*/chrome-linux/chrome",
+                    "chromium/chrome-linux/chrome", "chromium"):
         matches = sorted(glob.glob(str(Path(root) / pattern)))
         if matches:
             return matches[-1]
@@ -303,10 +314,10 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     write_status(out_dir, "starting", args.account)
 
-    username = os.environ.get(account["user_env"], "")
-    password = os.environ.get(account["pass_env"], "")
+    user_var, username = first_env(account["user_env"])
+    pass_var, password = first_env(account["pass_env"])
     if not username or not password:
-        write_status(out_dir, "error", f"missing env vars {account['user_env']}/{account['pass_env']}")
+        write_status(out_dir, "error", f"missing env vars {user_var} / {pass_var}")
         return 2
 
     # MYCHART_BASE_URL overrides config — used by the run-agent driver to point

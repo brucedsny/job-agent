@@ -88,8 +88,8 @@ def main() -> int:
     env = {
         **os.environ,
         "MYCHART_BASE_URL": f"http://127.0.0.1:{port}/mychart",
-        "MYCHART_EU_USER": "smoke-user",
-        "MYCHART_EU_PASS": "smoke-pass",
+        "MYCHART_BRUCE_USER": "smoke-user",
+        "MYCHART_BRUCE_PASS": "smoke-pass",
     }
     print("[2/5] launching real scraper (agent/mychart.py) against mock")
     scraper = subprocess.Popen(
