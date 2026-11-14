@@ -10,8 +10,11 @@ notificação. O scratchpad some quando o contêiner reinicia: a memória é o
 Drive. Esta skill não envia nada a ninguém.
 
 ## 0. Preparar
-- `since` = `last_sync=<RFC3339>` na descrição da pasta `80_Atualizacoes`
-  (`get_file_metadata`); sem marcador, últimas 24 h. Anote `now` (UTC).
+- `since` = `last_sync=<RFC3339>` do Doc `_MARCADOR_last_sync` na pasta
+  `80_Atualizacoes` (`read_file_content`; o texto pode vir como `last\_sync`).
+  Se o Doc faltar ou estiver sem valor, use a descrição da pasta
+  (`get_file_metadata`, jeito antigo); sem nenhum dos dois, últimas 24 h.
+  Anote `now` (UTC).
 - Leia `00_ESTADO_ATUAL` (onde ela está, o que está pendente).
 - Preflight sem imprimir valores: credenciais `MYCHART_*` e `WELLMARK_*` (`[ -n "${VAR:-}" ]`);
   rede: `curl -sS -o /dev/null -w "%{http_code}" --max-time 15 https://mychart.uihealthcare.org/mychart/Authentication/Login`
@@ -99,7 +102,9 @@ segundas (cada login dispara um código de verificação).
 - Resposta de outra IA (na Entrada ou nova em `70_Analises_juntas_e_outras_IAs`,
   exceto "Checagem —…") → `fact-checker` → Doc "Checagem — <título>" na `70_`.
 - Processado → mova (`update_file` com `parentId`) para a pasta do tema,
-  conforme o `04_MAPA_DA_PASTA`. Nunca apague nada.
+  conforme o `04_MAPA_DA_PASTA`, só com o usuário presente: `update_file`
+  pede aprovação e trava a execução agendada. Nela, liste o arquivo em
+  "A mover (Bruce)" no resumo. Nunca apague nada.
 
 ## 5. Documentos centrais
 Fato que mudou (resultado, diagnóstico, remédio, alta ou transferência,
@@ -110,7 +115,15 @@ decisão do seguro, consulta, prazo) → grave como na skill `mae`, seção 3.
   `80_Atualizacoes`, até 1 página: 🔴 Atenção agora · 🟢 Novidades (com
   fonte) · ❓ Perguntar à equipe (inglês simples) · ✅ Fazer (dono, horário) ·
   📎 Links.
-- `update_file` na pasta `80_Atualizacoes`: descrição `last_sync=<now>`.
+- Fontes no resumo: uma linha por fonte (Gmail, MyChart, Wellmark, Agenda,
+  90_Entrada) com a última consulta que funcionou e o resultado: "novidade",
+  "sem novidade" ou "não consegui acessar" (nunca confundir os dois últimos).
+- Marcador, só depois de salvar o resumo: grave `last_sync=<now>` no Doc
+  `_MARCADOR_last_sync` (`update_doc`, `replaceAllText` do valor anterior;
+  `occurrencesChanged` = 1) e leia de volta. Só com o valor novo lido de volta
+  o marcador avançou; senão escreva "❌ marcador não gravado" no resumo. Não
+  use `update_file` em execução agendada (pede aprovação e trava a rodada).
+  Algo que precise do usuário → "bloqueado: precisa do Bruce" no resumo.
 - Notificação push só para: resultado alterado, alta ou transferência,
   decisão do seguro, carta com prazo, mensagem nova da equipe.
 - Resposta: 3–6 linhas + link do Doc; falhas (login, MFA, rede, credencial)
