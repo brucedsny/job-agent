@@ -52,8 +52,10 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - Faltou um fato: PERGUNTAR antes de supor.
 - Seguro, dinheiro, família e documentos: conferir no `01_FATOS` antes de afirmar.
 - Errou um fato: corrigir em uma linha e registrar a correção no `01_FATOS`.
-- Tópicos coloridos em português; o que for dito à equipe vai em frases curtas
-  e simples em inglês.
+- Tópicos coloridos em português, fáceis de entender: números, ícones (emojis)
+  e, quando ajudar, tabelas ou imagens. Sem introduções longas.
+- Sempre incluir frases curtas e simples em inglês: o que dizer ou perguntar à
+  equipe e, quando o assunto for mais profundo, como explicar o motivo.
 
 ## MyChart da mãe pela nuvem (funciona — não peça senha)
 Login pelas variáveis `MYCHART_EU_USER`/`MYCHART_EU_PASS` (hoje com o login da
