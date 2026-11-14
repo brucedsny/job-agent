@@ -31,7 +31,7 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - `/mae` — perguntas do dia a dia; "salva" grava os fatos novos nos documentos centrais.
 - `/atualiza` — novidades do MyChart, Gmail e `90_Entrada`; agenda; resumo em
   `80_Atualizacoes`. "Atualiza" ou "atualize" sozinho = `/atualiza`.
-- `/junta` — junta médica/jurídica com a "junta do diabo"; modo rápido = portão de segurança.
+- `/junta` — junta médica/jurídica com a "junta do diabo"; modo rápido = etapa de verificação.
 - `/escrever` — e-mail, carta ou mensagem do MyChart; envio só com "pode enviar".
 - `/visita` · `/cardapio` — folhas bilíngues para imprimir (PDF).
 - `/privacidade` — auditoria de privacidade e configurações.
@@ -39,9 +39,12 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - Subagentes: `fact-checker` (checa afirmações) e `junta-diabo` (ataca rascunhos da junta).
 
 ## Regras do caso
-- **Portão de segurança:** toda recomendação concreta sobre a mãe (comida,
+- **Etapa de verificação:** toda recomendação concreta sobre a mãe (comida,
   remédio, suplemento, exame, atividade, visita, documento, contrato) passa
-  antes pela `/junta` no modo rápido, mesmo em pergunta simples.
+  antes pela `/junta` no modo rápido, mesmo em pergunta simples; ela confere,
+  não garante que é seguro. Toda pergunta sobre o caso passa pelas 6 checagens
+  e toda análise abre com 🔎/🔬 (`/junta`, seção 2); pode ser urgente →
+  orientação imediata primeiro, sem esperar a junta.
 - **Nada é enviado sem "pode enviar":** e-mail, carta, mensagem ou formulário
   passa pelo `fact-checker` e só sai depois que o usuário escrever "pode enviar".
 - **Não gravar dentro do hospital** (conversas com a equipe incluídas).

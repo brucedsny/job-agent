@@ -8,7 +8,8 @@ description: Atalho para a junta MÉDICA do caso da mãe (diagnóstico diferenci
 Rode a skill `junta` no modo **médico** (`/junta medica`): carregue
 `00_ESTADO_ATUAL`, os temas do `01_FATOS` e o prompt `00_PROMPT_JUNTA_MEDICA`
 (versão "USE ESTE" mais alta) em `70_Analises_juntas_e_outras_IAs`; passe
-pelo portão de segurança; rascunho → subagente `junta-diabo` → resposta.
+pela etapa de verificação (seção 2 da `junta`); rascunho → subagente
+`junta-diabo` → resposta.
 
 Se o prompt do Drive não abrir, use este roteiro mínimo e diga que o prompt
 não carregou:

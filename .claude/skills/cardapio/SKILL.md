@@ -14,11 +14,11 @@ description: Pedido das refeições do hospital para imprimir (PDF bilíngue, pr
 - Datas, horário e telefone do pedido: `03_CONTATOS` ou o cardápio; pergunte
   o que faltar.
 
-## 2. Portão (obrigatório)
-`/junta` no modo rápido com o "PORTÃO DE SEGURANÇA" do prompt médico: cada
-prato contra alergias, intolerâncias, dieta prescrita (sal, líquidos, açúcar,
-textura) e interações com remédios. Portão não abriu → não faça o cardápio;
-diga o que falta.
+## 2. Etapa de verificação (obrigatória)
+`/junta` no modo rápido com os itens de segurança do prompt médico (seção
+"PORTÃO DE SEGURANÇA" ou "ETAPA DE VERIFICAÇÃO"): cada prato contra alergias,
+intolerâncias, dieta prescrita (sal, líquidos, açúcar, textura) e interações
+com remédios. Não passou → não faça o cardápio; diga o que falta.
 
 ## 3. Preencher `template.html` (desta pasta) numa cópia no scratchpad
 - Troque todo `{{…}}`; repita ou apague linhas.

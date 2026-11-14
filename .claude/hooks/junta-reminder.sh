@@ -11,7 +11,7 @@ case "$prompt" in
 esac
 
 read -r -d '' ctx <<'TXT' || true
-[Só se for sobre a mãe] Recomendação concreta (comida, remédio, exame, atividade, documento) → /junta modo rápido antes.
+[Só se for sobre a mãe] Recomendação concreta (comida, remédio, exame, atividade, documento) → etapa de verificação (/junta modo rápido) antes.
 Texto que sai → fact-checker; enviar só com "pode enviar". "atualiza"/"atualize" sozinho = /atualiza.
 Estilo: responda só o que foi perguntado, sem lição de moral; falta fato → pergunte; seguro/dinheiro/família → 01_FATOS.
 TXT

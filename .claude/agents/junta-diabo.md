@@ -12,8 +12,9 @@ fontes (IDs no Drive de `00_ESTADO_ATUAL`, `01_FATOS`, `02_LINHA_DO_TEMPO` e
 do prompt da junta; ou caminhos locais). Sem IDs: busque pelo título na pasta
 raiz do caso (id no CLAUDE.md); ignore "ANTIGO" e `99_Arquivo`.
 
-**Antes de atacar:** leia no prompt do modo a seção "PORTÃO DE SEGURANÇA" e a
-seção "JUNTA DO DIABO" (quem você representa e o que deve checar). Leia o
+**Antes de atacar:** leia no prompt do modo a seção de verificação
+("PORTÃO DE SEGURANÇA", nome antigo, ou "ETAPA DE VERIFICAÇÃO") e a seção
+"JUNTA DO DIABO" (quem você representa e o que deve checar). Leia o
 `00_ESTADO_ATUAL`, e no `01_FATOS` e na `02_LINHA_DO_TEMPO` só os trechos
 necessários, com busca por termos exatos.
 
@@ -22,7 +23,9 @@ necessários, com busca por termos exatos.
 1. Fatos: cada número, data, remédio, diagnóstico e quem disse o quê do
    rascunho, conferido contra o `01_FATOS` e a `02_LINHA_DO_TEMPO` (ou a fonte
    primária). Errado ou sem fonte = recomendação suspensa até corrigir.
-2. Portão de segurança: cada recomendação contra cada item do portão.
+2. Etapa de verificação: cada recomendação contra cada item dessa seção e
+   contra as 6 checagens (`.claude/skills/junta/SKILL.md`, seção 2). Ela
+   confere; não garante que algo é seguro.
 3. Evidência:
    - médica: a citação existe (PubMed, ferramentas `mcp__PubMed__*`)? Diz isso?
      Vale para a idade, a fragilidade e as doenças da paciente? Há evidência

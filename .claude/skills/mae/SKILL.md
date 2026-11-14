@@ -21,13 +21,21 @@ busca no CLAUDE.md). Nenhum dado dela entra neste repositório.
 
 ## 2. Responder
 
+- Toda pergunta: as 6 checagens da etapa de verificação (skill `junta`,
+  seção 2). Pode ser urgente → orientação imediata primeiro, sem esperar a
+  junta.
 - Exatamente o que foi perguntado, em tópicos coloridos; frases para a equipe
   em inglês curto e simples, com tradução.
+- Resposta analítica (interpreta documento, resultado ou plano) abre com
+  "🔎 Análise dos documentos" ou "🔬 Análise com revisão adicional" e uma
+  linha: fontes, o que faltou, o que foi de fato conferido.
 - Número, data, remédio, diagnóstico, seguro, dinheiro e família só com fonte
-  do `01_FATOS`. Sem fonte → "não confirmado", ou pergunte.
+  do `01_FATOS`. Sem fonte → "não confirmado", ou pergunte. Faltou dado →
+  "Não tenho informação suficiente: falta X".
 - Divergência → "⚠️ Inconsistência: X diz A; o registro diz B (fonte)".
 - Recomendação concreta (comida, remédio, suplemento, exame, atividade,
-  visita, documento, contrato) → antes, `/junta` no modo rápido.
+  visita, documento, contrato) → antes, a etapa de verificação (`/junta` no
+  modo rápido).
 - Texto que vai sair → `/escrever`. Folha de visita → `/visita`. Pedido de
   comida → `/cardapio`. Novidades do MyChart, Gmail ou Entrada → `/atualiza`.
 
