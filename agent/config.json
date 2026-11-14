@@ -8,19 +8,17 @@
       "id": "eu",
       "label": "[Eu]",
       "color_id": "9",
-      "user_env": ["MYCHART_BRUCE_USER"],
-      "pass_env": ["MYCHART_BRUCE_PASS"],
-      "persona": null,
-      "patient_first_name": "Bruce"
+      "user_env": "MYCHART_EU_USER",
+      "pass_env": "MYCHART_EU_PASS",
+      "persona": null
     },
     {
       "id": "mae",
       "label": "[Mãe]",
       "color_id": "11",
-      "user_env": ["MYCHART_MAE_USER", "MYCHART_EU_USER"],
-      "pass_env": ["MYCHART_MAE_PASS", "MYCHART_EU_PASS"],
-      "persona": null,
-      "patient_first_name": "Clea"
+      "user_env": "MYCHART_MAE_USER",
+      "pass_env": "MYCHART_MAE_PASS",
+      "persona": null
     }
   ],
   "reminder_color_id": "5",

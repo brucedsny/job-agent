@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- Hospital meal-order template. Copy it to the scratchpad, replace every
+     {{...}}, repeat or delete <tr>/<li> blocks, and never commit a filled copy.
+     .en = dish name exactly as on the hospital menu (bold); .pt = what it is / why.
+     Render: node agent/tools/html2pdf.js IN.html OUT.pdf 0.95  (max 2 pages) -->
+<html lang="en"><head><meta charset="utf-8"><title>Meal order {{DATAS}}</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;color:#1f2933;font-size:9.3pt;line-height:1.27;margin:0}
+.h{background:#168f63;color:#fff;padding:7px 14px;border-radius:8px}.h h1{margin:0;font-size:13.5pt}.h p{margin:3px 0 0;font-size:8.6pt}
+h2{font-size:10.2pt;color:#fff;padding:4px 10px;border-radius:6px;margin:7px 0 3px}
+.a{background:#c4561f}.b{background:#2a78d6}.c{background:#0f766e}.e{background:#b03a2e}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:3px 0}td,th{border:1px solid #d9e2ec;padding:4px 6px;text-align:left;vertical-align:top}th{background:#f0f4f8}
+.en{font-weight:bold;color:#102a43}
+.pt{display:block;color:#52606d;font-size:8.2pt;font-style:italic}
+.ok{padding:5px 10px;border-radius:6px;margin:5px 0;background:#e8f6ef;border-left:6px solid #168f63}
+.no{padding:5px 10px;border-radius:6px;margin:5px 0;background:#fdecea;border-left:6px solid #b03a2e}
+.say{background:#eef4fb;border-left:5px solid #1f4e8c;padding:4px 9px;border-radius:6px;margin:3px 0}
+.day{font-weight:bold;background:#f0f4f8;width:12%}
+.pb{page-break-before:always}.small{font-size:7.5pt;color:#52606d}
+</style></head><body>
+
+<div class="h"><h1>🍽️ Meal order · Pedido de comida — {{DATAS}}</h1>
+<p>Dish names as on the hospital menu · Nomes como no cardápio do hospital (circular) · Pedido: {{COMO_E_QUANDO_PEDIR}}</p></div>
+
+<div class="ok">🎯 <b>Goals · Metas:</b> <span class="en">{{GOALS_IN_ENGLISH}}</span><span class="pt">{{METAS_EM_PORTUGUES_COM_FONTE}}</span></div>
+
+<h2 class="a">🌅 Breakfast · Café da manhã</h2>
+<table><tr><th>Circle on the form · Circular no formulário</th><th>Por quê</th></tr>
+<tr><td class="en">{{PRATO}}</td><td>{{POR_QUE}}</td></tr>
+</table>
+
+<h2 class="b">🕐 Snacks · Lanches</h2>
+<table><tr><th>Time · Hora</th><th>Snack · Lanche</th><th>Drink · Bebida</th></tr>
+<tr><td><b>{{HORA}}</b></td><td class="en">{{LANCHE}}</td><td class="en">{{BEBIDA}}</td></tr>
+</table>
+
+<h2 class="c">🍲 Lunch and dinner · Almoço e jantar</h2>
+<table>
+<tr><th>Day · Dia</th><th>Lunch · Almoço</th><th>Dinner · Jantar</th></tr>
+<tr><td class="day">{{DIA}}</td><td><span class="en">{{PRATOS_ALMOCO}}</span><span class="pt">{{NOTA_PT}}</span></td><td><span class="en">{{PRATOS_JANTAR}}</span><span class="pt">{{NOTA_PT}}</span></td></tr>
+</table>
+
+<div class="no">🚫 <b>Please avoid · Não pedir:</b> <span class="en">{{AVOID_IN_ENGLISH}}</span><span class="pt">{{EVITAR_E_POR_QUE}}</span></div>
+
+<h2 class="e">❓ Questions for the team · Perguntas à equipe</h2>
+<div class="say"><span class="en">"{{QUESTION}}"</span><span class="pt">{{TRADUCAO}}</span></div>
+
+<p class="small">{{ASSINATURA_E_PAPEL}} · The care team and the dietitian decide the diet; these are preferences and questions. Feito com IA a partir do 01_FATOS (até {{DATA_DA_FONTE}}).</p>
+</body></html>

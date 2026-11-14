@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- Visit sheet template. Copy it to the scratchpad, replace every {{...}},
+     repeat or delete <li>/<tr> blocks, and never commit a filled copy.
+     .en = English sentence to read aloud (bold); .pt = short Portuguese line.
+     Render: node agent/tools/html2pdf.js IN.html OUT.pdf 0.95  (max 2 pages) -->
+<html lang="pt"><head><meta charset="utf-8"><title>Visita {{DATA}}</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;color:#1f2933;font-size:9.4pt;line-height:1.27;margin:0}
+.h{background:#1f4e8c;color:#fff;padding:7px 14px;border-radius:8px}.h h1{margin:0;font-size:13.5pt}.h p{margin:3px 0 0;font-size:8.6pt}
+h2{font-size:10.2pt;color:#fff;padding:4px 10px;border-radius:6px;margin:7px 0 3px}
+.a{background:#0f766e}.b{background:#b03a2e}.c{background:#6a4c9c}.d{background:#c4561f}.f{background:#168f63}
+ol,ul{margin:2px 0;padding-left:20px}li{margin:3px 0}
+.en{font-weight:bold;color:#102a43}
+.pt{display:block;color:#52606d;font-size:8.3pt;font-style:italic}
+.box{padding:5px 10px;border-radius:6px;margin:5px 0;background:#fff7ed;border-left:6px solid #eb6834}
+.ok{padding:5px 10px;border-radius:6px;margin:5px 0;background:#e8f6ef;border-left:6px solid #168f63}
+.no{padding:5px 10px;border-radius:6px;margin:5px 0;background:#fdecea;border-left:6px solid #b03a2e}
+table{border-collapse:collapse;width:100%;font-size:8.8pt}td,th{border:1px solid #d9e2ec;padding:3px 6px;text-align:left;vertical-align:top}th{background:#f0f4f8}
+.cb{font-size:11pt;width:4%}.pb{page-break-before:always}.small{font-size:7.5pt;color:#52606d}
+</style></head><body>
+
+<div class="h"><h1>🏥 Visita — o que pedir e perguntar</h1>
+<p>{{DIA_DA_SEMANA}}, {{DATA}} · Inglês em negrito: leia em voz alta · Português embaixo, só para você</p></div>
+
+<div class="ok">🟢 <b>Hoje no prontuário:</b> {{NOVIDADES_COM_FONTE_E_HORA}}</div>
+<div class="box">🔴 <b>Atenção hoje:</b> {{ATENCAO_HOJE_COM_FONTE}}</div>
+
+<h2 class="a">A. 👩‍⚕️ Enfermagem (na chegada)</h2>
+<ol>
+<li><span class="en">"{{FRASE_EM_INGLES}}"</span><span class="pt">{{TRADUCAO}}</span></li>
+</ol>
+
+<h2 class="b">B. 🩺 Médico(a) — {{NOME_E_CARGO}}</h2>
+<ol>
+<li><span class="en">"{{FRASE_EM_INGLES}}"</span><span class="pt">{{TRADUCAO}}</span></li>
+</ol>
+
+<!-- Optional page 2: <div class="h pb"><h1>🏥 Visita — página 2</h1><p>{{RESUMO_DA_PAGINA}}</p></div> -->
+
+<h2 class="c">C. 🤝 Serviço social e plano de alta</h2>
+<ol>
+<li><span class="en">"{{FRASE_EM_INGLES}}"</span><span class="pt">{{TRADUCAO}}</span></li>
+</ol>
+
+<h2 class="d">D. 🏃 Terapias (fisio, TO, fono)</h2>
+<ol>
+<li><span class="en">"{{FRASE_EM_INGLES}}"</span><span class="pt">{{TRADUCAO}}</span></li>
+</ol>
+
+<h2 class="f">E. 💛 O que ela pediu — levar e pedir</h2>
+<table>
+<tr><th class="cb">☐</th><th>Levar ou pedir</th><th>Observação</th></tr>
+<tr><td class="cb">☐</td><td>{{ITEM}}</td><td>{{OBSERVACAO}}</td></tr>
+</table>
+<p><span class="en">"{{PEDIDO_DELA_EM_INGLES}}"</span><span class="pt">{{TRADUCAO}}</span></p>
+
+<div class="no">🚫 <b>Hoje, NÃO:</b> gravar conversas · falar de tribunal ou dinheiro na frente dela · ser o intérprete dela (peça o do hospital) · {{OUTRO_NAO}}</div>
+<div class="box">📝 <b>Anotar ao sair:</b> nome e cargo de quem falou com você · o que foi decidido · próximo exame ou reunião · {{OUTRO_ANOTAR}}. À noite, um e-mail curto pelo /escrever: <i>"Thank you for talking with me today. To confirm: …"</i></div>
+<p class="small">Feito com IA a partir do prontuário (MyChart até {{DATA_HORA_DA_FONTE}}) e do 01_FATOS. São perguntas e pedidos; as decisões são da equipe.</p>
+</body></html>
