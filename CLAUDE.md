@@ -25,7 +25,8 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
   `30_Seguro_Wellmark_e_contas` · `40_Juridico_EUA` · `50_Brasil` ·
   `60_Cuidados_diarios` · `70_Analises_juntas_e_outras_IAs` (prompts
   `00_PROMPT_JUNTA_MEDICA` v4 e `00_PROMPT_JUNTA_JURIDICA` v2) ·
-  `80_Atualizacoes` (a descrição guarda `last_sync=`) · `90_Entrada` · `99_Arquivo`
+  `80_Atualizacoes` (o Doc `_MARCADOR_last_sync` guarda o `last_sync=`) ·
+  `90_Entrada` · `99_Arquivo`
 
 ## Skills (`/<nome>`)
 - `/mae` — perguntas do dia a dia; "salva" grava os fatos novos nos documentos centrais.

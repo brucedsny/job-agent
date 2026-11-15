@@ -8,8 +8,8 @@ description: Folha de visita ao hospital para imprimir (PDF bilíngue, inglês e
 ## 1. Juntar
 - `00_ESTADO_ATUAL`; no `01_FATOS`, os temas de hoje (remédios, exames, alta,
   seguro, cuidados); no `03_CONTATOS`, a equipe atual e o telefone do usuário.
-- `last_sync` (descrição de `80_Atualizacoes`) com mais de 12 h → rode
-  `/atualiza` antes ou pergunte.
+- `last_sync` (Doc `_MARCADOR_last_sync` em `80_Atualizacoes`) com mais de
+  12 h → rode `/atualiza` antes ou pergunte.
 - O que ela pediu e o que levar: listas em `60_Cuidados_diarios`; pergunte o
   que faltar.
 
