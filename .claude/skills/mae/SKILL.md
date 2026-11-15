@@ -30,8 +30,11 @@ busca no CLAUDE.md). Nenhum dado dela entra neste repositório.
   "🔎 Análise dos documentos" ou "🔬 Análise com revisão adicional" e uma
   linha: fontes, o que faltou, o que foi de fato conferido.
 - Número, data, remédio, diagnóstico, seguro, dinheiro e família só com fonte
-  do `01_FATOS`. Sem fonte → "não confirmado", ou pergunte. Faltou dado →
-  "Não tenho informação suficiente: falta X".
+  do `01_FATOS`, citando a referência de lá (seção 3). Sem fonte → "não
+  confirmado", ou pergunte. Faltou dado → "Não tenho informação suficiente:
+  falta X".
+- Causa ou interpretação ("o principal gatilho é…", "piorou porque…") →
+  `[INF]` (hipótese), salvo se o original a documenta — então cite entre aspas.
 - Divergência → "⚠️ Inconsistência: X diz A; o registro diz B (fonte)".
 - Recomendação concreta (comida, remédio, suplemento, exame, atividade,
   visita, documento, contrato) → antes, a etapa de verificação (`/junta` no
@@ -43,19 +46,25 @@ busca no CLAUDE.md). Nenhum dado dela entra neste repositório.
 
 Leia com `mcp__Google_Docs__read_doc` e edite com `mcp__Google_Docs__update_doc`
 (`writeControl.requiredRevisionId` = revisão lida; se falhar, releia e refaça).
-Use a estrutura e as etiquetas que cada documento já tem.
+Use a estrutura que cada documento já tem e, em todo fato, a referência
+recuperável `[fonte · tipo do documento · título ou ID da nota/arquivo · data e
+hora · seção]` — fonte `MyChart`, `DOC`, `EMAIL`, `GRAV` (seção = mm:ss) ou
+`FAM` (quem disse); link ou ID do Drive quando houver. "[MyChart]" sozinho
+não basta.
 
 1. `00_ESTADO_ATUAL` — REESCREVA inteiro, não acrescente: `deleteContentRange`
    de 1 até o `endIndex` do corpo − 1, depois `insertText` no índice 1. Até 2
    páginas; o que deixou de valer sai (o histórico fica na linha do tempo);
    última linha "Atualizado: AAAA-MM-DD HH:MM — fontes".
 2. `01_FATOS` — cada fato novo no fim do tema certo (`insertText` no índice em
-   que começa o título seguinte): uma linha com fato, data e etiqueta de fonte
-   (`[DOC <documento> <data>]`, `[GRAV <arquivo> mm:ss]`, `[EMAIL <remetente>
-   <data>]`, `[FAM <quem> <data>]`). Sem confirmação → `[NÃO CONFIRMADO]`.
-   Fato errado → corrija no lugar e anote "(corrigido AAAA-MM-DD; antes: …)".
+   que começa o título seguinte): uma linha com fato, data e referência. Sem
+   confirmação → `[NÃO CONFIRMADO]`; hipótese → `[INF]` (seção 2).
+   Fato errado ou que mudou → nunca apague nem sobrescreva: acrescente
+   "Correção DD/MM: antes X (fonte A) → agora Y (fonte B); motivo" e marque o
+   antigo "(superado em DD/MM)"; as duas versões ficam. Vale também para os
+   itens 3 e 4.
 3. `02_LINHA_DO_TEMPO` — evento novo na posição da data:
-   `AAAA-MM-DD HH:MM — o que aconteceu — fonte`.
+   `AAAA-MM-DD HH:MM — o que aconteceu — referência`.
 4. `03_CONTATOS` — pessoa ou dado novo: nome, papel, instituição,
-   telefone/e-mail, fonte.
+   telefone/e-mail, referência.
 5. Responda em uma linha o que foi salvo e onde, sem repetir o conteúdo.
