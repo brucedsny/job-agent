@@ -141,8 +141,9 @@ marcado "(superado em DD/MM)" — nunca apague nem sobrescreva.
   "NÃO verificado (motivo)" e pule o passo.
 - **Trava** (antes da primeira gravação na planilha, `Log_robo` incluído):
   `get_values` em `LEIAME!A:C` e ache a linha com `TRAVA_ROBO` na coluna A
-  (B = `travado_por`, C = `ate` UTC). Sem ela → `append_values` de
-  `TRAVA_ROBO | livre |` e releia para saber o número da linha.
+  (B = `travado_por`, C = `ate` UTC). Sem ela → `update_values` de
+  `TRAVA_ROBO | livre |` duas linhas abaixo da última preenchida (nunca
+  `append_values`: no LEIAME ele cai na primeira linha vazia entre blocos).
   - B diferente de `livre` e C no futuro → outra sessão está gravando:
     painel "NÃO verificado (travado por <B> até <C>)", sem gravar nada na
     planilha nesta rodada (o `Log_robo` vai só para o resumo).
