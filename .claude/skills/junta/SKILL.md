@@ -33,6 +33,8 @@ Nada de alergias, remédios ou diagnósticos neste repositório.
      "não validado" se o status não for `aprovado`).
    - Essa leitura vale até o fim da execução: uma edição posterior no Drive
      (no original ou no registro) não muda a análise em curso.
+   - Linha sem cópia congelada → leia o `doc_id` uma vez e anote
+     `· não fixado`.
    - Sem registro, sem linha do modo ou cópia que não abre → avise em uma
      linha e use a regra antiga: título com "USE ESTE" e a versão mais alta,
      ignorando "ANTIGO"; anote `prompt: <título> · não fixado`.
