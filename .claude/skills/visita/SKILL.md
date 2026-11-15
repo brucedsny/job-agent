@@ -8,14 +8,14 @@ description: Folha de visita ao hospital para imprimir (PDF bilíngue, inglês e
 ## 1. Juntar
 - `00_ESTADO_ATUAL`; no `01_FATOS`, os temas de hoje (remédios, exames, alta,
   seguro, cuidados); no `03_CONTATOS`, a equipe atual e o telefone do usuário.
-- `last_sync` (descrição de `80_Atualizacoes`) com mais de 12 h → rode
-  `/atualiza` antes ou pergunte.
+- `last_sync` (Doc `_MARCADOR_last_sync` em `80_Atualizacoes`) com mais de
+  12 h → rode `/atualiza` antes ou pergunte.
 - O que ela pediu e o que levar: listas em `60_Cuidados_diarios`; pergunte o
   que faltar.
 
-## 2. Portão
+## 2. Etapa de verificação
 Cada pedido (comida, objeto, roupa, banho, atividade, exame, remédio) passa
-pela `/junta` no modo rápido. Portão não abriu → fica fora da folha.
+pela `/junta` no modo rápido. Não passou → fica fora da folha.
 
 ## 3. Preencher `template.html` (desta pasta) numa cópia no scratchpad
 - Troque todo `{{…}}`; repita ou apague itens e seções. Até 7 itens por pessoa.

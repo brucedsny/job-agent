@@ -5,13 +5,15 @@ description: Atualização do caso da mãe — só o novo desde o last_sync no M
 
 # atualiza — só o que é novo
 
-Nada novo → grave o marcador e responda em uma linha, sem documento nem
-notificação. O scratchpad some quando o contêiner reinicia: a memória é o
-Drive. Esta skill não envia nada a ninguém.
+Nada novo → só o fechamento do passo 8 (marcador, log e sinal) e resposta de
+uma linha, sem documento nem notificação. O scratchpad some quando o contêiner
+reinicia: a memória é o Drive. Esta skill não envia nada a ninguém.
 
 ## 0. Preparar
-- `since` = `last_sync=<RFC3339>` na descrição da pasta `80_Atualizacoes`
-  (`get_file_metadata`); sem marcador, últimas 24 h. Anote `now` (UTC).
+- `since` = `last_sync=<RFC3339>` do Doc `_MARCADOR_last_sync` na
+  `80_Atualizacoes` (`read_doc`; pode vir como `last\_sync`); sem o Doc, da
+  descrição da pasta (`get_file_metadata`); sem marcador, últimas 24 h.
+  Anote `now` (UTC).
 - Leia `00_ESTADO_ATUAL` (onde ela está, o que está pendente).
 - Preflight sem imprimir valores: credenciais `MYCHART_*` e `WELLMARK_*` (`[ -n "${VAR:-}" ]`);
   rede: `curl -sS -o /dev/null -w "%{http_code}" --max-time 15 https://mychart.uihealthcare.org/mychart/Authentication/Login`
@@ -105,13 +107,56 @@ segundas (cada login dispara um código de verificação).
 Fato que mudou (resultado, diagnóstico, remédio, alta ou transferência,
 decisão do seguro, consulta, prazo) → grave como na skill `mae`, seção 3.
 
-## 6. Resumo e fechamento
+## 6. Painel
+- Planilha `05_PAINEL_DA_… (planilha)` na raiz da pasta da mãe, achada pelo
+  título (nunca fixe o id): `search_files` com
+  `parentId = '<id da raiz>' and title contains '05_PAINEL' and mimeType = 'application/vnd.google-apps.spreadsheet'`.
+- Abas: `get_spreadsheet`. Sem a planilha ou sem a aba `LEIAME` → pule o
+  passo e anote no resumo. Com ela, siga o contrato escrito no `LEIAME`:
+  - linhas novas desta rodada nas abas (exames, sinais, remédios,
+    cognição/comportamento, infecções, exames pendentes, perguntas), com
+    `append_values` e sem repetir `id_fonte` (leia a coluna antes);
+  - aplique a aba `Regras_alerta` e acrescente à aba `Alertas` só os
+    alertas novos.
+
+## 7. Junta automática
+Só se a rodada trouxe novidade clínica (nota, exame, remédio ou alerta): a
+etapa de verificação (`/junta` no modo rápido) só sobre o que mudou. No TOPO
+do resumo:
+"🩺 Junta (automática): o que mudou · bom ou ruim · risco · 3 perguntas para a equipe"
+(perguntas em inglês simples, com tradução). Recomendação concreta só entra
+se passar na etapa de verificação. Sem novidade clínica, não rode.
+
+## 8. Resumo e fechamento
 - Com novidade: Doc "Atualização AAAA-MM-DD (manhã|noite)" em
-  `80_Atualizacoes`, até 1 página: 🔴 Atenção agora · 🟢 Novidades (com
-  fonte) · ❓ Perguntar à equipe (inglês simples) · ✅ Fazer (dono, horário) ·
-  📎 Links.
-- `update_file` na pasta `80_Atualizacoes`: descrição `last_sync=<now>`.
+  `80_Atualizacoes`, até 1 página: 🩺 Junta (passo 7, no topo) · 🔴 Atenção
+  agora · 🟢 Novidades (com fonte) · ❓ Perguntar à equipe (inglês simples) ·
+  ✅ Fazer (dono, horário) · 📎 Links.
+- Travou em algo que só o usuário resolve (código, aprovação, credencial,
+  liberar rede; o SMS do Wellmark não conta) → no resumo,
+  "bloqueado: precisa do <nome do usuário>: <o quê>".
 - Notificação push só para: resultado alterado, alta ou transferência,
   decisão do seguro, carta com prazo, mensagem nova da equipe.
+- Depois de salvar o resumo (nada novo: direto), nesta ordem:
+  1. **Marcador** — `update_doc` no `_MARCADOR_last_sync` com `replaceAllText`
+     do valor anterior exato (o RFC3339, sem `last_sync=`) por `<now>`;
+     releia com `read_doc`. Nunca com `update_file` (pede aprovação e trava a
+     rodada sem ninguém). Não voltou `last_sync=<now>` (ou não há o Doc) →
+     "❌ marcador não gravado" no resumo (nada novo: na resposta).
+  2. **Log** — aba `Log_robo` existe → `append_values` de uma linha:
+     `inicio_utc | fim_utc | fontes_ok | linhas_novas | alertas | erros | observacao`.
+  3. **Sinal**, por último — Doc `_SINAL_ROBO_MAE` (pasta `00_CEREBRO_…` do
+     usuário; ache pelo título com `search_files`). Troque a PRIMEIRA linha por
+     "🟢 Robô da mãe: rodou DD/MM às HHhMM (CT), resumo salvo às HHhMM. Fontes: …"
+     (CT = America/Chicago; cada fonte ok, falhou ou pulada; nada novo →
+     "sem novidades" no lugar do resumo) com `update_doc` e `replaceAllText`
+     da primeira linha exata de agora (sem as `\` de escape); releia. Sem o
+     Doc ou não voltou → diga na resposta.
+     - 🟡 se o resumo tem "bloqueado: precisa do <nome do usuário>", se uma
+       fonte falhou (Wellmark pulado por SMS não conta) ou se entrou alerta
+       novo na aba `Alertas` — sobre ele, só
+       "alerta de saúde novo — veja o resumo".
+     - 🔴 se houver qualquer "❌" (vence o 🟡).
+     - Nessa linha, nunca detalhe de saúde, nome de remédio ou do caso.
 - Resposta: 3–6 linhas + link do Doc; falhas (login, MFA, rede, credencial)
   em uma linha. Nada novo → "Sem novidades (Gmail, MyChart, Entrada)."
