@@ -23,8 +23,8 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - `02_LINHA_DO_TEMPO` · `03_CONTATOS` · `04_MAPA_DA_PASTA` (onde fica cada coisa)
 - Pastas: `10_Prontuario_MyChart` · `20_Hospital_queixas_e_HIM` ·
   `30_Seguro_Wellmark_e_contas` · `40_Juridico_EUA` · `50_Brasil` ·
-  `60_Cuidados_diarios` · `70_Analises_juntas_e_outras_IAs` (prompts
-  `00_PROMPT_JUNTA_MEDICA` e `00_PROMPT_JUNTA_JURIDICA`, sempre a versão "USE ESTE" mais alta) ·
+  `60_Cuidados_diarios` · `70_Analises_juntas_e_outras_IAs` (prompts da
+  junta; qual vale está na planilha `00_REGISTRO_DE_PROMPTS`) ·
   `80_Atualizacoes` (o Doc `_MARCADOR_last_sync` guarda o `last_sync=`) ·
   `90_Entrada` · `99_Arquivo`
 

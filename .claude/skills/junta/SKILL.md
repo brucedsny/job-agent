@@ -22,10 +22,21 @@ Nada de alergias, remédios ou diagnósticos neste repositório.
 
 1. `00_ESTADO_ATUAL` — o que vale agora.
 2. `01_FATOS` — os temas da pergunta; `02_LINHA_DO_TEMPO` para sequência e datas.
-3. O prompt do modo, em `70_Analises_juntas_e_outras_IAs` (ou na raiz):
-   `00_PROMPT_JUNTA_MEDICA` (v4 ou mais nova) ou `00_PROMPT_JUNTA_JURIDICA`
-   (v2 ou mais nova) — título com "USE ESTE" e a versão mais alta; ignore
-   "ANTIGO". Se algo não abrir, diga qual e siga com o resto.
+3. O prompt do modo, pelo registro — não pelo título:
+   - Abra a planilha `00_REGISTRO_DE_PROMPTS` em
+     `70_Analises_juntas_e_outras_IAs`. Pegue a linha do modo (`JUNTA_MEDICA`,
+     `JUNTA_JURIDICA`, `JUNTA_FINANCEIRA`; o modo rápido segue a linha
+     `MODO_RAPIDO`) com status `aprovado`; sem aprovada, a
+     `ativo-não-validado`.
+   - Leia a `cópia_congelada_id` dessa linha UMA vez, no início, e anote no
+     topo da análise: `prompt: <nome> v<x> · cópia <id> · rev <n>` (mais
+     "não validado" se o status não for `aprovado`).
+   - Essa leitura vale até o fim da execução: uma edição posterior no Drive
+     (no original ou no registro) não muda a análise em curso.
+   - Sem registro, sem linha do modo ou cópia que não abre → avise em uma
+     linha e use a regra antiga: título com "USE ESTE" e a versão mais alta,
+     ignorando "ANTIGO"; anote `prompt: <título> · não fixado`.
+   - Se algo não abrir, diga qual e siga com o resto.
 
 ## 2. Etapa de verificação (obrigatória; é o modo rápido)
 
