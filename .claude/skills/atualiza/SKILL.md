@@ -17,9 +17,9 @@ gerar ❌ falso.
 ## 0. Preparar
 - `run_id` = `now` = início da rodada (UTC, RFC3339).
 - `versao` = `git rev-parse --short HEAD` depois do `git pull` (a versão das
-  skills que esta rodada carregou); `junta_prompt` = título do prompt que a
-  junta abriu no passo 7 (o "USE ESTE" de versão mais alta); no modo rápido
-  sem abrir prompt, "modo rápido (sem prompt)"; sem junta, "não rodou". Os dois vão no `Log_robo` e na
+  skills que esta rodada carregou); `junta_prompt` = a linha `prompt: …` que a
+  junta anotou no passo 7 (registro `00_REGISTRO_DE_PROMPTS`; no modo rápido,
+  a linha `MODO_RAPIDO`), copiada como veio; sem junta, "não rodou". Os dois vão no `Log_robo` e na
   última linha do resumo.
 - Marcadores: `read_doc` no Doc `_MARCADOR_last_sync` da `80_Atualizacoes`
   (pode vir com `\_`). Linha `last_sync=<UTC>` e, em qualquer lugar do Doc
