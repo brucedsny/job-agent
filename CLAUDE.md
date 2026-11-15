@@ -24,7 +24,7 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - Pastas: `10_Prontuario_MyChart` · `20_Hospital_queixas_e_HIM` ·
   `30_Seguro_Wellmark_e_contas` · `40_Juridico_EUA` · `50_Brasil` ·
   `60_Cuidados_diarios` · `70_Analises_juntas_e_outras_IAs` (prompts
-  `00_PROMPT_JUNTA_MEDICA` v4 e `00_PROMPT_JUNTA_JURIDICA` v2) ·
+  `00_PROMPT_JUNTA_MEDICA` e `00_PROMPT_JUNTA_JURIDICA`, sempre a versão "USE ESTE" mais alta) ·
   `80_Atualizacoes` (o Doc `_MARCADOR_last_sync` guarda o `last_sync=`) ·
   `90_Entrada` · `99_Arquivo`
 

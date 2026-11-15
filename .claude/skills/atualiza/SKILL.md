@@ -9,19 +9,25 @@ Nada novo e lote completo → só o fechamento do passo 8 (marcadores, log e
 sinal) e a resposta curta do fim, sem documento nem notificação. O scratchpad
 some quando o contêiner reinicia: a memória é o Drive. Esta skill não envia
 nada a ninguém. Toda gravação (Doc, evento, arquivo, linha) é relida:
-✅ voltou, ❌ não voltou.
+✅ voltou, ❌ não voltou. Releia com `read_doc` (Doc) ou `get_values`
+(planilha). O `read_file_content` corta os ~5 últimos caracteres do Doc:
+com ele, confira um trecho do meio do texto gravado, nunca o fim, para não
+gerar ❌ falso.
 
 ## 0. Preparar
 - `run_id` = `now` = início da rodada (UTC, RFC3339).
 - `versao` = `git rev-parse --short HEAD` depois do `git pull` (a versão das
   skills que esta rodada carregou); `junta_prompt` = título do prompt que a
-  junta abriu no passo 7 (ou "não rodou"). Os dois vão no `Log_robo` e na
+  junta abriu no passo 7 (o "USE ESTE" de versão mais alta); no modo rápido
+  sem abrir prompt, "modo rápido (sem prompt)"; sem junta, "não rodou". Os dois vão no `Log_robo` e na
   última linha do resumo.
 - Marcadores: `read_doc` no Doc `_MARCADOR_last_sync` da `80_Atualizacoes`
-  (pode vir com `\_`). A linha `last_sync=<UTC>` fica como está (uma rotina
-  agendada a reescreve); abaixo dela, uma linha por fonte: `fonte:mychart=`,
+  (pode vir com `\_`). Linha `last_sync=<UTC>` e, em qualquer lugar do Doc
+  (as que faltam entram no fim), uma linha por fonte: `fonte:mychart=`,
   `fonte:gmail=`, `fonte:agenda=`, `fonte:entrada=`, `fonte:wellmark=` e
-  `fonte:painel=`, cada uma com `<UTC>` (RFC3339).
+  `fonte:painel=`, cada uma com `<UTC>` (RFC3339). Só o passo 8.2 grava
+  neste Doc, com a regra de lá; se o prompt do agendamento mandar gravar o
+  `last_sync` de outro jeito, vale esta skill.
 - `since` de cada fonte = a linha dela; sem a linha, `last_sync`; sem o Doc,
   a descrição da pasta (`get_file_metadata`); sem marcador, últimas 24 h.
   Cada fonte lê só o novo desde o SEU `since`. Agenda ou painel mais atrás
@@ -85,8 +91,9 @@ Rode se o usuário pediu, se chegou e-mail do Wellmark desde o `since` dele ou
   `01_FATOS` (seção Seguro); prazo de recurso da carta → passo 3.
 
 ## 3. Agenda
-- Calendário "Saúde" (`list_calendars`; sem ele, o principal — diga uma vez
-  que criá-lo separa os eventos). `America/Chicago`, `visibility: private`.
+- Calendário "Saúde" (`list_calendars`; sem ele, o principal). O aviso de
+  que criá-lo separa os eventos sai uma vez só: em ⚙️ só se o marcador não
+  tem a linha `aviso:agenda_sem_saude=`, que o passo 8.2 acrescenta. `America/Chicago`, `visibility: private`.
   Cores em `agent/config.json`: `[Mãe]` 11, `[Eu]` 9, lembretes 5.
 - Etiqueta pelo paciente da página ("Welcome, X!" / `patient_name`) comparado
   com o `03_CONTATOS`, não pela variável usada; divergiu → diga uma vez.
@@ -131,8 +138,20 @@ marcado "(superado em DD/MM)" — nunca apague nem sobrescreva.
   título (nunca fixe o id): `search_files` com
   `parentId = '<id da raiz>' and title contains '05_PAINEL' and mimeType = 'application/vnd.google-apps.spreadsheet'`.
 - Abas: `get_spreadsheet`. Sem a planilha ou sem a aba `LEIAME` → painel
-  "NÃO verificado (motivo)" e pule o passo. Com ela, siga o contrato escrito
-  no `LEIAME`:
+  "NÃO verificado (motivo)" e pule o passo.
+- **Trava** (antes da primeira gravação na planilha, `Log_robo` incluído):
+  `get_values` em `LEIAME!A:C` e ache a linha com `TRAVA_ROBO` na coluna A
+  (B = `travado_por`, C = `ate` UTC). Sem ela → `append_values` de
+  `TRAVA_ROBO | livre |` e releia para saber o número da linha.
+  - B diferente de `livre` e C no futuro → outra sessão está gravando:
+    painel "NÃO verificado (travado por <B> até <C>)", sem gravar nada na
+    planilha nesta rodada (o `Log_robo` vai só para o resumo).
+  - Livre ou vencida → `update_values` em B:C com `<run_id> | <now + 45 min>`;
+    releia: B ≠ `run_id` → perdeu a vez, igual ao item acima.
+  - Libere no passo 8.1 (`livre | <fim UTC>`), também quando a rodada
+    abortar; releia. Não liberou → "❌ trava não liberada".
+- Com a trava, siga o contrato escrito no `LEIAME` (colunas na ordem do
+  cabeçalho de cada aba, lido antes de gravar; nunca pela memória):
   - linhas novas desde o `since` do painel nas abas (exames, sinais, remédios,
     cognição/comportamento, infecções, exames pendentes, perguntas), com
     `append_values` e sem repetir `id_fonte` (leia a coluna antes);
@@ -175,26 +194,39 @@ se passar na etapa de verificação. Sem novidade clínica, não rode.
 - Notificação push só para: urgência clínica, resultado alterado, alta ou
   transferência, decisão do seguro, carta com prazo, mensagem nova da equipe.
 - `lote_completo` = sim só se toda fonte da vez (a que os passos 1–6 mandam
-  rodar agora) foi verificada, toda gravação voltou ✅ e o marcador de cada
-  fonte verificada avançou. Fonte fora da vez ou Wellmark parado só no SMS:
-  "NÃO verificado", sem deixar o lote incompleto.
-- Depois de salvar o resumo (sem Doc: direto), nesta ordem:
-  1. **Marcadores** — um `update_doc` no `_MARCADOR_last_sync`, com
+  rodar agora) foi verificada e nenhuma gravação da rodada deu ❌ (Doc,
+  evento, arquivo, linha do painel, `Log_robo`, trava, marcador). Fonte fora
+  da vez ou Wellmark parado só no SMS: "NÃO verificado", sem deixar o lote
+  incompleto; painel travado por outra sessão deixa.
+- **Regra dos marcadores:** QUALQUER ❌ na rodada → NENHUM marcador avança,
+  nem o `last_sync`, e a rodada seguinte relê tudo desde os marcadores
+  antigos (o `id_fonte` e a checagem da agenda evitam repetir). Sem ❌:
+  avança a linha `fonte:` de cada fonte verificada; `last_sync` só com
+  `lote_completo` = sim. O sinal (item 3) fica fora: vem depois e não
+  guarda dado.
+- Depois de salvar e reler o resumo (sem Doc: direto), nesta ordem:
+  1. **Log** — com a trava do passo 6, `append_values` de uma linha no
+     `Log_robo`, nas colunas do cabeçalho:
+     `inicio_utc | fim_utc | fontes_ok | linhas_novas | alertas | erros | observacao | docs | marcadores | sinal | lote_completo | versao | junta_prompt`
+     — inicio_utc: o `run_id`; fontes_ok: o status de cada fonte;
+     linhas_novas: as acrescentadas, por aba; docs: cada Doc gravado, ✅ ou
+     ❌; marcadores: os que vão avançar ou "nenhum (❌ na rodada)"; sinal:
+     "a gravar"; lote_completo: sim ou não. Cabeçalho: nunca reescreva a
+     linha 1 quando houver dados; faltando colunas desta lista, escreva só os
+     nomes que faltam nas células vazias logo depois da última preenchida;
+     coluna que não existe nem pode ser criada → o valor vai em observacao.
+     Releia a linha (`get_values`) e libere a trava; releia.
+  2. **Marcadores** — pela regra acima. Um único `update_doc` no
+     `_MARCADOR_last_sync` (as trocas entram juntas ou nenhuma), com
      `replaceAllText` da linha inteira exata de agora (sem as `\` de escape;
      nunca só o valor, que pode se repetir em outra linha):
-     `last_sync=<anterior>` → `last_sync=<now>`; `fonte:<nome>=<anterior>` →
-     `fonte:<nome>=<hora UTC em que a verificação dela começou>` só para a
-     fonte verificada cujas gravações voltaram ✅ (linha que falta →
-     `insertText` no fim do Doc). Nunca com `update_file` (pede aprovação e
+     `fonte:<nome>=<anterior>` → `fonte:<nome>=<hora UTC em que a
+     verificação dela começou>`; `last_sync=<anterior>` → `last_sync=<now>`;
+     linha que falta (e `aviso:agenda_sem_saude=<now>`, se avisou) →
+     `insertText` no fim do Doc. Nunca com `update_file` (pede aprovação e
      trava a rodada sem ninguém). Releia com `read_doc`; o que não voltou (ou
-     sem o Doc) → "❌ marcador <linha> não gravado". Então acrescente ao
-     resumo os "❌" e a linha "Lote: …" e releia (sem Doc: na resposta).
-  2. **Log** — aba `Log_robo` existe → `append_values` de uma linha
-     (cabeçalho diferente → reescreva a linha 1 antes):
-     `run_id | fim_utc | fontes | linhas_painel | alertas | erros | observacao | docs | marcadores | sinal | lote_completo | versao | junta_prompt`
-     — fontes: o status de cada uma; linhas_painel: as acrescentadas, por
-     aba; docs: cada Doc gravado, ✅ ou ❌ na releitura; marcadores: os que
-     avançaram; sinal: o do item 3; lote_completo: sim ou não. Releia a linha.
+     sem o Doc) → "❌ marcador <linha> não gravado" no resumo, `lote_completo`
+     = não e, na linha do log, marcadores = "❌ não gravado".
   3. **Sinal**, por último — Doc `_SINAL_ROBO_MAE` (pasta `00_CEREBRO_…` do
      usuário; ache pelo título com `search_files`). Troque a PRIMEIRA linha por
      "🟢 Robô da mãe: rodou DD/MM às HHhMM (CT), resumo salvo às HHhMM. Fontes: …"
@@ -202,7 +234,8 @@ se passar na etapa de verificação. Sem novidade clínica, não rode.
      "sem novidade nas fontes verificadas" no lugar do resumo) com
      `update_doc` e `replaceAllText` da primeira linha exata de agora (sem as
      `\` de escape); releia. Sem o Doc ou não voltou → diga na resposta e
-     ponha ❌ no `sinal` da linha do log.
+     ponha ❌ no `sinal` da linha do log. Por fim, troque o "a gravar" do
+     `sinal` na linha do log por ✅ ou ❌ (`update_values` só nessa célula).
      - 🟢 só com `lote_completo` = sim e sem alerta novo.
      - 🟡 lote incompleto → "rodada incompleta — ver resumo"; alerta novo na
        aba `Alertas` → sobre ele, só "alerta de saúde novo — veja o resumo".
