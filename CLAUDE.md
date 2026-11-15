@@ -70,7 +70,10 @@ mãe; use `MYCHART_MAE_*` se existirem). Nunca peça nem imprima os valores.
 3. Código MFA: o e-mail "Verification Code" mais recente no Gmail
    (`newer_than:1h`). Se não chegar em 3 min, peça ao usuário só o código.
 4. Leia com `/text`, `/links`, `/note_text`; feche com `/quit`.
-O portal do Wellmark não abre da nuvem.
+Wellmark: abre da nuvem só com navegador visível e o código SMS do Bruce
+(peça antes "celular pronto"): `cd agent && xvfb-run -a python3 wellmark.py
+--out <scratchpad>/wellmark --headed --allow-sms`; o código vai em
+`<out>/mfa_code.txt`. Claims e EOBs ainda vêm vazios; autorizações e cartas, sim.
 
 ## Convenções e comandos
 Código, nomes e commits em inglês (imperativo, sem nome de modelo). Branch de
