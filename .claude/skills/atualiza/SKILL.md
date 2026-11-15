@@ -13,6 +13,10 @@ nada a ninguém. Toda gravação (Doc, evento, arquivo, linha) é relida:
 
 ## 0. Preparar
 - `run_id` = `now` = início da rodada (UTC, RFC3339).
+- `versao` = `git rev-parse --short HEAD` depois do `git pull` (a versão das
+  skills que esta rodada carregou); `junta_prompt` = título do prompt que a
+  junta abriu no passo 7 (ou "não rodou"). Os dois vão no `Log_robo` e na
+  última linha do resumo.
 - Marcadores: `read_doc` no Doc `_MARCADOR_last_sync` da `80_Atualizacoes`
   (pode vir com `\_`). A linha `last_sync=<UTC>` fica como está (uma rotina
   agendada a reescreve); abaixo dela, uma linha por fonte: `fonte:mychart=`,
@@ -151,7 +155,8 @@ se passar na etapa de verificação. Sem novidade clínica, não rode.
   importantes · ⚙️ Falhas operacionais. Sem urgência, nunca um título
   vermelho "ATENÇÃO AGORA". Depois: 🩺 Junta (passo 7) · ❓ Perguntar à
   equipe (inglês simples) · ✅ Fazer (dono, horário) · 📡 Fontes · 📎 Links.
-  Última linha: "Lote: completo" ou "Lote: incompleto (o que faltou)".
+  Última linha: "Lote: completo" ou "Lote: incompleto (o que faltou)",
+  seguida de "· versão <versao> · junta: <junta_prompt>".
 - Em todo o resumo (Junta incluída): cada fato com referência recuperável
   `[fonte · tipo do documento · título ou ID da nota/arquivo · data e hora ·
   seção]`, com link ou ID do Drive quando houver ("[MyChart]" sozinho não
@@ -186,7 +191,7 @@ se passar na etapa de verificação. Sem novidade clínica, não rode.
      resumo os "❌" e a linha "Lote: …" e releia (sem Doc: na resposta).
   2. **Log** — aba `Log_robo` existe → `append_values` de uma linha
      (cabeçalho diferente → reescreva a linha 1 antes):
-     `run_id | fim_utc | fontes | linhas_painel | alertas | erros | observacao | docs | marcadores | sinal | lote_completo`
+     `run_id | fim_utc | fontes | linhas_painel | alertas | erros | observacao | docs | marcadores | sinal | lote_completo | versao | junta_prompt`
      — fontes: o status de cada uma; linhas_painel: as acrescentadas, por
      aba; docs: cada Doc gravado, ✅ ou ❌ na releitura; marcadores: os que
      avançaram; sinal: o do item 3; lote_completo: sim ou não. Releia a linha.
