@@ -71,7 +71,9 @@ ela está internada ou em transição (até 7 dias após alta ou transferência)
   expira em ~30 min). Falhou ou o código não chegou em 3 min → registre e
   siga; no máximo 2 tentativas por conta.
 - Só o posterior ao `since` do MyChart: Test Results (valor, referência,
-  alterado?), notas da internação ou visita (`/note_text` em
+  alterado?; abra também a seção recolhida "Additional information", que traz
+  Result date, Result status e Resulting lab, os campos de `resultado_em`,
+  `status` e `laboratorio` do painel), notas da internação ou visita (`/note_text` em
   `visits/past-details?csn=…&pageMode=notesfirst`; uma por vez com
   `agent/tools/readnote.sh`), Messages, Documents/Letters, saldo em Billing e
   a página Visits (`/text`: traz "Upcoming", "Future" e "Past" juntas). `/quit`.
