@@ -15,6 +15,10 @@ busca no CLAUDE.md). Nenhum dado dela entra neste repositório.
 3. Se a pergunta pedir: `02_LINHA_DO_TEMPO` (datas e sequência),
    `03_CONTATOS` (quem é quem, telefones, e-mails), `04_MAPA_DA_PASTA` (onde
    está cada documento).
+   Perguntas sobre o dia a dia (sono, comida, líquidos, comportamento, quedas,
+   intestino, dor) → aba `Diario_cuidados` da `05_PAINEL_DA_CLEA`, só os
+   últimos 7–14 dias; cite como `[DIARIO <quem> <data>]` e trate como relato,
+   não prontuário.
 4. Fonte primária (nota, carta, transcrição) só para o que a ficha não
    resolve, em trechos. Várias fontes ou checar outra IA → subagente
    `fact-checker`.
@@ -52,7 +56,9 @@ Use a estrutura e as etiquetas que cada documento já tem.
 2. `01_FATOS` — cada fato novo no fim do tema certo (`insertText` no índice em
    que começa o título seguinte): uma linha com fato, data e etiqueta de fonte
    (`[DOC <documento> <data>]`, `[GRAV <arquivo> mm:ss]`, `[EMAIL <remetente>
-   <data>]`, `[FAM <quem> <data>]`). Sem confirmação → `[NÃO CONFIRMADO]`.
+   <data>]`, `[FAM <quem> <data>]`). Fato do diário só entra com `[DIARIO <quem>
+   <data>]` mais confirmação da equipe; sem ela, não entra. Sem confirmação →
+   `[NÃO CONFIRMADO]`.
    Fato errado → corrija no lugar e anote "(corrigido AAAA-MM-DD; antes: …)".
 3. `02_LINHA_DO_TEMPO` — evento novo na posição da data:
    `AAAA-MM-DD HH:MM — o que aconteceu — fonte`.
