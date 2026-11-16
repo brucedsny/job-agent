@@ -50,6 +50,16 @@ gerar ❌ falso.
 - Leia só threads novos. Classifique: hospital/portal · HIM (prontuário) ·
   seguro · CLINIX (revisão externa) · tribunal · casa de cuidado · contas.
 - Aviso do portal → passo 2. Prazo (recurso, audiência, pagamento) → passo 3.
+- Notas do Wave: `from:support@wave.co` com o mesmo `after:`. São resumos de
+  gravações do Bruce.
+  - Sobre a mãe (hospital, equipe, alta, tribunal, ligações com ela): leia
+    inteiro e grave os fatos novos com a etiqueta `[GRAV]` e a data. Uso
+    interno: nunca citar à equipe, nunca dizer que houve gravação e nunca
+    pôr em texto que sai.
+  - Sobre a saúde ou a vida do próprio Bruce: não leia além do assunto e
+    não grave nada no sistema da mãe; no resumo, só "Wave: N notas do Bruce
+    (fora do caso)".
+  - Propaganda, recibo ou resumo semanal do Wave: ignore.
 
 ## 2. MyChart
 Entre se o usuário pediu, se houve aviso do portal desde o `since` dele, se
