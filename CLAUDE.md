@@ -33,6 +33,8 @@ ter sufixo); ignore "ANTIGO" e `99_Arquivo`.
 - `/atualiza` — novidades do MyChart, Gmail e `90_Entrada`; agenda; resumo em
   `80_Atualizacoes`. "Atualiza" ou "atualize" sozinho = `/atualiza`.
 - `/junta` — junta médica/jurídica com a "junta do diabo"; modo rápido = etapa de verificação.
+- `/cruzamento` — padrões entre camadas do painel (remédio × comportamento ×
+  sinais × infecção × exames), gatilhos, exames vencidos; perguntas em inglês.
 - `/escrever` — e-mail, carta ou mensagem do MyChart; envio só com "pode enviar".
 - `/visita` · `/cardapio` — folhas bilíngues para imprimir (PDF).
 - `/privacidade` — auditoria de privacidade e configurações.

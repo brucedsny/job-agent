@@ -9,7 +9,8 @@ textos extraídos e PDFs gerados ficam no scratchpad da sessão e vão para o Dr
 
 - Menos skills, mais afiadas: `/mae` (dia a dia e "salva"), `/atualiza`
   (substitui `health-sync` + `check-medico`), `/junta` (absorveu
-  `health-advocate`), `/escrever`, `/visita`, `/cardapio`, `/privacidade`.
+  `health-advocate`), `/escrever`, `/visita`, `/cardapio`, `/privacidade`,
+  `/cruzamento` (padrões entre as abas do painel, só leitura).
 - Memória em documentos centrais no Drive: `00_ESTADO_ATUAL` (reescrito a cada
   atualização), `01_FATOS`, `02_LINHA_DO_TEMPO`, `03_CONTATOS`, `04_MAPA_DA_PASTA`.
 - Nomes, contatos e números do caso saíram dos arquivos versionados.
