@@ -118,6 +118,31 @@ decisão do seguro, consulta, prazo) → grave como na skill `mae`, seção 3.
     `append_values` e sem repetir `id_fonte` (leia a coluna antes);
   - aplique a aba `Regras_alerta` e acrescente à aba `Alertas` só os
     alertas novos.
+  - **Diário dos cuidadores** (aba `Diario_cuidados`):
+    - Aba ausente → pule e anote no resumo.
+    - Linhas novas = `lido_robo` vazio. Nunca releia o diário inteiro; para
+      regras que olham para trás (D1, D4, D5, D6) leia só os últimos 7 dias
+      pela coluna `data_hora`.
+    - Regra geral, para qualquer regra da `Regras_alerta` (não só D1–D8):
+      aplique SÓ as com `aprovado_por` preenchido. Regra sem aprovação é
+      pulada e listada no resumo como "regra aguardando aprovação". As regras
+      já aprovadas (a)–(m) continuam valendo sem mudança.
+    - Alerta novo na `Alertas` no formato existente: `id_fonte =
+      ALE:<data_hora AAAA-MM-DDTHH:MM>:<slug(regra)>` (":2" se colidir),
+      `status_registro = ativo`, `fonte = DIARIO <quem> · diario:<carimbo>` e,
+      no `detalhe`, o trecho curto do relato (sem nomes de remédios além do
+      que o cuidador escreveu).
+    - Só depois de gravar os alertas, preencha `lido_robo` com o horário UTC
+      (`update_values` na célula da linha). Se cair no meio, a linha é relida:
+      `id_fonte` já existente na `Alertas` → pule (regra de dedup de sempre).
+    - Linhas do diário são relato (etiqueta FAM-cuidador). Fatos do diário NÃO
+      vão para o `01_FATOS` (não são prontuário), salvo confirmação da equipe;
+      no resumo podem aparecer como "relato do cuidador".
+    - O diário complementa o Doc `DIARIO_CLEA` (`60_Cuidados_diarios`), não o
+      substitui.
+    - Resumo: uma linha "Diário: N registros novos, N alertas (N aguardando
+      aprovação de regra)". No `Log_robo`, some os registros do diário em
+      `linhas_novas`.
 
 ## 7. Junta automática
 Só se a rodada trouxe novidade clínica (nota, exame, remédio ou alerta): a
